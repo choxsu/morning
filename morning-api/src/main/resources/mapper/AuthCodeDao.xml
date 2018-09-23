@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.model.entity.mybatis.dao.AuthCodeDao">
+
+    <resultMap type="com.syc.model.entity.mybatis.entity.AuthCode" id="AuthCodeMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="accountid" column="accountId" jdbcType="INTEGER"/>
+        <result property="expireat" column="expireAt" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AuthCodeMap">
+        select
+          id, accountId, expireAt, type
+        from sblog.auth_code
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id},
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AuthCodeMap">
+        select
+        id, accountId, expireAt, type
+        from sblog.auth_code
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AuthCodeMap">
+        select
+          id, accountId, expireAt, type
+        from sblog.auth_code
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id},
+            </if>
+            <if test="accountid != null">
+                and accountId = #{accountid},
+            </if>
+            <if test="expireat != null">
+                and expireAt = #{expireat},
+            </if>
+            <if test="type != null">
+                and type = #{type},
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sblog.auth_code(accountId, expireAt, type)
+        values (#{accountid}, #{expireat}, #{type})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sblog.auth_code
+        <set>
+            <if test="accountid != null">
+                and accountId = #{accountid},
+            </if>
+            <if test="expireat != null">
+                and expireAt = #{expireat},
+            </if>
+            <if test="type != null">
+                and type = #{type},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sblog.auth_code where id = #{id}
+    </delete>
+
+</mapper>

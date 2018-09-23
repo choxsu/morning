@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.model.entity.mybatis.dao.VisitorDao">
+
+    <resultMap type="com.syc.model.entity.mybatis.entity.Visitor" id="VisitorMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="method" column="method" jdbcType="VARCHAR"/>
+        <result property="client" column="client" jdbcType="VARCHAR"/>
+        <result property="requesttime" column="requestTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="VisitorMap">
+        select
+          id, ip, url, method, client, requestTime
+        from sblog.visitor
+        <where>
+            <if test="id != null">
+                and id = #{id},
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="VisitorMap">
+        select
+        id, ip, url, method, client, requestTime
+        from sblog.visitor
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="VisitorMap">
+        select
+          id, ip, url, method, client, requestTime
+        from sblog.visitor
+        <where>
+            <if test="id != null">
+                and id = #{id},
+            </if>
+            <if test="ip != null and ip != ''">
+                and ip = #{ip},
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url},
+            </if>
+            <if test="method != null and method != ''">
+                and method = #{method},
+            </if>
+            <if test="client != null and client != ''">
+                and client = #{client},
+            </if>
+            <if test="requesttime != null">
+                and requestTime = #{requesttime},
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sblog.visitor(ip, url, method, client, requestTime)
+        values (#{ip}, #{url}, #{method}, #{client}, #{requesttime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sblog.visitor
+        <set>
+            <if test="ip != null and ip != ''">
+                and ip = #{ip},
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url},
+            </if>
+            <if test="method != null and method != ''">
+                and method = #{method},
+            </if>
+            <if test="client != null and client != ''">
+                and client = #{client},
+            </if>
+            <if test="requesttime != null">
+                and requestTime = #{requesttime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sblog.visitor where id = #{id}
+    </delete>
+
+</mapper>

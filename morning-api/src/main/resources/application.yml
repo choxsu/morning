@@ -1,0 +1,23 @@
+server:
+  port: 3333
+spring:
+  profiles:
+    active: dev
+  application:
+    name: morning
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cache:
+    cache-names: people
+    caffeine:
+      spec: initialCapacity=50,maximumSize=500,expireAfterWrite=10s,refreshAfterWrite=5s
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.syc.model.entity.mybatis.entity
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
