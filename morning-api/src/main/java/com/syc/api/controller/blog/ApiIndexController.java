@@ -5,11 +5,13 @@ import com.syc.api.controller.common.BaseApiController;
 import com.syc.model.entity.jf.Blog;
 import com.syc.model.result.Result;
 import com.syc.service.service.IndexService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/index/api")
@@ -37,7 +39,13 @@ public class ApiIndexController extends BaseApiController {
                         @RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         Blog blog = new Blog();
-        Page list = indexService.findList(blog, pageNumber, pageSize);
+        Page list;
+        try {
+            list = indexService.findList(blog, pageNumber, pageSize);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return Result.fail().setMsg("系统错误:500");
+        }
         return Result.ok().setData(list);
     }
 }
