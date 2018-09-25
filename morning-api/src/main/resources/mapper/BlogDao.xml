@@ -46,46 +46,46 @@
         from sblog.blog
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                and accountId = #{accountid}
             </if>
             <if test="title != null and title != ''">
-                and title = #{title},
+                and title = #{title}
             </if>
             <if test="content != null">
-                and content = #{content},
+                and content = #{content}
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                and createAt = #{createat}
             </if>
             <if test="updateat != null">
-                and updateAt = #{updateat},
+                and updateAt = #{updateat}
             </if>
             <if test="clickcount != null">
-                and clickCount = #{clickcount},
+                and clickCount = #{clickcount}
             </if>
             <if test="likecount != null">
-                and likeCount = #{likecount},
+                and likeCount = #{likecount}
             </if>
             <if test="favoritecount != null">
-                and favoriteCount = #{favoritecount},
+                and favoriteCount = #{favoritecount}
             </if>
             <if test="category != null and category != ''">
-                and category = #{category},
+                and category = #{category}
             </if>
             <if test="isdelete != null">
-                and isDelete = #{isdelete},
+                and isDelete = #{isdelete}
             </if>
             <if test="tagId != null">
-                and tag_id = #{tagId},
+                and tag_id = #{tagId}
             </if>
             <if test="categoryId != null">
-                and category_id = #{categoryId},
+                and category_id = #{categoryId}
             </if>
             <if test="markedcontent != null">
-                and markedContent = #{markedcontent},
+                and markedContent = #{markedcontent}
             </if>
         </where>
     </select>

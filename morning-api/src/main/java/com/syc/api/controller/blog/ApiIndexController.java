@@ -32,7 +32,22 @@ public class ApiIndexController extends BaseApiController {
      * @apiParam {int} pageSize 每页显示的条数 默认十条
      * @apiSuccess {int} code   提示代码 -1->权限不足 0->失败 1->成功
      * @apiSuccess {String} msg 提示信息
-     * @apiSuccess {Object} data
+     * @apiSuccess {Array} data 对象信息
+     * @apiSuccess {int} data.id 主键id
+     * @apiSuccess {int} data.accountid 博主id
+     * @apiSuccess {String} data.title 标题
+     * @apiSuccess {String} data.content html内容
+     * @apiSuccess {String} data.createat 创建时间
+     * @apiSuccess {String} data.updateat 更新时间
+     * @apiSuccess {int} data.clickcount 点击数
+     * @apiSuccess {int} data.likecount 收藏数
+     * @apiSuccess {int} data.favoritecount 收藏数
+     * @apiSuccess {String} data.category 分类名称
+     * @apiSuccess {int} data.isdelete 是否删除 0否 1是
+     * @apiSuccess {int} data.tagId 标签id
+     * @apiSuccess {int} data.categoryId 分类id，暂时弃用
+     * @apiSuccess {String} data.markedcontent markdown内容
+     *
      */
     @RequestMapping(value = "/v1/list", method = RequestMethod.GET)
     public Result index(String token,
