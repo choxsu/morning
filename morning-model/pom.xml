@@ -12,7 +12,11 @@
     <artifactId>morning-model</artifactId>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.choxsu.syc</groupId>
+            <artifactId>morning-common</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 
