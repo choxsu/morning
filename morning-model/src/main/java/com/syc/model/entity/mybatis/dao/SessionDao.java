@@ -10,7 +10,7 @@ import com.syc.model.entity.mybatis.entity.Session;
  * (Session)表数据库访问层
  *
  * @author makejava
- * @since 2018-09-23 12:28:45
+ * @since 2018-09-25 11:51:16
  */
 public interface SessionDao {
 
@@ -20,7 +20,7 @@ public interface SessionDao {
      * @param id 主键
      * @return 实例对象
      */
-    Session queryById(String id);
+    Session queryById(@Param("id") String id);
 
     /**
      * 查询指定行数据
@@ -62,6 +62,6 @@ public interface SessionDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(String id);
+    int deleteById(@Param("id") String id);
 
 }

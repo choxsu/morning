@@ -16,7 +16,7 @@
         from sblog.sensitive_words
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -36,16 +36,16 @@
         from sblog.sensitive_words
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="word != null and word != ''">
-                and word = #{word},
+                and word = #{word}
             </if>
             <if test="status != null">
-                and status = #{status},
+                and status = #{status}
             </if>
             <if test="wordPinyin != null and wordPinyin != ''">
-                and word_pinyin = #{wordPinyin},
+                and word_pinyin = #{wordPinyin}
             </if>
         </where>
     </select>

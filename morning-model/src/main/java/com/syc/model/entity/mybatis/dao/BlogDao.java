@@ -1,16 +1,15 @@
 package com.syc.model.entity.mybatis.dao;
 
+import com.syc.model.entity.mybatis.entity.Blog;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import com.syc.model.entity.mybatis.entity.Blog;
 
 /**
  * (Blog)表数据库访问层
  *
  * @author makejava
- * @since 2018-09-23 12:28:45
+ * @since 2018-09-25 11:51:16
  */
 public interface BlogDao {
 
@@ -20,7 +19,7 @@ public interface BlogDao {
      * @param id 主键
      * @return 实例对象
      */
-    Blog queryById(Integer id);
+    Blog queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -62,6 +61,6 @@ public interface BlogDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    int deleteById(@Param("id") Integer id);
 
 }

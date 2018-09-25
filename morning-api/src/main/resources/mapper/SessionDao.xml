@@ -15,7 +15,7 @@
         from sblog.session
         <where>
             <if test="id != null and id != ''">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -35,13 +35,13 @@
         from sblog.session
         <where>
             <if test="id != null and id != ''">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                and accountId = #{accountid}
             </if>
             <if test="expireat != null">
-                and expireAt = #{expireat},
+                and expireAt = #{expireat}
             </if>
         </where>
     </select>

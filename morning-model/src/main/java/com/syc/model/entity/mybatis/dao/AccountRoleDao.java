@@ -1,15 +1,16 @@
 package com.syc.model.entity.mybatis.dao;
 
-import com.syc.model.entity.mybatis.entity.AccountRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+
+import com.syc.model.entity.mybatis.entity.AccountRole;
 
 /**
  * (AccountRole)表数据库访问层
  *
  * @author makejava
- * @since 2018-09-23 12:28:43
+ * @since 2018-09-25 11:51:16
  */
 public interface AccountRoleDao {
 
@@ -19,7 +20,7 @@ public interface AccountRoleDao {
      * @param accountid 主键
      * @return 实例对象
      */
-    AccountRole queryById(Integer accountid);
+    AccountRole queryById(@Param("accountid") Integer accountid);
 
     /**
      * 查询指定行数据
@@ -61,6 +62,6 @@ public interface AccountRoleDao {
      * @param accountid 主键
      * @return 影响行数
      */
-    int deleteById(Integer accountid);
+    int deleteById(@Param("accountid") Integer accountid);
 
 }

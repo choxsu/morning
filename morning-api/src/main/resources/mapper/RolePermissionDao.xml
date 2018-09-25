@@ -14,10 +14,10 @@
         from sblog.role_permission
         <where>
             <if test="roleid != null">
-                and roleId = #{roleid},
+                and roleId = #{roleid}
             </if>
             <if test="permissionid != null">
-                and permissionId = #{permissionid},
+                and permissionId = #{permissionid}
             </if>
         </where>
     </select>
@@ -37,10 +37,10 @@
         from sblog.role_permission
         <where>
             <if test="roleid != null">
-                and roleId = #{roleid},
+                and roleId = #{roleid}
             </if>
             <if test="permissionid != null">
-                and permissionId = #{permissionid},
+                and permissionId = #{permissionid}
             </if>
         </where>
     </select>

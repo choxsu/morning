@@ -26,7 +26,7 @@
         from sblog.blog
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>

@@ -16,7 +16,7 @@
         from sblog.auth_code
         <where>
             <if test="id != null and id != ''">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -36,16 +36,16 @@
         from sblog.auth_code
         <where>
             <if test="id != null and id != ''">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                and accountId = #{accountid}
             </if>
             <if test="expireat != null">
-                and expireAt = #{expireat},
+                and expireAt = #{expireat}
             </if>
             <if test="type != null">
-                and type = #{type},
+                and type = #{type}
             </if>
         </where>
     </select>

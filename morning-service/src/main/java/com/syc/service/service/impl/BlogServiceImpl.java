@@ -2,17 +2,17 @@ package com.syc.service.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.syc.model.entity.jf.Blog;
+import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.entity.mybatis.dao.BlogDao;
 import com.syc.service.common.CommonService;
-import com.syc.service.service.IndexService;
+import com.syc.service.service.BlogService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("indexService")
-public class IndexServiceImpl extends CommonService implements IndexService  {
+@Service("blogService")
+public class BlogServiceImpl extends CommonService implements BlogService {
 
     @Resource
     private BlogDao blogDao;
@@ -21,7 +21,11 @@ public class IndexServiceImpl extends CommonService implements IndexService  {
     public Page findList(Blog blog, int pageNumber, int paeSize) {
 
         Page page = PageHelper.startPage(pageNumber, paeSize);
-        blogDao.queryAll(new com.syc.model.entity.mybatis.entity.Blog());
+        if (blog == null){
+            blog = new Blog();
+        }
+        blog.setIsdelete(0);
+        blogDao.queryAll(blog);
         return page;
     }
 
@@ -32,7 +36,7 @@ public class IndexServiceImpl extends CommonService implements IndexService  {
 
     @Override
     public Blog findById(Integer id) {
-        return null;
+        return blogDao.queryById(id);
     }
 
     @Override

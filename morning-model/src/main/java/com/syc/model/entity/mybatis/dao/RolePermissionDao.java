@@ -10,7 +10,7 @@ import com.syc.model.entity.mybatis.entity.RolePermission;
  * (RolePermission)表数据库访问层
  *
  * @author makejava
- * @since 2018-09-23 12:28:45
+ * @since 2018-09-25 11:51:16
  */
 public interface RolePermissionDao {
 
@@ -20,7 +20,7 @@ public interface RolePermissionDao {
      * @param roleid 主键
      * @return 实例对象
      */
-    RolePermission queryById(Integer roleid);
+    RolePermission queryById(@Param("roleid") Integer roleid);
 
     /**
      * 查询指定行数据
@@ -62,6 +62,6 @@ public interface RolePermissionDao {
      * @param roleid 主键
      * @return 影响行数
      */
-    int deleteById(Integer roleid);
+    int deleteById(@Param("roleid") Integer roleid);
 
 }

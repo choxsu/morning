@@ -15,7 +15,7 @@
         from sblog.role
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -35,13 +35,13 @@
         from sblog.role
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="name != null and name != ''">
-                and name = #{name},
+                and name = #{name}
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                and createAt = #{createat}
             </if>
         </where>
     </select>

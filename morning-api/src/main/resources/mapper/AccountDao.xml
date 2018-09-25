@@ -22,7 +22,7 @@
         from sblog.account
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -42,34 +42,34 @@
         from sblog.account
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="nickname != null and nickname != ''">
-                and nickName = #{nickname},
+                and nickName = #{nickname}
             </if>
             <if test="username != null and username != ''">
-                and userName = #{username},
+                and userName = #{username}
             </if>
             <if test="password != null and password != ''">
-                and password = #{password},
+                and password = #{password}
             </if>
             <if test="salt != null and salt != ''">
-                and salt = #{salt},
+                and salt = #{salt}
             </if>
             <if test="status != null">
-                and status = #{status},
+                and status = #{status}
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                and createAt = #{createat}
             </if>
             <if test="ip != null and ip != ''">
-                and ip = #{ip},
+                and ip = #{ip}
             </if>
             <if test="avatar != null and avatar != ''">
-                and avatar = #{avatar},
+                and avatar = #{avatar}
             </if>
             <if test="likecount != null">
-                and likeCount = #{likecount},
+                and likeCount = #{likecount}
             </if>
         </where>
     </select>

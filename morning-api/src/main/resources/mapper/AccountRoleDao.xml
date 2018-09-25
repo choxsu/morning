@@ -14,10 +14,10 @@
         from sblog.account_role
         <where>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                and accountId = #{accountid}
             </if>
             <if test="roleid != null">
-                and roleId = #{roleid},
+                and roleId = #{roleid}
             </if>
         </where>
     </select>
@@ -37,10 +37,10 @@
         from sblog.account_role
         <where>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                and accountId = #{accountid}
             </if>
             <if test="roleid != null">
-                and roleId = #{roleid},
+                and roleId = #{roleid}
             </if>
         </where>
     </select>

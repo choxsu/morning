@@ -1,11 +1,11 @@
 package com.syc.service.service;
 
 import com.github.pagehelper.Page;
-import com.syc.model.entity.jf.Blog;
+import com.syc.model.entity.mybatis.entity.Blog;
 
 import java.util.List;
 
-public interface IndexService {
+public interface BlogService {
 
     /**
      * @param blog       用对象字段做筛选条件

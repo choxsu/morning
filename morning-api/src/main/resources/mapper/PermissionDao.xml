@@ -16,7 +16,7 @@
         from sblog.permission
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -36,16 +36,16 @@
         from sblog.permission
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="actionkey != null and actionkey != ''">
-                and actionKey = #{actionkey},
+                and actionKey = #{actionkey}
             </if>
             <if test="controller != null and controller != ''">
-                and controller = #{controller},
+                and controller = #{controller}
             </if>
             <if test="remark != null and remark != ''">
-                and remark = #{remark},
+                and remark = #{remark}
             </if>
         </where>
     </select>

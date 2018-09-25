@@ -18,7 +18,7 @@
         from sblog.visitor
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -38,22 +38,22 @@
         from sblog.visitor
         <where>
             <if test="id != null">
-                and id = #{id},
+                and id = #{id}
             </if>
             <if test="ip != null and ip != ''">
-                and ip = #{ip},
+                and ip = #{ip}
             </if>
             <if test="url != null and url != ''">
-                and url = #{url},
+                and url = #{url}
             </if>
             <if test="method != null and method != ''">
-                and method = #{method},
+                and method = #{method}
             </if>
             <if test="client != null and client != ''">
-                and client = #{client},
+                and client = #{client}
             </if>
             <if test="requesttime != null">
-                and requestTime = #{requesttime},
+                and requestTime = #{requesttime}
             </if>
         </where>
     </select>
