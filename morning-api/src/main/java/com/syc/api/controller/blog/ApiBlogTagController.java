@@ -1,6 +1,7 @@
 package com.syc.api.controller.blog;
 
 import com.syc.api.controller.common.BaseApiController;
+import com.syc.api.service.common.RedisService;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.entity.mybatis.entity.BlogTag;
 import com.syc.model.result.Result;
@@ -20,6 +21,9 @@ import java.util.List;
 public class ApiBlogTagController extends BaseApiController {
 
 
+    @Autowired
+    private RedisService redisService;
+
     private final BlogTagService blogTagService;
 
     @Autowired
@@ -33,7 +37,6 @@ public class ApiBlogTagController extends BaseApiController {
      * @apiGroup 博客相关接口
      * @apiDescription 博客相关接口， 博客标签列表
      * @apiParam {String} token 登录token信息
-     *
      * @apiSuccess {int} code   提示代码 -1->权限不足 0->失败 1->成功
      * @apiSuccess {String} msg 提示信息
      * @apiSuccess {Object} data 对象信息
@@ -43,16 +46,21 @@ public class ApiBlogTagController extends BaseApiController {
     @RequestMapping(value = "/v1/list", method = RequestMethod.GET)
     public Result detail(String token) {
         List<BlogTag> blogTags;
+        final String tagListKey = "tag:tagList";
         try {
-            blogTags = blogTagService.queryAllByLimit(0, 100);
+            Object o = redisService.get(tagListKey);
+            if (o != null) {
+                blogTags = (List<BlogTag>) o;
+            } else {
+                blogTags = blogTagService.queryAllByLimit(0, 100);
+                redisService.set(tagListKey, blogTags);
+            }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return Result.fail().setMsg("系统错误:500");
         }
         return Result.ok().setData(blogTags);
     }
-
-    
 
 
 }

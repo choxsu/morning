@@ -16,6 +16,9 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -90,6 +93,16 @@ public class AppConfig {
         // arp.addSqlTemplate("/sql/all_sqls.sql");
         arp.start();
         return arp;
+    }
+
+
+    @Bean
+    public RedisTemplate redisTemplateInit(RedisTemplate redisTemplate) {
+        //设置序列化Key的实例化对象
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        //设置序列化Value的实例化对象
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        return redisTemplate;
     }
 
 

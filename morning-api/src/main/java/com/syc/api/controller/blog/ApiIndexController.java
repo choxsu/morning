@@ -2,6 +2,7 @@ package com.syc.api.controller.blog;
 
 import com.github.pagehelper.Page;
 import com.syc.api.controller.common.BaseApiController;
+import com.syc.api.service.common.RedisService;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.result.Result;
 import com.syc.service.service.BlogService;
@@ -18,27 +19,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/index/api")
 public class ApiIndexController extends BaseApiController {
 
-
-    private final BlogService blogService;
-
     @Autowired
-    public ApiIndexController(@Qualifier("blogService") BlogService blogService) {
-        this.blogService = blogService;
-    }
+    private BlogService blogService;
+    @Autowired
+    private RedisService redisService;
 
     /**
      * @api {get} /index/api/v1/list #1、首页列表数据带分页
      * @apiName 首页列表
      * @apiGroup 首页相关接口
      * @apiDescription 首页列表数据带分页, 返回了所有的相关博客列表数据
-     *
      * @apiParam {String} token 登录token信息
      * @apiParam {String} tagId 标签id
      * @apiParam {String} category 博客分类str
      * @apiParam {int} pageNumber 当前第几页 默认第一页
      * @apiParam {int} pageSize 每页显示的条数 默认十条
-     *
-     *
      * @apiSuccess {int} code   提示代码 -1->权限不足 0->失败 1->成功
      * @apiSuccess {String} msg 提示信息
      * @apiSuccess {Array} data 对象信息
@@ -56,7 +51,6 @@ public class ApiIndexController extends BaseApiController {
      * @apiSuccess {int} data.tagId 标签id
      * @apiSuccess {int} data.categoryId 分类id，暂时弃用
      * @apiSuccess {String} data.markedcontent markdown内容
-     *
      */
     @RequestMapping(value = "/v1/list", method = RequestMethod.GET)
     public Result index(String token,
@@ -65,10 +59,10 @@ public class ApiIndexController extends BaseApiController {
                         @RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         Blog blog = new Blog();
-        if (tagId != null){
+        if (tagId != null) {
             blog.setTagId(tagId);
         }
-        if (StringUtils.hasText(category)){
+        if (StringUtils.hasText(category)) {
             blog.setCategory(category);
         }
         Page list;
