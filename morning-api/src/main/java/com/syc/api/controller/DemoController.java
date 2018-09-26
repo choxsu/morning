@@ -57,27 +57,30 @@ public class DemoController {
         //验证程序执行时数据量是否正确
         Object n1 = redisService.get("n");
         int n = n1 == null ? 0 : (int) n1;
-        String uid = "";
+        String uid;
+        String msg = "";
         while (bfNum-- >= 0) {
             uid = String.valueOf((new Random().nextInt(100000) + 990000));
             if (n < num) {
                 redisService.listPush(MS, uid + "|" + n);
-                System.out.println(uid + "秒杀成功" + n);
+                msg = uid + "秒杀成功" + n;
+                System.out.println(msg);
             } else {
-                System.out.println(uid + "秒杀已结束");
+                msg = uid + "秒杀已结束";
+                System.out.println(msg);
                 break;
             }
             n++;
         }
         System.out.println(n);
         redisService.set("n", n);
-        List<Object> ms = redisService.listRange(MS, 0, 1000);
+        List ms = redisService.listRange(MS, 0, 1000);
         System.out.println(ms.size());
         boolean isSu = redisService.set(key, value);
         if (isSu) {
-            return Ret.ok("msg", "插入成功");
+            return Ret.ok("msg", "插入成功+" + msg);
         }
-        return Ret.fail("msg", "系统错误");
+        return Ret.fail("msg", "系统错误+" + msg);
     }
 
     /**
