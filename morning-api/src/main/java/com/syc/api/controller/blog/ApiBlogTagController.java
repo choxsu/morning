@@ -22,6 +22,7 @@ public class ApiBlogTagController extends BaseApiController {
 
 
     @Autowired
+    @Qualifier(value = "redisService")
     private RedisService redisService;
 
     private final BlogTagService blogTagService;

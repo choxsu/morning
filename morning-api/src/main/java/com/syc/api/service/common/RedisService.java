@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author choxsu
  */
-@Service
+@Service("redisService")
 public class RedisService {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisService.class);

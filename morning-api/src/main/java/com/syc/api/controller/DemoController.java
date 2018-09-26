@@ -6,6 +6,7 @@ import com.syc.api.service.common.RedisService;
 import com.jfinal.kit.Ret;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.concurrent.Executors;
 public class DemoController {
 
     @Autowired
+    @Qualifier(value = "redisService")
     private RedisService redisService;
 
     @Autowired
