@@ -32,7 +32,7 @@ public class RedisService {
     public boolean set(final String key, Object value) {
         boolean result = false;
         try {
-            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            ValueOperations operations = redisTemplate.opsForValue();
             operations.set(key, value);
             result = true;
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class RedisService {
     public boolean set(final String key, Object value, Long expireTime) {
         boolean result = false;
         try {
-            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            ValueOperations operations = redisTemplate.opsForValue();
             operations.set(key, value);
             redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
             result = true;
@@ -80,7 +80,7 @@ public class RedisService {
      * @param pattern
      */
     public void removePattern(final String pattern) {
-        Set<Serializable> keys = redisTemplate.keys(pattern);
+        Set keys = redisTemplate.keys(pattern);
         if (keys.size() > 0)
             redisTemplate.delete(keys);
     }
@@ -113,9 +113,8 @@ public class RedisService {
      * @return
      */
     public Object get(final String key) {
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-        Object result = operations.get(key);
-        return result;
+        ValueOperations operations = redisTemplate.opsForValue();
+        return operations.get(key);
     }
 
     /**
@@ -126,7 +125,7 @@ public class RedisService {
      * @param value
      */
     public void hmSet(String key, Object hashKey, Object value) {
-        HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+        HashOperations hash = redisTemplate.opsForHash();
         hash.put(key, hashKey, value);
     }
 
@@ -138,32 +137,32 @@ public class RedisService {
      * @return
      */
     public Object hmGet(String key, Object hashKey) {
-        HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+        HashOperations hash = redisTemplate.opsForHash();
         return hash.get(key, hashKey);
     }
 
     /**
      * 列表添加
      *
-     * @param k
-     * @param v
+     * @param key,   list Key
+     * @param object 缓存的对象
      */
-    public void lPush(String k, Object v) {
-        ListOperations<String, Object> list = redisTemplate.opsForList();
-        list.rightPush(k, v);
+    public void listPush(String key, Object object) {
+        ListOperations list = redisTemplate.opsForList();
+        list.rightPush(key, object);
     }
 
     /**
-     * 列表获取
+     * 列表获取,这个可以实现分页
      *
-     * @param k
-     * @param l
-     * @param l1
+     * @param key
+     * @param start
+     * @param end
      * @return
      */
-    public List<Object> lRange(String k, long l, long l1) {
-        ListOperations<String, Object> list = redisTemplate.opsForList();
-        return list.range(k, l, l1);
+    public List listRange(String key, long start, long end) {
+        ListOperations list = redisTemplate.opsForList();
+        return list.range(key, start, end);
     }
 
     /**
@@ -173,7 +172,7 @@ public class RedisService {
      * @param value
      */
     public void add(String key, Object value) {
-        SetOperations<String, Object> set = redisTemplate.opsForSet();
+        SetOperations set = redisTemplate.opsForSet();
         set.add(key, value);
     }
 
@@ -183,8 +182,8 @@ public class RedisService {
      * @param key
      * @return
      */
-    public Set<Object> setMembers(String key) {
-        SetOperations<String, Object> set = redisTemplate.opsForSet();
+    public Set setMembers(String key) {
+        SetOperations set = redisTemplate.opsForSet();
         return set.members(key);
     }
 
@@ -193,23 +192,22 @@ public class RedisService {
      *
      * @param key
      * @param value
-     * @param scoure
+     * @param score
      */
-    public void zAdd(String key, Object value, double scoure) {
-        ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        zset.add(key, value, scoure);
+    public void zAdd(String key, Object value, double score) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        zSet.add(key, value, score);
     }
 
     /**
      * 有序集合获取
      *
      * @param key
-     * @param scoure
-     * @param scoure1
+     * @param min
+     * @param max
      * @return
      */
-    public Set<Object> rangeByScore(String key, double scoure, double scoure1) {
-        ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        return zset.rangeByScore(key, scoure, scoure1);
+    public Set rangeByScore(String key, double min, double max) {
+        return redisTemplate.opsForZSet().rangeByScore(key, min, max);
     }
 }
