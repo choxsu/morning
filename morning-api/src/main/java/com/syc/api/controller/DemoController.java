@@ -50,37 +50,38 @@ public class DemoController {
         if (StrKit.isBlank(key)) {
             return Ret.fail().set("msg", "key不能为空串");
         }
-        //模拟20万并发
-        int bfNum = 200000;
-        //500人能秒杀到
-        int num = 500;
+        //模拟2亿并发
+        int bfNum = 200000000;
+        //50万人能秒杀到
+        int num = 500000;
         //验证程序执行时数据量是否正确
         Object n1 = redisService.get("n");
-        int n = n1 == null ? 0 : (int) n1;
-        String uid;
-        String msg = "";
-        while (bfNum-- >= 0) {
-            uid = String.valueOf((new Random().nextInt(100000) + 990000));
-            if (n < num) {
-                redisService.listPush(MS, uid + "|" + n);
-                msg = uid + "秒杀成功" + n;
-                System.out.println(msg);
+        final int[] n = {n1 == null ? 0 : (int) n1};
+        final String[] uid = new String[1];
+        final String[] msg = {""};
+
+        for (int i = 0; i < bfNum; i++) {
+            uid[0] = String.valueOf((new Random().nextInt(100000) + 990000));
+            if (n[0] < num) {
+                redisService.listPush(MS, uid[0] + "|" + n[0]);
+                msg[0] = uid[0] + "秒杀成功" + n[0];
+                System.out.println(msg[0]);
             } else {
-                msg = uid + "秒杀已结束";
-                System.out.println(msg);
+                msg[0] = uid[0] + "秒杀已结束";
+                System.out.println(msg[0]);
                 break;
             }
-            n++;
+            n[0]++;
         }
-        System.out.println(n);
-        redisService.set("n", n);
-        List ms = redisService.listRange(MS, 0, 1000);
+        System.out.println(n[0]);
+        redisService.set("n", n[0]);
+        List ms = redisService.listRange(MS, 0, 10000);
         System.out.println(ms.size());
         boolean isSu = redisService.set(key, value);
         if (isSu) {
-            return Ret.ok("msg", "插入成功+" + msg);
+            return Ret.ok("msg", "插入成功+" + msg[0]);
         }
-        return Ret.fail("msg", "系统错误+" + msg);
+        return Ret.fail("msg", "系统错误+" + msg[0]);
     }
 
     /**
