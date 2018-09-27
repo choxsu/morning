@@ -210,4 +210,8 @@ public class RedisService {
     public Set rangeByScore(String key, double min, double max) {
         return redisTemplate.opsForZSet().rangeByScore(key, min, max);
     }
+
+    public RedisTemplate getRedisTemplate() {
+        return redisTemplate;
+    }
 }
