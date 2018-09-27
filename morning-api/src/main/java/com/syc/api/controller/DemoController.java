@@ -1,16 +1,18 @@
 package com.syc.api.controller;
 
+import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
 import com.syc.api.service.common.RedisService;
-import com.jfinal.kit.Ret;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,7 +31,7 @@ public class DemoController {
     private RedisService redisService;
 
     @Autowired
-    EmailKit emailKit;
+    private EmailKit emailKit;
 
     final String MS = "MS";
     //20个线程池并发数
@@ -103,6 +105,7 @@ public class DemoController {
         if (StrKit.isBlank(key)) {
             return Ret.fail().set("msg", "key不能为空串");
         }
+
         Object o = redisService.get(key);
         Map map = new HashMap();
         map.put("value", o);
