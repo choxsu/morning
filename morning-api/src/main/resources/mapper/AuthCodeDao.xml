@@ -61,13 +61,13 @@
         update sblog.auth_code
         <set>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                accountId = #{accountid},
             </if>
             <if test="expireat != null">
-                and expireAt = #{expireat},
+                expireAt = #{expireat},
             </if>
             <if test="type != null">
-                and type = #{type},
+                type = #{type},
             </if>
         </set>
         where id = #{id}

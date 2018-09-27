@@ -61,13 +61,13 @@
         update sblog.permission
         <set>
             <if test="actionkey != null and actionkey != ''">
-                and actionKey = #{actionkey},
+                actionKey = #{actionkey},
             </if>
             <if test="controller != null and controller != ''">
-                and controller = #{controller},
+                controller = #{controller},
             </if>
             <if test="remark != null and remark != ''">
-                and remark = #{remark},
+                remark = #{remark},
             </if>
         </set>
         where id = #{id}

@@ -57,10 +57,10 @@
         update sblog.session
         <set>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                accountId = #{accountid},
             </if>
             <if test="expireat != null">
-                and expireAt = #{expireat},
+                expireAt = #{expireat},
             </if>
         </set>
         where id = #{id}

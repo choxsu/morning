@@ -101,43 +101,43 @@
         update sblog.blog
         <set>
             <if test="accountid != null">
-                and accountId = #{accountid},
+                accountId = #{accountid},
             </if>
             <if test="title != null and title != ''">
-                and title = #{title},
+                title = #{title},
             </if>
             <if test="content != null">
-                and content = #{content},
+                content = #{content},
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                createAt = #{createat},
             </if>
             <if test="updateat != null">
-                and updateAt = #{updateat},
+                updateAt = #{updateat},
             </if>
             <if test="clickcount != null">
-                and clickCount = #{clickcount},
+                clickCount = #{clickcount},
             </if>
             <if test="likecount != null">
-                and likeCount = #{likecount},
+                likeCount = #{likecount},
             </if>
             <if test="favoritecount != null">
-                and favoriteCount = #{favoritecount},
+                favoriteCount = #{favoritecount},
             </if>
             <if test="category != null and category != ''">
-                and category = #{category},
+                category = #{category},
             </if>
             <if test="isdelete != null">
-                and isDelete = #{isdelete},
+                isDelete = #{isdelete},
             </if>
             <if test="tagId != null">
-                and tag_id = #{tagId},
+                tag_id = #{tagId},
             </if>
             <if test="categoryId != null">
-                and category_id = #{categoryId},
+                category_id = #{categoryId},
             </if>
             <if test="markedcontent != null">
-                and markedContent = #{markedcontent},
+                markedContent = #{markedcontent},
             </if>
         </set>
         where id = #{id}

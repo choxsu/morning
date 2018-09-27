@@ -61,13 +61,13 @@
         update sblog.sensitive_words
         <set>
             <if test="word != null and word != ''">
-                and word = #{word},
+                word = #{word},
             </if>
             <if test="status != null">
-                and status = #{status},
+                status = #{status},
             </if>
             <if test="wordPinyin != null and wordPinyin != ''">
-                and word_pinyin = #{wordPinyin},
+                word_pinyin = #{wordPinyin},
             </if>
         </set>
         where id = #{id}

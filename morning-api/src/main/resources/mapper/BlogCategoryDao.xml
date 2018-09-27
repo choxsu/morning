@@ -57,10 +57,10 @@
         update sblog.blog_category
         <set>
             <if test="name != null and name != ''">
-                and name = #{name},
+                name = #{name},
             </if>
             <if test="status != null">
-                and status = #{status},
+                status = #{status},
             </if>
         </set>
         where id = #{id}

@@ -69,19 +69,19 @@
         update sblog.visitor
         <set>
             <if test="ip != null and ip != ''">
-                and ip = #{ip},
+                ip = #{ip},
             </if>
             <if test="url != null and url != ''">
-                and url = #{url},
+                url = #{url},
             </if>
             <if test="method != null and method != ''">
-                and method = #{method},
+                method = #{method},
             </if>
             <if test="client != null and client != ''">
-                and client = #{client},
+                client = #{client},
             </if>
             <if test="requesttime != null">
-                and requestTime = #{requesttime},
+                requestTime = #{requesttime},
             </if>
         </set>
         where id = #{id}

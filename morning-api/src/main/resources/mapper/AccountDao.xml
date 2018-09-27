@@ -85,31 +85,31 @@
         update sblog.account
         <set>
             <if test="nickname != null and nickname != ''">
-                and nickName = #{nickname},
+                nickName = #{nickname},
             </if>
             <if test="username != null and username != ''">
-                and userName = #{username},
+                userName = #{username},
             </if>
             <if test="password != null and password != ''">
-                and password = #{password},
+                password = #{password},
             </if>
             <if test="salt != null and salt != ''">
-                and salt = #{salt},
+                salt = #{salt},
             </if>
             <if test="status != null">
-                and status = #{status},
+                status = #{status},
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                createAt = #{createat},
             </if>
             <if test="ip != null and ip != ''">
-                and ip = #{ip},
+                ip = #{ip},
             </if>
             <if test="avatar != null and avatar != ''">
-                and avatar = #{avatar},
+                avatar = #{avatar},
             </if>
             <if test="likecount != null">
-                and likeCount = #{likecount},
+                likeCount = #{likecount},
             </if>
         </set>
         where id = #{id}

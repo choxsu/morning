@@ -57,10 +57,10 @@
         update sblog.role
         <set>
             <if test="name != null and name != ''">
-                and name = #{name},
+                name = #{name},
             </if>
             <if test="createat != null">
-                and createAt = #{createat},
+                createAt = #{createat},
             </if>
         </set>
         where id = #{id}
