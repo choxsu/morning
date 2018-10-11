@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/index/api")
+@RequestMapping(value = "/api/index")
 public class ApiIndexController extends BaseApiController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class ApiIndexController extends BaseApiController {
     private RedisService redisService;
 
     /**
-     * @api {get} /index/api/v1/list #1、首页列表数据带分页
+     * @api {get} /api/index/v1/list #1、首页列表数据带分页
      * @apiName 首页列表
      * @apiGroup 首页相关接口
      * @apiDescription 首页列表数据带分页, 返回了所有的相关博客列表数据

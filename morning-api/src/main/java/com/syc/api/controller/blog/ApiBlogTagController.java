@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/blog/tag/api")
+@RequestMapping(value = "/api/blog/tag")
 public class ApiBlogTagController extends BaseApiController {
 
 
@@ -33,7 +33,7 @@ public class ApiBlogTagController extends BaseApiController {
     }
 
     /**
-     * @api {get} /blog/tag/api/v1/list #2、博客标签列表
+     * @api {get} /api/blog/tag/v1/list #2、博客标签列表
      * @apiName 博客标签列表
      * @apiGroup 博客相关接口
      * @apiDescription 博客相关接口， 博客标签列表

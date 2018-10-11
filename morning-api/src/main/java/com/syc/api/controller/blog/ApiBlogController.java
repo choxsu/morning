@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/blog/api")
+@RequestMapping(value = "/api/blog")
 public class ApiBlogController extends BaseApiController {
 
 
@@ -24,7 +24,7 @@ public class ApiBlogController extends BaseApiController {
     }
 
     /**
-     * @api {get} /blog/api/v1/detail/:id #1、博客详情
+     * @api {get} /api/blog/v1/detail/:id #1、博客详情
      * @apiName 博客详情
      * @apiGroup 博客相关接口
      * @apiDescription 博客相关接口
