@@ -36,7 +36,12 @@ public class BlogServiceImpl extends CommonService implements BlogService {
 
     @Override
     public Blog findById(Integer id) {
-        return blogDao.queryById(id);
+        Blog blog = blogDao.queryById(id);
+        if (blog != null){
+            blog.setClickcount(blog.getClickcount() + 1);
+            blogDao.update(blog);
+        }
+        return blog;
     }
 
     @Override
