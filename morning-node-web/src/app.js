@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
 import { createStore } from './store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
 
-Vue.use(iView);
-Vue.config.productionTip = false;
+//Vue.config.productionTip = false;
 
 // 解决移动端300ms延迟问题
 if (typeof window !== 'undefined') {

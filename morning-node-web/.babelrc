@@ -1,8 +1,10 @@
 {
   "presets": [
-    ["env", { "modules": false }]
+    ["env", { "modules": false }],
+    "stage-2"
   ],
   "plugins": [
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    "transform-object-rest-spread"
   ]
 }
