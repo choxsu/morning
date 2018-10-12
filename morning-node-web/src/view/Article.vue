@@ -15,127 +15,128 @@
 </template>
 
 <script>
-import Loading from '../components/common/Loading.vue';
-import marked from '../lib/marked.js';
-import Side from '../components/common/Side.vue';
-import Comment from '../components/common/Comment.vue';
+    import Loading from '../components/common/Loading.vue';
+    import marked from '../lib/marked.js';
+    import Side from '../components/common/Side.vue';
+    import Comment from '../components/common/Comment.vue';
 
-import {
-    mapGetters,
-    mapActions,
-} from 'vuex';
+    import {
+        mapGetters,
+        mapActions,
+    } from 'vuex';
 
-export default {
-    name: 'article_component', // 防止和html元素重名
-    data() {
-        return {
-            category: [],
-            isLoading: false,
-            loadingMsg: '加载中...',
-        };
-    },
-    computed: {
-        ...mapGetters([
-            'currentPost',
-            'currentPostCompile',
-        ]),
-        compiledPost() {
-            return this.compiledMarkdown(this.$store.state.currentPost.content);
+    export default {
+        name: 'article_component', // 防止和html元素重名
+        data() {
+            return {
+                category: [],
+                isLoading: false,
+                loadingMsg: '加载中...',
+            };
         },
-    },
-    components: {
-        Side,
-        Loading,
-        Comment,
-    },
-    beforeMount() {
-    // 如果想等说明数据已经拿到，就没必要进行再去取数据了
-        if (this.currentPost.id === this.$route.params.id) {
-            this.$nextTick(() => {
-                // 提取文章标签，生成目录
-                Array.from(this.$refs.post.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach((item, index) => {
-                    item.id = item.localName + '-' + index;
-                    this.category.push({
-                        tagName: item.localName,
-                        text: item.innerText,
-                        href: '#' + item.localName + '-' + index,
+        computed: {
+            ...mapGetters([
+                'currentPost',
+                'currentPostCompile',
+            ]),
+            compiledPost() {
+                return this.compiledMarkdown(this.$store.state.currentPost.content);
+            },
+        },
+        components: {
+            Side,
+            Loading,
+            Comment,
+        },
+        beforeMount() {
+            // 如果想等说明数据已经拿到，就没必要进行再去取数据了
+            if (this.currentPost.id === this.$route.params.id) {
+                this.$nextTick(() => {
+                    // 提取文章标签，生成目录
+                    Array.from(this.$refs.post.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach((item, index) => {
+                        item.id = item.localName + '-' + index;
+                        this.category.push({
+                            tagName: item.localName,
+                            text: item.innerText,
+                            href: '#' + item.localName + '-' + index,
+                        });
+                    });
+                });
+                return;
+            }
+            this.isLoading = true;
+            this.getPost(this.$route.params.id).then(() => {
+                document.querySelector('title').innerText = this.currentPost.title;
+                this.isLoading = false;
+                this.$nextTick(() => {
+                    // 提取文章标签，生成目录
+                    Array.from(this.$refs.post.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach((item, index) => {
+                        item.id = item.localName + '-' + index;
+                        this.category.push({
+                            tagName: item.localName,
+                            text: item.innerText,
+                            href: '#' + item.localName + '-' + index,
+                        });
                     });
                 });
             });
-            return;
-        }
-        this.isLoading = true;
-        this.getPost(this.$route.params.id).then(() => {
-            document.querySelector('title').innerText = this.currentPost.title;
-            this.isLoading = false;
-            this.$nextTick(() => {
-                // 提取文章标签，生成目录
-                Array.from(this.$refs.post.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach((item, index) => {
-                    item.id = item.localName + '-' + index;
-                    this.category.push({
-                        tagName: item.localName,
-                        text: item.innerText,
-                        href: '#' + item.localName + '-' + index,
-                    });
-                });
-            });
-        });
-    },
-    preFetch(store) {
-        return store.dispatch('getPost', store.state.route.params.id);
-    },
-    mounted() {
-    // this.compiledPost = this.compiledMarkdown(this.currentPost.content)
-    // this.isLoading = false
-    },
-    methods: {
-        ...mapActions([
-            'getPost',
-        ]),
-        compiledMarkdown(value) {
-            return marked(value);
         },
-    },
-};
+        preFetch(store) {
+            return store.dispatch('getPost', store.state.route.params.id);
+        },
+        mounted() {
+            // this.compiledPost = this.compiledMarkdown(this.currentPost.content)
+            // this.isLoading = false
+        },
+        methods: {
+            ...mapActions([
+                'getPost',
+            ]),
+            compiledMarkdown(value) {
+                return marked(value);
+            },
+        },
+    };
 </script>
 
 <style lang="stylus">
-  @import '../assets/stylus/markdown.styl'
+    @import '../assets/stylus/markdown.styl'
 </style>
 <style lang="stylus" scoped>
-@import '../assets/stylus/_settings.styl'
-.article
-  max-width 1000px
-  margin 85px auto 0 auto
-  padding 0 20px 0px 20px
-  &__main
-    margin-left 260px
-    min-height 100%
-  &__title
-    font-size 24px
-    word-break break-all
-  &__time
-    color #7f8c8d
-    font-weight 400
-    margin-bottom 10px
-  &__loading
-    position fixed
-    top 50%
-    left 50%
-    width 300px
-    height 200px
-    margin-left -(@width/2)+125
-    margin-top  -(@height/2)+60
-@media screen and (max-width: 850px)
-  .article
-    position relative
-    margin-top 80px
-    &__main
-      margin-left 0
-    &__loading
-      position absolute
-      top 200px
-      left 50%
-      width 300px
-      margin-left -(@width/2)
+    @import '../assets/stylus/_settings.styl'
+    .article
+        max-width 1000px
+        margin 85px auto 0 auto
+        padding 0 20px 0px 20px
+        &__main
+            margin-left 260px
+            min-height 100%
+        &__title
+            font-size 24px
+            word-break break-all
+        &__time
+            color #7f8c8d
+            font-weight 400
+            margin-bottom 10px
+        &__loading
+            position fixed
+            top 50%
+            left 50%
+            width 300px
+            height 200px
+            margin-left -(@width/ 2) + 125
+            margin-top -(@height/ 2) + 60
+
+    @media screen and (max-width: 850px)
+        .article
+            position relative
+            margin-top 80px
+            &__main
+                margin-left 0
+            &__loading
+                position absolute
+                top 200px
+                left 50%
+                width 300px
+                margin-left -(@width/ 2)
 </style>
