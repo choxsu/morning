@@ -14,7 +14,7 @@ export function createStore() {
         id: '',
       },
       currentPostCompile: '',
-      posts: [],
+      blogList: [],
       allPage: 0,
       curPage: 0,
       tags: [],
@@ -25,8 +25,8 @@ export function createStore() {
     actions: {
       getAllPosts({commit, state}, {tagId = '', category = '', pageNumber = 1, pageSize = 10} = {}) {
         return articleApi.getAllPublishArticles(tagId, category, pageNumber, pageSize).then(res => {
-          console.log(res.data);
-          commit('GET_ALL_POSTS', {posts: res.data.data, allPage: 10, curPage: 1});
+          let data =  res.data.data;
+          commit('GET_ALL_POSTS', {blogList: data.list, allPage: data.totalPage, curPage: data.pageNumber});
           return new Promise((resolve, reject) => {
             resolve(res);
           });
@@ -42,7 +42,7 @@ export function createStore() {
         });
       },
       getPost({commit, state}, id) {
-        let article = state.posts.find((post) => post.id === id);
+        let article = state.blogList.find((post) => post.id === id);
         if (!article && state.currentPost.id === id) {
           article = state.currentPost;
         }
@@ -65,14 +65,14 @@ export function createStore() {
     },
 
     mutations: {
-      GET_ALL_POSTS: (state, {posts, allPage, curPage}) => {
+      GET_ALL_POSTS: (state, {blogList, allPage, curPage}) => {
             if (isNaN(+allPage)) {
                 allPage = 0;
             }
             if (isNaN(+curPage)) {
                 curPage = 0;
             }
-            state.posts = posts;
+            state.blogList = blogList;
             state.allPage = +allPage;
             state.curPage = +curPage;
         },
@@ -86,11 +86,13 @@ export function createStore() {
             if (typeof state.selectTags.find(function (e) {
                 return e.id === id;
             }) === 'undefined') {
+                console.log("true")
                 state.selectTags.push({
                     id,
                     name,
                 });
             } else {
+                console.log("false")
                 state.selectTags = state.selectTags.filter((e) => {
                     return e.id !== id;
                 });
@@ -108,7 +110,7 @@ export function createStore() {
         },
     },
     getters: {
-      posts: state => state.posts,
+      blogList: state => state.blogList,
       tags: state => state.tags,
       curPage: state => state.curPage,
       allPage: state => state.allPage,

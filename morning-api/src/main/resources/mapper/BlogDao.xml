@@ -45,47 +45,53 @@
           id, accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent
         from sblog.blog
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="blog.id != null">
+                and id = #{blog.id}
             </if>
-            <if test="accountid != null">
-                and accountId = #{accountid}
+            <if test="blog.accountid != null">
+                and accountId = #{blog.accountid}
             </if>
-            <if test="title != null and title != ''">
-                and title = #{title}
+            <if test="blog.title != null and blog.title != ''">
+                and title = #{blog.title}
             </if>
-            <if test="content != null">
-                and content = #{content}
+            <if test="blog.content != null">
+                and content = #{blog.content}
             </if>
-            <if test="createat != null">
-                and createAt = #{createat}
+            <if test="blog.createat != null">
+                and createAt = #{blog.createat}
             </if>
-            <if test="updateat != null">
-                and updateAt = #{updateat}
+            <if test="blog.updateat != null">
+                and updateAt = #{blog.updateat}
             </if>
-            <if test="clickcount != null">
-                and clickCount = #{clickcount}
+            <if test="blog.clickcount != null">
+                and clickCount = #{blog.clickcount}
             </if>
-            <if test="likecount != null">
-                and likeCount = #{likecount}
+            <if test="blog.likecount != null">
+                and likeCount = #{blog.likecount}
             </if>
-            <if test="favoritecount != null">
-                and favoriteCount = #{favoritecount}
+            <if test="blog.favoritecount != null">
+                and favoriteCount = #{blog.favoritecount}
             </if>
-            <if test="category != null and category != ''">
-                and category = #{category}
+            <if test="blog.category != null and blog.category != ''">
+                and category = #{blog.category}
             </if>
-            <if test="isdelete != null">
-                and isDelete = #{isdelete}
+            <if test="blog.isdelete != null">
+                and isDelete = #{blog.isdelete}
             </if>
-            <if test="tagId != null">
-                and tag_id = #{tagId}
+            <if test="blog.tagId != null">
+                and tag_id = #{blog.tagId}
             </if>
-            <if test="categoryId != null">
-                and category_id = #{categoryId}
+            <if test="blog.categoryId != null">
+                and category_id = #{blog.categoryId}
             </if>
-            <if test="markedcontent != null">
-                and markedContent = #{markedcontent}
+            <if test="blog.markedcontent != null">
+                and markedContent = #{blog.markedcontent}
+            </if>
+            <if test="tagIds != null and tagIds.size > 0">
+                and tag_id in
+                <foreach collection="tagIds" item="id" index="index" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
             </if>
         </where>
     </select>

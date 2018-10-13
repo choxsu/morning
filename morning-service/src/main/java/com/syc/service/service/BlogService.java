@@ -13,7 +13,7 @@ public interface BlogService {
      * @param paeSize    每页显示的条数
      * @return
      */
-    Page findList(Blog blog, int pageNumber, int paeSize);
+    Page findList(Blog blog, String tagId, int pageNumber, int paeSize);
 
     /**
      * 获取制定条数博客

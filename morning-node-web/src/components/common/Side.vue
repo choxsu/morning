@@ -68,7 +68,7 @@ export default {
         if (typeof window === 'undefined') {
             return;
         }
-        console.log('side created');
+        //console.log('side created');
         if (!this.isInList) {
             window.onscroll = throttle(this.getScrollTop, 30);
         }

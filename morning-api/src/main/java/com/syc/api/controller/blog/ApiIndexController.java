@@ -1,6 +1,7 @@
 package com.syc.api.controller.blog;
 
 import com.github.pagehelper.Page;
+import com.jfinal.kit.StrKit;
 import com.syc.api.controller.common.BaseApiController;
 import com.syc.api.service.common.RedisService;
 import com.syc.model.entity.mybatis.entity.Blog;
@@ -53,24 +54,23 @@ public class ApiIndexController extends BaseApiController {
      */
     @RequestMapping(value = "/v1/list", method = RequestMethod.GET)
     public Result index(String token,
-                        @RequestParam(value = "tagId", required = false) Integer tagId,
+                        @RequestParam(value = "tagId", required = false) String tagId,
                         @RequestParam(value = "category", required = false) String category,
                         @RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         Blog blog = new Blog();
-        if (tagId != null) {
-            blog.setTagId(tagId);
-        }
         if (StringUtils.hasText(category)) {
             blog.setCategory(category);
         }
         Page list;
         try {
-            list = blogService.findList(blog, pageNumber, pageSize);
+            list = blogService.findList(blog, tagId, pageNumber, pageSize);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return Result.fail().setMsg("系统错误:500");
         }
-        return Result.ok().setData(list);
+        //int pageNumber, int pageSize, int totalPage, int totalRow
+        com.jfinal.plugin.activerecord.Page page = new com.jfinal.plugin.activerecord.Page(list, pageNumber, pageSize, list.getPages(), (int)list.getTotal());
+        return Result.ok().setData(page);
     }
 }

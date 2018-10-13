@@ -2,13 +2,17 @@ package com.syc.service.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jfinal.kit.StrKit;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.entity.mybatis.dao.BlogDao;
 import com.syc.service.common.CommonService;
 import com.syc.service.service.BlogService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service("blogService")
@@ -18,14 +22,19 @@ public class BlogServiceImpl extends CommonService implements BlogService {
     private BlogDao blogDao;
 
     @Override
-    public Page findList(Blog blog, int pageNumber, int paeSize) {
-
-        Page page = PageHelper.startPage(pageNumber, paeSize);
+    public Page findList(Blog blog, String tagId, int pageNumber, int paeSize) {
         if (blog == null){
             blog = new Blog();
         }
+        List list = new ArrayList();
+        if (StringUtils.hasLength(tagId)){
+            list = Arrays.asList(tagId.split(","));
+        }
         blog.setIsdelete(0);
-        blogDao.queryAll(blog);
+        Page<Blog> page = PageHelper.startPage(pageNumber, paeSize);
+
+        blogDao.queryAll(blog, list);
+
         return page;
     }
 

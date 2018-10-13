@@ -37,7 +37,7 @@ public interface BlogDao {
      * @param blog 实例对象
      * @return 对象列表
      */
-    List<Blog> queryAll(Blog blog);
+    List<Blog> queryAll(@Param("blog") Blog blog, @Param("tagIds") List tagIds);
 
     /**
      * 新增数据
