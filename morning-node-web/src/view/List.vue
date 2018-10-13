@@ -32,11 +32,10 @@
 </template>
 
 <script>
-import Pagination from 'publicComponents/Pagination.vue';
-import Loading from 'publicComponents/Loading.vue';
-import Side from './common/Side.vue';
-import articleApi from 'api/article.js';
-import marked from 'lib/marked.js';
+import Pagination from '../components/common/Pagination.vue';
+import Loading from '../components/common/Loading.vue';
+import Side from '../components/common/Side.vue';
+import marked from '../lib/marked.js';
 
 import {
     mapGetters,

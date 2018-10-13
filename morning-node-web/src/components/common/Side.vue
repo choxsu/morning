@@ -264,7 +264,7 @@ export default {
         position static
         width auto
 </style>
-<style>
+<style lang="stylus">
   @import '../../assets/iconfont/iconfont.css'
 </style>
 

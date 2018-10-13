@@ -15,11 +15,10 @@
 </template>
 
 <script>
-import Loading from 'publicComponents/Loading.vue';
-import articleApi from 'api/article.js';
-import marked from 'lib/marked.js';
-import Side from './common/Side.vue';
-import Comment from './common/Comment.vue';
+import Loading from '../components/common/Loading.vue';
+import marked from '../lib/marked.js';
+import Side from '../components/common/Side.vue';
+import Comment from '../components/common/Comment.vue';
 
 import {
     mapGetters,
