@@ -99,11 +99,11 @@ export default {
         ]),
         compiledMarkdown(value) {
             let md = marked(value);
-            return md.substr(0, 100);
+            return md.substr(0, 150);
         },
         changePage(cur) {
             this.isLoading = true;
-            this.$router.push('/page/' + cur);
+            this.$router.push('/' + cur);
             this.getAllPosts({tagId: this.searchTags, pageNumber: cur}).then(() => {
                 this.isLoading = false;
             });

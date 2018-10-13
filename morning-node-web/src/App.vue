@@ -57,9 +57,6 @@
         text-align center
         color $grey
         line-height 20px
-        position fixed
-        button 0px
-        left 53%
         a
             text-decoration none
             color $blue-link

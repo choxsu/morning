@@ -20,7 +20,7 @@ export function createRouter() {
     routes: [
       {path: '/', component: List},
       {path: '/article/:id', component: Article, meta: {scrollToTop: true}},
-      {path: '/page/:page', component: List},
+      {path: '/:page', component: List},
       {path: '*', component: NotFoundComponent},
     ],
   });

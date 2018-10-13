@@ -107,7 +107,8 @@ export default {
             if (document.documentElement) {
                 documentScrollTop = document.documentElement.scrollTop;
             }
-            console.log(this.scrollTop);
+            //这里是打印的滚动条滚动的高度
+            //console.log(this.scrollTop);
             this.scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
             // console.log(this.scrollTop)
         },

@@ -10,8 +10,8 @@ export function createStore() {
   return new Vuex.Store({
     state: {
       currentPost: {
-        content: '',
-        id: '',
+          id: '',
+          content: '',
       },
       currentPostCompile: '',
       blogList: [],
@@ -23,7 +23,7 @@ export function createStore() {
     },
 
     actions: {
-      getAllPosts({commit, state}, {tagId = '', category = '', pageNumber = 1, pageSize = 10} = {}) {
+      getAllPosts({commit, state}, {tagId = '', category = '', pageNumber = 1, pageSize = 5} = {}) {
         return articleApi.getAllPublishArticles(tagId, category, pageNumber, pageSize).then(res => {
           let data =  res.data.data;
           commit('GET_ALL_POSTS', {blogList: data.list, allPage: data.totalPage, curPage: data.pageNumber});
@@ -53,7 +53,7 @@ export function createStore() {
           });
         } else {
           return articleApi.getArticle(id).then(res => {
-            commit('GET_POST', res.data.article);
+            commit('GET_POST', res.data.data);
             return new Promise((resolve, reject) => {
               resolve(res);
             });
