@@ -1,8 +1,6 @@
 server:
   port: 3333
 spring:
-  profiles:
-    active: dev
   application:
     name: morning
   jackson:
