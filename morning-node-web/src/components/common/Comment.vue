@@ -13,7 +13,7 @@ export default {
     },
     props: {
         sourceId: {
-            type: String,
+            type: Number,
             required: true,
         },
     },

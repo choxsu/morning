@@ -10,12 +10,12 @@
                 <span>{{filterMsg}}</span>
                 分类
             </li>
-            <template v-if="posts.length!==0 && isLoading == false">
-                <li v-for="article in posts" class="list__article__item" :key="article.id">
+            <template v-if="blogList.length!==0 && isLoading == false">
+                <li v-for="article in blogList" class="list__article__item" :key="article.id">
                     <h1 class="list__article__item__title"><router-link :to="'article/'+article.id">{{ article.title }}</router-link></h1>
                     <div class="list__article__item__info">
-                        <p class="list__article__item__time">{{article.createTime}}</p>
-                        <div class="list__article__item__abstract markdown-body" v-html="compiledMarkdown(article.abstract)"></div>
+                        <p class="list__article__item__time">{{article.createat}}</p>
+                        <div class="list__article__item__abstract markdown-body" v-html="compiledMarkdown(article.markedcontent)"></div>
                         <!-- <span v-for="tag in article.tags"> {{tag.name}}</span> -->
                         <p>
                             <router-link :to="'/article/'+article.id" class="continue-reading">继续阅读...</router-link>
@@ -24,7 +24,7 @@
                 </li>
                 <Pagination :curPage='curPage' :allPage='allPage' @changePage='changePage'></Pagination>
             </template>
-            <div v-if="posts.length==0 && isLoading==false" class="msg-box">
+            <div v-if="blogList.length==0 && isLoading==false" class="msg-box">
                 <p>暂时没有相关文章</p>
             </div>
         </ul>
@@ -32,11 +32,10 @@
 </template>
 
 <script>
-import Pagination from 'publicComponents/Pagination.vue';
-import Loading from 'publicComponents/Loading.vue';
-import Side from './common/Side.vue';
-import articleApi from 'api/article.js';
-import marked from 'lib/marked.js';
+import Pagination from '../components/common/Pagination.vue';
+import Loading from '../components/common/Loading.vue';
+import Side from '../components/common/Side.vue';
+import marked from '../lib/marked.js';
 
 import {
     mapGetters,
@@ -47,7 +46,7 @@ export default {
     name: 'list',
     computed: {
         ...mapGetters([
-            'posts',
+            'blogList',
             'tags',
             'curPage',
             'allPage',
@@ -78,7 +77,8 @@ export default {
     created() {
     },
     beforeMount() {
-    // 用来判断是否有数据，有数据就不再请求了
+        this.$store.dispatch('getAllPosts', {page: this.$store.state.route.params.page});
+        // 用来判断是否有数据，有数据就不再请求了
         if (this.currentPost.id === '') {
             // 这句话说明不是从文章详细页过来的
             return;
@@ -90,8 +90,7 @@ export default {
     },
     preFetch(store) {
         store.dispatch('getAllTags');
-        return store.dispatch('getAllPosts', {page: store.state.route.params.page}).then(()=>{
-        });
+        return store.dispatch('getAllPosts', {page: store.state.route.params.page});
     },
     methods: {
         ...mapActions([
@@ -99,12 +98,13 @@ export default {
             'getAllTags',
         ]),
         compiledMarkdown(value) {
-            return marked(value);
+            let md = marked(value);
+            return md.substr(0, 150);
         },
         changePage(cur) {
             this.isLoading = true;
-            this.$router.push('/page/' + cur);
-            this.getAllPosts({tag: this.searchTags, page: cur}).then(() => {
+            this.$router.push('/' + cur);
+            this.getAllPosts({tagId: this.searchTags, pageNumber: cur}).then(() => {
                 this.isLoading = false;
             });
         },
@@ -113,7 +113,7 @@ export default {
         selectTags() {
             this.isLoading = true;
             this.getAllPosts({
-                tag: this.searchTags,
+                tagId: this.searchTags,
             }).then(()=> {
                 this.isLoading = false;
             });

@@ -68,7 +68,7 @@ export default {
         if (typeof window === 'undefined') {
             return;
         }
-        console.log('side created');
+        //console.log('side created');
         if (!this.isInList) {
             window.onscroll = throttle(this.getScrollTop, 30);
         }
@@ -107,7 +107,8 @@ export default {
             if (document.documentElement) {
                 documentScrollTop = document.documentElement.scrollTop;
             }
-            console.log(this.scrollTop);
+            //这里是打印的滚动条滚动的高度
+            //console.log(this.scrollTop);
             this.scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
             // console.log(this.scrollTop)
         },
@@ -264,7 +265,7 @@ export default {
         position static
         width auto
 </style>
-<style>
+<style lang="stylus">
   @import '../../assets/iconfont/iconfont.css'
 </style>
 

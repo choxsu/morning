@@ -37,7 +37,7 @@ export default {
     background-color #0288D1
 </style>
 
-<style scoped>
+<style scoped lang="stylus">
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;
