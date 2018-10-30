@@ -22,7 +22,7 @@ public class MorningApplication {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello World!";
+        return "=================Welcome=================";
     }
 
 
