@@ -22,7 +22,10 @@ public class MorningApplication {
 
     @RequestMapping("/")
     public String home() {
-        return "=================Welcome=================";
+        return "<div style='text-align: center;\n" +
+                "    margin-top: 200px;\n" +
+                "    font-size: 36px;\n" +
+                "    color: currentColor;'>Welcome!</div>";
     }
 
 
