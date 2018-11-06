@@ -174,49 +174,4 @@ public class AppConfig {
 
     }
 
-    public static class MyObject{
-        private static MyObject myObject;
-
-        //加上synchronize才能保证在多线程的情况下保证得到的对象单列，就如下面的列子
-        public synchronized static MyObject getInstance(){
-            if (myObject == null){
-                myObject = new MyObject();
-            }
-            return myObject;
-        }
-    }
-
-    public static class MyThread extends Thread{
-
-        @Override
-        public void run() {
-            System.out.println(MyObject.getInstance().hashCode());
-        }
-    }
-
-    public static void main(String[] args) {
-        List<MyThread> list = new ArrayList();
-        MyThread t;
-        for (int i = 0; i < 50; i++) {
-            t = new MyThread();
-            list.add(t);
-        }
-
-        System.out.println(list.size());
-
-        for (MyThread myThread : list) {
-            myThread.start();
-        }
-
-        /*MyThread t1 = new MyThread();
-        MyThread t2 = new MyThread();
-        MyThread t3 = new MyThread();
-        MyThread t4 = new MyThread();
-        MyThread t5 = new MyThread();
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();*/
-    }
 }
