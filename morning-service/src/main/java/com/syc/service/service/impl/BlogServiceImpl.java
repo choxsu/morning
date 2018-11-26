@@ -2,10 +2,8 @@ package com.syc.service.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.jfinal.kit.StrKit;
-import com.jfinal.plugin.activerecord.Db;
-import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.entity.mybatis.dao.BlogDao;
+import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.service.common.CommonService;
 import com.syc.service.service.BlogService;
 import org.springframework.stereotype.Service;
@@ -49,7 +47,7 @@ public class BlogServiceImpl extends CommonService implements BlogService {
         Blog blog = blogDao.queryById(id);
         if (blog != null) {
             blog.setClickcount(blog.getClickcount() + 1);
-            Db.update("UPDATE blog set clickCount = clickCount + 1 WHERE id = ?", blog.getId());
+            blogDao.updateClick(blog.getId());
         }
         return blog;
     }
