@@ -3,6 +3,7 @@ package com.syc.service.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.model.entity.mybatis.dao.BlogDao;
 import com.syc.service.common.CommonService;
@@ -23,11 +24,11 @@ public class BlogServiceImpl extends CommonService implements BlogService {
 
     @Override
     public Page findList(Blog blog, String tagId, int pageNumber, int paeSize) {
-        if (blog == null){
+        if (blog == null) {
             blog = new Blog();
         }
         List list = new ArrayList();
-        if (StringUtils.hasLength(tagId)){
+        if (StringUtils.hasLength(tagId)) {
             list = Arrays.asList(tagId.split(","));
         }
         blog.setIsdelete(0);
@@ -46,9 +47,9 @@ public class BlogServiceImpl extends CommonService implements BlogService {
     @Override
     public Blog findById(Integer id) {
         Blog blog = blogDao.queryById(id);
-        if (blog != null){
+        if (blog != null) {
             blog.setClickcount(blog.getClickcount() + 1);
-            blogDao.update(blog);
+            Db.update("UPDATE blog set clickCount = clickCount + 1 WHERE id = ?", blog.getId());
         }
         return blog;
     }
