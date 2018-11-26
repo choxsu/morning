@@ -12,7 +12,7 @@ import javax.management.MXBean;
 /**
  * @author chox su
  * @date 2018/01/17 18:04
- * scanBasePackages 这个是在分模块的情况下，扫描报下的自动配置
+ * scanBasePackages 这个是在分模块的情况下，扫描报下的自动配置,基于spring boot 2.0
  */
 @SpringBootApplication(scanBasePackages = {"com.syc"})
 @EnableCaching
@@ -25,7 +25,9 @@ public class MorningApplication {
         return "<div style='text-align: center;\n" +
                 "    margin-top: 200px;\n" +
                 "    font-size: 36px;\n" +
-                "    color: currentColor;'>Welcome!</div>";
+                "    color: currentColor;'>Choxsu's Blog Api " +
+                "<br/>" +
+                "Welcome!</div>";
     }
 
 
