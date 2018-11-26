@@ -2,6 +2,7 @@ package com.syc.model.entity.mybatis.dao;
 
 import com.syc.model.entity.mybatis.entity.Blog;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -20,6 +21,15 @@ public interface BlogDao {
      * @return 实例对象
      */
     Blog queryById(@Param("id") Integer id);
+
+
+    /**
+     * 更新点击次数
+     * @param id
+     * @return
+     */
+    @Update("UPDATE blog set clickCount = clickCount + 1 WHERE id = #{id}")
+    int updateClick(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
