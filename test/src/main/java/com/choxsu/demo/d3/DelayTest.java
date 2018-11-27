@@ -64,10 +64,10 @@ public class DelayTest implements Delayed {
 
     }*/
 
+    static ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
 
     public static void main(String[] args) {
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
         //下单成功后就将订单超时时间放入队列中，当支付成功后传入订单id，调用取消订单超时
 
         //当后台系统重启时，要去遍历一次数据库，并将已经超时的订单处理，并将未付款订单加入队列中去
