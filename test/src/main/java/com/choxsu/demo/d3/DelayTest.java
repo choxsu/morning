@@ -66,22 +66,51 @@ public class DelayTest implements Delayed {
 
 
     public static void main(String[] args) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
+        //下单成功后就将订单超时时间放入队列中，当支付成功后传入订单id，调用取消订单超时
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(64);
+        //当后台系统重启时，要去遍历一次数据库，并将已经超时的订单处理，并将未付款订单加入队列中去
+        //OrderTimeOutRunnable outRunnable = new OrderTimeOutRunnable("T1");
         //遍历未付款的订单记录list，然后将时间作为
         int c = 0;
-        for (int i = 100; i > 0; i--) {
-            int time = i;//算出剩余订单超时时间秒数
-            executor.schedule(() -> {
-                //这里就需要去更改订单的状态去取消
-                System.out.println("Work start, thread id:" + Thread.currentThread().getId() + " " + sdf.format(new Date()));
-            }, time, TimeUnit.SECONDS);
-            if (time == 99)
+        for (int i = 20; i > 0; i--) {
+            //算出剩余订单超时时间秒数
+            int time = i;
+            executor.schedule(new OrderTimeOutRunnable(i + ""), time, TimeUnit.SECONDS);
+            if (time == 19)
                 c = time;
         }
         System.out.println("队列装载完毕,c:" + c);
     }
+
+    public interface SRunnable extends Runnable {
+        String getName();
+    }
+
+    public static class OrderTimeOutRunnable implements SRunnable {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        private String name;
+
+        public OrderTimeOutRunnable(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        @Override
+        public void run() {
+            //需要先判断订单是否已经支付，并且订单必须是未付款，并且时间已经大于超时时间了。
+
+            //这里就需要去更改订单的状态去取消,
+            System.out.println("time:" + name);
+            System.out.println("Work start, thread id:" + Thread.currentThread().getId() + " " + sdf.format(new Date()));
+        }
+    }
+
 
 }
