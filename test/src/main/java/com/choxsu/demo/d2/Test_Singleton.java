@@ -1,5 +1,7 @@
 package com.choxsu.demo.d2;
 
+import org.junit.Test;
+
 import java.util.*;
 
 /**
@@ -61,19 +63,26 @@ public class Test_Singleton {
     /**
      * map的三种遍历方式
      */
+    @Test
     public void mapIt(){
-        Map map = new HashMap();
 
+        Map map = new HashMap();
+        map.put("1", "v1");
+        map.put("2", "v2");
+        map.put("3", "v3");
+        map.put("4", "v4");
         Set<Map.Entry> set = map.entrySet();
         for (Map.Entry entry : set) {
             Object key = entry.getKey();
             Object value = entry.getValue();
+            System.out.println(key + "|" + value);
         }
 
         Set<Object> set1 = map.keySet();
         for (Object o : set1) {
             Object key = o;
             Object value = map.get(o);
+            System.out.println(key + "|" + value);
         }
 
         Collection values = map.values();
@@ -81,4 +90,5 @@ public class Test_Singleton {
             System.out.println(value);
         }
     }
+
 }
