@@ -64,7 +64,7 @@ public class DelayTest implements Delayed {
 
     }*/
 
-    static ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
 
     public static void main(String[] args) {
 
@@ -76,13 +76,18 @@ public class DelayTest implements Delayed {
         int c = 0;
         for (int i = 20; i > 0; i--) {
             //算出剩余订单超时时间秒数
-            int time = i;
-            executor.schedule(new OrderTimeOutRunnable(i + ""), time, TimeUnit.SECONDS);
-            if (time == 19)
-                c = time;
+            executor.schedule(new OrderTimeOutRunnable(i + ""), i, TimeUnit.SECONDS);
+            if (i == 19)
+                c = i;
         }
         System.out.println("队列装载完毕,c:" + c);
     }
+
+    public boolean remove(SRunnable sRunnable){
+
+        return false;
+    }
+
 
     public interface SRunnable extends Runnable {
         String getName();
@@ -93,7 +98,7 @@ public class DelayTest implements Delayed {
 
         private String name;
 
-        public OrderTimeOutRunnable(String name) {
+        OrderTimeOutRunnable(String name) {
             this.name = name;
         }
 
