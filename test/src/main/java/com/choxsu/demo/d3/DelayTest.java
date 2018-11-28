@@ -74,20 +74,17 @@ public class DelayTest implements Delayed {
         //OrderTimeOutRunnable outRunnable = new OrderTimeOutRunnable("T1");
         //遍历未付款的订单记录list，然后将时间作为
         int c = 0;
+        SRunnable sRunnable;
         for (int i = 20; i > 0; i--) {
             //算出剩余订单超时时间秒数
-            executor.schedule(new OrderTimeOutRunnable(i + ""), i, TimeUnit.SECONDS);
+            sRunnable = new OrderTimeOutRunnable(i + "");
+            System.out.println(sRunnable.getName());
+            executor.schedule(sRunnable, i, TimeUnit.SECONDS);
             if (i == 19)
                 c = i;
         }
         System.out.println("队列装载完毕,c:" + c);
     }
-
-    public boolean remove(SRunnable sRunnable){
-
-        return false;
-    }
-
 
     public interface SRunnable extends Runnable {
         String getName();
