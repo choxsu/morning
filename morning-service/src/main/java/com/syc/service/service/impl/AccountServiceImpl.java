@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.AccountDao;
+import com.syc.service.dao.AccountDao;
 import com.syc.model.entity.mybatis.entity.Account;
 import com.syc.service.service.AccountService;
 import org.springframework.stereotype.Service;

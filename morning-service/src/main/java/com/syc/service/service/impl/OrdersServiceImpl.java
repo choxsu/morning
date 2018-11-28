@@ -1,8 +1,10 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.OrdersDao;
+import com.syc.service.dao.OrdersDao;
 import com.syc.model.entity.mybatis.entity.Orders;
+import com.syc.model.result.Result;
 import com.syc.service.service.OrdersService;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -75,5 +77,20 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public boolean deleteById(Integer id) {
         return this.ordersDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 订单超时处理
+     * @param arguments
+     * @return
+     */
+    @Override
+    public Result orderTimeoutAction(ApplicationArguments arguments) {
+
+        List<Orders> orders = this.ordersDao.queryByStatus(0, 0);
+
+
+
+        return Result.fail().setMsg("订单处理失败！");
     }
 }

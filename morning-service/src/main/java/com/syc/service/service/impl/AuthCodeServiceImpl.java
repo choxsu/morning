@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.AuthCodeDao;
+import com.syc.service.dao.AuthCodeDao;
 import com.syc.model.entity.mybatis.entity.AuthCode;
 import com.syc.service.service.AuthCodeService;
 import org.springframework.stereotype.Service;

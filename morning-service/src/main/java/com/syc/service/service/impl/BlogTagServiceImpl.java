@@ -1,9 +1,8 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.BlogTagDao;
+import com.syc.service.dao.BlogTagDao;
 import com.syc.model.entity.mybatis.entity.BlogTag;
 import com.syc.service.service.BlogTagService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

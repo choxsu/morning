@@ -16,7 +16,7 @@ import javax.management.MXBean;
  */
 @SpringBootApplication(scanBasePackages = {"com.syc"})
 @EnableCaching
-@MapperScan("com.syc.model.entity.mybatis.dao")
+@MapperScan("com.syc.service.dao")
 @RestController
 public class MorningApplication {
 

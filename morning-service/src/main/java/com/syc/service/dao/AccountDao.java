@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
+import com.syc.model.entity.mybatis.entity.Account;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.SensitiveWords;
 
 /**
- * (SensitiveWords)表数据库访问层
+ * (Account)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface SensitiveWordsDao {
+public interface AccountDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface SensitiveWordsDao {
      * @param id 主键
      * @return 实例对象
      */
-    SensitiveWords queryById(@Param("id") Integer id);
+    Account queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface SensitiveWordsDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<SensitiveWords> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Account> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param sensitiveWords 实例对象
+     * @param account 实例对象
      * @return 对象列表
      */
-    List<SensitiveWords> queryAll(SensitiveWords sensitiveWords);
+    List<Account> queryAll(Account account);
 
     /**
      * 新增数据
      *
-     * @param sensitiveWords 实例对象
+     * @param account 实例对象
      * @return 影响行数
      */
-    int insert(SensitiveWords sensitiveWords);
+    int insert(Account account);
 
     /**
      * 修改数据
      *
-     * @param sensitiveWords 实例对象
+     * @param account 实例对象
      * @return 影响行数
      */
-    int update(SensitiveWords sensitiveWords);
+    int update(Account account);
 
     /**
      * 通过主键删除数据

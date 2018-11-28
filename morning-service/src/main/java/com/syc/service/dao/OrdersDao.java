@@ -1,7 +1,10 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import com.syc.model.entity.mybatis.entity.Orders;
+import com.syc.service.sql.OrdersSqlProvider;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
@@ -25,7 +28,7 @@ public interface OrdersDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Orders> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -63,4 +66,13 @@ public interface OrdersDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 查询订单通过支付状态和订单状态
+     *
+     * @param payStatus 支付状态
+     * @param status    订单状态
+     * @return
+     */
+    @SelectProvider(type = OrdersSqlProvider.class, method = "queryByStatus")
+    List<Orders> queryByStatus(@Param("payStatus") int payStatus, @Param("status") int status);
 }

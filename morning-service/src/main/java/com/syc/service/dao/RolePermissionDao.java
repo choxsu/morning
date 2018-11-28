@@ -1,4 +1,4 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 

@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.SensitiveWordsDao;
+import com.syc.service.dao.SensitiveWordsDao;
 import com.syc.model.entity.mybatis.entity.SensitiveWords;
 import com.syc.service.service.SensitiveWordsService;
 import org.springframework.stereotype.Service;

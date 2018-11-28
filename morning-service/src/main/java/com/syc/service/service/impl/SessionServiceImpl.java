@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.SessionDao;
+import com.syc.service.dao.SessionDao;
 import com.syc.model.entity.mybatis.entity.Session;
 import com.syc.service.service.SessionService;
 import org.springframework.stereotype.Service;

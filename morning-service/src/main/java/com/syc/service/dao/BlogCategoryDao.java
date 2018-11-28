@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
-import com.syc.model.entity.mybatis.entity.Account;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import com.syc.model.entity.mybatis.entity.BlogCategory;
 
 /**
- * (Account)表数据库访问层
+ * 类别表(BlogCategory)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface AccountDao {
+public interface BlogCategoryDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface AccountDao {
      * @param id 主键
      * @return 实例对象
      */
-    Account queryById(@Param("id") Integer id);
+    BlogCategory queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface AccountDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Account> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<BlogCategory> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param account 实例对象
+     * @param blogCategory 实例对象
      * @return 对象列表
      */
-    List<Account> queryAll(Account account);
+    List<BlogCategory> queryAll(BlogCategory blogCategory);
 
     /**
      * 新增数据
      *
-     * @param account 实例对象
+     * @param blogCategory 实例对象
      * @return 影响行数
      */
-    int insert(Account account);
+    int insert(BlogCategory blogCategory);
 
     /**
      * 修改数据
      *
-     * @param account 实例对象
+     * @param blogCategory 实例对象
      * @return 影响行数
      */
-    int update(Account account);
+    int update(BlogCategory blogCategory);
 
     /**
      * 通过主键删除数据

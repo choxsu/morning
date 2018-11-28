@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.PermissionDao;
+import com.syc.service.dao.PermissionDao;
 import com.syc.model.entity.mybatis.entity.Permission;
 import com.syc.service.service.PermissionService;
 import org.springframework.stereotype.Service;

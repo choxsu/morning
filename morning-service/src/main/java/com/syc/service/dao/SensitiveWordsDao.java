@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.AuthCode;
+import com.syc.model.entity.mybatis.entity.SensitiveWords;
 
 /**
- * (AuthCode)表数据库访问层
+ * (SensitiveWords)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface AuthCodeDao {
+public interface SensitiveWordsDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface AuthCodeDao {
      * @param id 主键
      * @return 实例对象
      */
-    AuthCode queryById(@Param("id") String id);
+    SensitiveWords queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface AuthCodeDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<AuthCode> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<SensitiveWords> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param authCode 实例对象
+     * @param sensitiveWords 实例对象
      * @return 对象列表
      */
-    List<AuthCode> queryAll(AuthCode authCode);
+    List<SensitiveWords> queryAll(SensitiveWords sensitiveWords);
 
     /**
      * 新增数据
      *
-     * @param authCode 实例对象
+     * @param sensitiveWords 实例对象
      * @return 影响行数
      */
-    int insert(AuthCode authCode);
+    int insert(SensitiveWords sensitiveWords);
 
     /**
      * 修改数据
      *
-     * @param authCode 实例对象
+     * @param sensitiveWords 实例对象
      * @return 影响行数
      */
-    int update(AuthCode authCode);
+    int update(SensitiveWords sensitiveWords);
 
     /**
      * 通过主键删除数据
@@ -62,6 +62,6 @@ public interface AuthCodeDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(@Param("id") String id);
+    int deleteById(@Param("id") Integer id);
 
 }

@@ -47,6 +47,10 @@ public class Result implements java.io.Serializable {
         return this;
     }
 
+    public boolean isSuccess(){
+        return this.code == codeSuccess;
+    }
+
     public static Result noAuth(){
         return new Result(codeNoAuth).setMsg(msgNoAuth);
     }

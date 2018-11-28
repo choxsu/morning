@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.Session;
+import com.syc.model.entity.mybatis.entity.Visitor;
 
 /**
- * (Session)表数据库访问层
+ * (Visitor)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface SessionDao {
+public interface VisitorDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface SessionDao {
      * @param id 主键
      * @return 实例对象
      */
-    Session queryById(@Param("id") String id);
+    Visitor queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface SessionDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Session> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Visitor> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param session 实例对象
+     * @param visitor 实例对象
      * @return 对象列表
      */
-    List<Session> queryAll(Session session);
+    List<Visitor> queryAll(Visitor visitor);
 
     /**
      * 新增数据
      *
-     * @param session 实例对象
+     * @param visitor 实例对象
      * @return 影响行数
      */
-    int insert(Session session);
+    int insert(Visitor visitor);
 
     /**
      * 修改数据
      *
-     * @param session 实例对象
+     * @param visitor 实例对象
      * @return 影响行数
      */
-    int update(Session session);
+    int update(Visitor visitor);
 
     /**
      * 通过主键删除数据
@@ -62,6 +62,6 @@ public interface SessionDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(@Param("id") String id);
+    int deleteById(@Param("id") Integer id);
 
 }

@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.Role;
+import com.syc.model.entity.mybatis.entity.AuthCode;
 
 /**
- * (Role)表数据库访问层
+ * (AuthCode)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface RoleDao {
+public interface AuthCodeDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface RoleDao {
      * @param id 主键
      * @return 实例对象
      */
-    Role queryById(@Param("id") Integer id);
+    AuthCode queryById(@Param("id") String id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface RoleDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Role> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<AuthCode> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param role 实例对象
+     * @param authCode 实例对象
      * @return 对象列表
      */
-    List<Role> queryAll(Role role);
+    List<AuthCode> queryAll(AuthCode authCode);
 
     /**
      * 新增数据
      *
-     * @param role 实例对象
+     * @param authCode 实例对象
      * @return 影响行数
      */
-    int insert(Role role);
+    int insert(AuthCode authCode);
 
     /**
      * 修改数据
      *
-     * @param role 实例对象
+     * @param authCode 实例对象
      * @return 影响行数
      */
-    int update(Role role);
+    int update(AuthCode authCode);
 
     /**
      * 通过主键删除数据
@@ -62,6 +62,6 @@ public interface RoleDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(@Param("id") Integer id);
+    int deleteById(@Param("id") String id);
 
 }

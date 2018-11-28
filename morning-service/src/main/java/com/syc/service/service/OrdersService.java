@@ -2,6 +2,8 @@ package com.syc.service.service;
 
 
 import com.syc.model.entity.mybatis.entity.Orders;
+import com.syc.model.result.Result;
+import org.springframework.boot.ApplicationArguments;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public interface OrdersService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Orders> queryAllByLimit(int offset, int limit);
@@ -54,4 +56,10 @@ public interface OrdersService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 订单超时处理
+     *
+     * @return
+     */
+    Result orderTimeoutAction(ApplicationArguments arguments);
 }

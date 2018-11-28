@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.BlogCategory;
+import com.syc.model.entity.mybatis.entity.Permission;
 
 /**
- * 类别表(BlogCategory)表数据库访问层
+ * (Permission)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface BlogCategoryDao {
+public interface PermissionDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface BlogCategoryDao {
      * @param id 主键
      * @return 实例对象
      */
-    BlogCategory queryById(@Param("id") Integer id);
+    Permission queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface BlogCategoryDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<BlogCategory> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Permission> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param blogCategory 实例对象
+     * @param permission 实例对象
      * @return 对象列表
      */
-    List<BlogCategory> queryAll(BlogCategory blogCategory);
+    List<Permission> queryAll(Permission permission);
 
     /**
      * 新增数据
      *
-     * @param blogCategory 实例对象
+     * @param permission 实例对象
      * @return 影响行数
      */
-    int insert(BlogCategory blogCategory);
+    int insert(Permission permission);
 
     /**
      * 修改数据
      *
-     * @param blogCategory 实例对象
+     * @param permission 实例对象
      * @return 影响行数
      */
-    int update(BlogCategory blogCategory);
+    int update(Permission permission);
 
     /**
      * 通过主键删除数据

@@ -1,6 +1,6 @@
 package com.syc.service.service.impl;
 
-import com.syc.model.entity.mybatis.dao.VisitorDao;
+import com.syc.service.dao.VisitorDao;
 import com.syc.model.entity.mybatis.entity.Visitor;
 import com.syc.service.service.VisitorService;
 import org.springframework.stereotype.Service;

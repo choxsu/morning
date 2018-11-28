@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
-import com.syc.model.entity.mybatis.entity.Blog;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
+import com.syc.model.entity.mybatis.entity.BlogTag;
+
 /**
- * (Blog)表数据库访问层
+ * 标签表(BlogTag)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface BlogDao {
+public interface BlogTagDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,16 +20,7 @@ public interface BlogDao {
      * @param id 主键
      * @return 实例对象
      */
-    Blog queryById(@Param("id") Integer id);
-
-
-    /**
-     * 更新点击次数
-     * @param id
-     * @return
-     */
-    @Update("UPDATE blog set clickCount = clickCount + 1 WHERE id = #{id}")
-    int updateClick(@Param("id") Integer id);
+    BlogTag queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -38,32 +29,32 @@ public interface BlogDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Blog> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<BlogTag> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param blog 实例对象
+     * @param blogTag 实例对象
      * @return 对象列表
      */
-    List<Blog> queryAll(@Param("blog") Blog blog, @Param("tagIds") List tagIds);
+    List<BlogTag> queryAll(BlogTag blogTag);
 
     /**
      * 新增数据
      *
-     * @param blog 实例对象
+     * @param blogTag 实例对象
      * @return 影响行数
      */
-    int insert(Blog blog);
+    int insert(BlogTag blogTag);
 
     /**
      * 修改数据
      *
-     * @param blog 实例对象
+     * @param blogTag 实例对象
      * @return 影响行数
      */
-    int update(Blog blog);
+    int update(BlogTag blogTag);
 
     /**
      * 通过主键删除数据

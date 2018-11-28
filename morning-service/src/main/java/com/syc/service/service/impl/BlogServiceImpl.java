@@ -2,7 +2,7 @@ package com.syc.service.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.syc.model.entity.mybatis.dao.BlogDao;
+import com.syc.service.dao.BlogDao;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.service.common.CommonService;
 import com.syc.service.service.BlogService;

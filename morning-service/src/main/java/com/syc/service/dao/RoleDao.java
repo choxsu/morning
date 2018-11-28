@@ -1,18 +1,18 @@
-package com.syc.model.entity.mybatis.dao;
+package com.syc.service.dao;
 
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.syc.model.entity.mybatis.entity.Permission;
+import com.syc.model.entity.mybatis.entity.Role;
 
 /**
- * (Permission)表数据库访问层
+ * (Role)表数据库访问层
  *
  * @author makejava
  * @since 2018-09-25 11:51:16
  */
-public interface PermissionDao {
+public interface RoleDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface PermissionDao {
      * @param id 主键
      * @return 实例对象
      */
-    Permission queryById(@Param("id") Integer id);
+    Role queryById(@Param("id") Integer id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface PermissionDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Permission> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Role> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param permission 实例对象
+     * @param role 实例对象
      * @return 对象列表
      */
-    List<Permission> queryAll(Permission permission);
+    List<Role> queryAll(Role role);
 
     /**
      * 新增数据
      *
-     * @param permission 实例对象
+     * @param role 实例对象
      * @return 影响行数
      */
-    int insert(Permission permission);
+    int insert(Role role);
 
     /**
      * 修改数据
      *
-     * @param permission 实例对象
+     * @param role 实例对象
      * @return 影响行数
      */
-    int update(Permission permission);
+    int update(Role role);
 
     /**
      * 通过主键删除数据
