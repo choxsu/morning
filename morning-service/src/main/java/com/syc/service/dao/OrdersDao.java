@@ -2,10 +2,8 @@ package com.syc.service.dao;
 
 import com.syc.model.entity.mybatis.entity.Orders;
 import com.syc.service.sql.OrdersSqlProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
@@ -75,8 +73,9 @@ public interface OrdersDao {
      * @return
      */
     @SelectProvider(type = OrdersSqlProvider.class, method = "queryByStatus")
+    @ResultMap("OrdersMap")
     List<Orders> queryByStatus(@Param("payStatus") int payStatus, @Param("status") int status);
 
-    @Update("update orders SET status = #{status} ,cencel_time = UNIX_TIMESTAMP()  where id = #{id}")
+    @Update("update orders SET status = #{status} ,cancel_time = UNIX_TIMESTAMP()  where id = #{id}")
     int updateStatusById(@Param("status") Integer status,@Param("id") Integer id);
 }

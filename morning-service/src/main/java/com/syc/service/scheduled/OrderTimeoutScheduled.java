@@ -40,7 +40,7 @@ public class OrderTimeoutScheduled {
         int c = 0;
 
         if (orders == null || orders.size() == 0) {
-            return Result.ok().setMsg("处理订单数量为null,或者数量为零");
+            return Result.ok().setMsg("待处理订单数量为null,或者数量为零");
         }
         //获取数据库配置的超时时间(单位：分钟) 转换为秒  乘以60
         int configTime = 15 * 60;

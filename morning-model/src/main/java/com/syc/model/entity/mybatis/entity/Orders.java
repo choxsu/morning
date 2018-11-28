@@ -33,7 +33,7 @@ public class Orders implements Serializable {
     //发货时间
     private Integer sendTime;
     //取消时间
-    private Integer cencelTime;
+    private Integer cancelTime;
     //删除时间
     private Integer deleteTime;
 
@@ -126,12 +126,12 @@ public class Orders implements Serializable {
         this.sendTime = sendTime;
     }
 
-    public Integer getCencelTime() {
-        return cencelTime;
+    public Integer getCancelTime() {
+        return cancelTime;
     }
 
-    public void setCencelTime(Integer cencelTime) {
-        this.cencelTime = cencelTime;
+    public void setCancelTime(Integer cancelTime) {
+        this.cancelTime = cancelTime;
     }
 
     public Integer getDeleteTime() {

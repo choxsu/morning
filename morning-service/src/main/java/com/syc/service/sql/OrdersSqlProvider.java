@@ -15,20 +15,7 @@ public class OrdersSqlProvider {
      */
     public String queryByStatus() {
         String sql = new SQL() {{
-            SELECT("id, " +
-                    "account_id as accountId , " +
-                    "goods_id as goodsId, scene, " +
-                    "order_sn as orderSn , " +
-                    "pay_status as payStatus, " +
-                    "status, " +
-                    "refund_status as refundStatus," +
-                    "created, " +
-                    "pay_time as payTime, " +
-                    "send_time as sendTime, " +
-                    "cencel_time as cencelTime, " +
-                    "delete_time as deleteTime ");
-            FROM("orders");
-            WHERE("pay_status = #{payStatus} and status = #{status}");
+            SELECT("*").FROM("orders").WHERE("pay_status = #{payStatus} and status = #{status}");
         }}.toString();
 
 
