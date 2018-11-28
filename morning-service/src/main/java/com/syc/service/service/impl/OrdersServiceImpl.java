@@ -3,7 +3,9 @@ package com.syc.service.service.impl;
 import com.syc.service.dao.OrdersDao;
 import com.syc.model.entity.mybatis.entity.Orders;
 import com.syc.model.result.Result;
+import com.syc.service.scheduled.OrderTimeoutScheduled;
 import com.syc.service.service.OrdersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class OrdersServiceImpl implements OrdersService {
     @Resource
     private OrdersDao ordersDao;
 
+    @Autowired
+    private OrderTimeoutScheduled orderTimeoutScheduled;
     /**
      * 通过ID查询单条数据
      *
@@ -90,6 +94,7 @@ public class OrdersServiceImpl implements OrdersService {
         List<Orders> orders = this.ordersDao.queryByStatus(0, 0);
 
 
+        Result result = orderTimeoutScheduled.timeoutAction(orders);
 
         return Result.fail().setMsg("订单处理失败！");
     }

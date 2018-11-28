@@ -5,6 +5,7 @@ import com.syc.service.sql.OrdersSqlProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -75,4 +76,7 @@ public interface OrdersDao {
      */
     @SelectProvider(type = OrdersSqlProvider.class, method = "queryByStatus")
     List<Orders> queryByStatus(@Param("payStatus") int payStatus, @Param("status") int status);
+
+    @Update("update orders SET status = #{status} ,cencel_time = UNIX_TIMESTAMP()  where id = #{id}")
+    int updateStatusById(@Param("status") Integer status,@Param("id") Integer id);
 }

@@ -29,4 +29,4 @@ spring:
 # 开发环境下，配置mybatis的sql打印配置
 logging:
   level:
-    com.syc.model.entity.mybatis.dao: debug
+    com.syc.service.dao: debug
