@@ -93,9 +93,8 @@ public class OrdersServiceImpl implements OrdersService {
 
         List<Orders> orders = this.ordersDao.queryByStatus(0, 0);
 
-
         Result result = orderTimeoutScheduled.timeoutAction(orders);
 
-        return Result.fail().setMsg("订单处理失败！");
+        return result;
     }
 }

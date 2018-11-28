@@ -65,7 +65,7 @@ public class OrderTimeoutScheduled {
         }
         System.out.println("系统启动处理超时订单队列装载完毕,c:" + c);
 
-        return Result.ok();
+        return Result.ok().setMsg("订单后台处理中...");
     }
 
     public class OrderTimeOutRunnable implements Runnable {

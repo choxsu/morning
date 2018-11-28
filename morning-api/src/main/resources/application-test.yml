@@ -25,3 +25,7 @@ spring:
             required: true
           ssl:
             enable: true
+# 开发环境下，配置mybatis的sql打印配置
+logging:
+  level:
+    com.syc.service.dao: debug

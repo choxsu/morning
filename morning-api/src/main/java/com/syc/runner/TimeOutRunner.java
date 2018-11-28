@@ -33,13 +33,9 @@ public class TimeOutRunner implements ApplicationRunner {
         try {
             Result result = ordersService.orderTimeoutAction(args);
             if (result == null) {
-                log.error("\t\t订单超时处理失败\t\t");
+                return;
             }
-            if (!result.isSuccess()) {
-                log.error("\t\tres|failed:msg={}", result.getMsg());
-            }else {
-                log.info("\t\tres:msg={}", result.getMsg());
-            }
+            log.info("\t\tres|info:msg={}", result.getMsg());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
