@@ -29,7 +29,6 @@ public class OrderTimeoutScheduled {
 
     private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(8);
 
-
     public Result timeoutAction(List<Orders> orders) {
 
         //下单成功后就将订单超时时间放入队列中，当支付成功后传入订单id，调用取消订单超时

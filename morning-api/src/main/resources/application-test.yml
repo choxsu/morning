@@ -10,6 +10,11 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: choxsu-redis-pwd
+  rabbitmq:
+    host: 192.168.73.130
+    port: 5672
+    username: choxsu-admin
+    password: choxsu-admin-pwd@su
   mail:
     default-encoding: utf-8
     host: smtp.163.com
