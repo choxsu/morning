@@ -1,7 +1,5 @@
 package com.syc.mq;
 
-import com.alibaba.fastjson.JSON;
-import com.rabbitmq.client.AMQP;
 import com.syc.model.entity.mybatis.entity.Orders;
 import com.syc.service.rabbitmq.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
