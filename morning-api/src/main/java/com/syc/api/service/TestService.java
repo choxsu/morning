@@ -17,7 +17,7 @@ public class TestService {
      */
     public boolean seckill(String key) {
 
-        redisLock.setLockKey(key).setTimeoutMsecs(10000).setExpireMsecs(20000);
+        redisLock.setLockKey(key).setTimeoutMsecs(500).setExpireMsecs(1000);
         try {
             if (redisLock.lock()) {
                 // 需要加锁的代码
