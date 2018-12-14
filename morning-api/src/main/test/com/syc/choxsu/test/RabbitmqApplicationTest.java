@@ -1,7 +1,6 @@
 package com.syc.choxsu.test;
 
 import com.syc.api.service.TestService;
-import com.syc.model.entity.mybatis.entity.Orders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,12 @@ public class RabbitmqApplicationTest {
     }
 
     @Test
-    public void seckill(){
+    public void st(){
 
-        for (int i = 0; i < 100; i++) {
+        //for (int i = 0; i < 100; i++) {
             ThreadA threadA = new ThreadA("Chosu");
             threadA.start();
-        }
+        //}
     }
 
 

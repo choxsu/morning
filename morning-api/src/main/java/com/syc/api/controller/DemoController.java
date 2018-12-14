@@ -3,10 +3,12 @@ package com.syc.api.controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
+import com.syc.api.service.TestService;
 import com.syc.api.service.common.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -178,4 +180,36 @@ public class DemoController {
 
         return Ret.ok().set("msg", "订单后台处理中。。。");
     }*/
+
+    @Autowired
+    private TestService testService;
+
+    @RequestMapping(value = "/kill", method = RequestMethod.GET)
+    public Object kill(){
+        String pronum = "pronum";
+        //设置库存为20
+        Object o = redisService.get(pronum);
+        if (o == null || Integer.parseInt(o.toString()) == 0){
+            redisService.set(pronum, 20);
+        }
+        for (int i = 0; i < 100; i++) {
+            ThreadA threadA = new ThreadA("Chosu");
+            threadA.start();
+        }
+        return "success";
+    }
+
+    class ThreadA extends Thread{
+
+        private String key;
+
+        public ThreadA(String key) {
+            this.key=key;
+        }
+
+        @Override
+        public void run() {
+            testService.seckill(key);
+        }
+    }
 }

@@ -2,15 +2,13 @@ package com.syc.lock;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import sun.misc.Contended;
+import org.springframework.stereotype.Component;
 
 @Slf4j
-@Contended
+@Component
 public class RedisLock {
 
     @Autowired
@@ -35,17 +33,22 @@ public class RedisLock {
 
     private volatile boolean locked = false;
 
-    public RedisLock(String lockKey) {
+    public RedisLock() {
+    }
+
+    public RedisLock setLockKey(String lockKey) {
         this.lockKey = lockKey + "_lock";
+        return this;
     }
 
-    public RedisLock(String lockKey, int timeoutMsecs) {
+    public RedisLock setTimeoutMsecs(int timeoutMsecs) {
         this.timeoutMsecs = timeoutMsecs;
+        return this;
     }
 
-    public RedisLock(String lockKey, int timeoutMsecs, int expireMsecs) {
-        this(lockKey, timeoutMsecs);
+    public RedisLock setExpireMsecs(int expireMsecs) {
         this.expireMsecs = expireMsecs;
+        return this;
     }
 
     /**
@@ -58,17 +61,14 @@ public class RedisLock {
     public String get(final String key) {
         Object obj = null;
         try {
-            obj = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection connection) throws DataAccessException {
-                    StringRedisSerializer serializer = new StringRedisSerializer();
-                    byte[] data = connection.get(serializer.serialize(key));
-                    connection.close();
-                    if (data == null) {
-                        return null;
-                    }
-                    return serializer.deserialize(data);
+            obj = redisTemplate.execute((RedisCallback<Object>) connection -> {
+                StringRedisSerializer serializer = new StringRedisSerializer();
+                byte[] data = connection.get(serializer.serialize(key));
+                connection.close();
+                if (data == null) {
+                    return null;
                 }
+                return serializer.deserialize(data);
             });
         } catch (Exception e) {
             log.error("get redis error, key : {}", key);
@@ -92,6 +92,7 @@ public class RedisLock {
 
     /**
      * set key 如果key不存在
+     *
      * @param key
      * @param value
      * @return
@@ -99,17 +100,14 @@ public class RedisLock {
     public boolean setNX(final String key, final String value) {
         Object obj = null;
         try {
-            obj = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection connection) throws DataAccessException {
-                    StringRedisSerializer serializer = new StringRedisSerializer();
-                    Boolean success = connection.setNX(serializer.serialize(key), serializer.serialize(value));
-                    connection.close();
-                    return success;
-                }
+            obj = redisTemplate.execute((RedisCallback<Object>) connection -> {
+                StringRedisSerializer serializer = new StringRedisSerializer();
+                Boolean success = connection.setNX(serializer.serialize(key), serializer.serialize(value));
+                connection.close();
+                return success;
             });
         } catch (Exception e) {
-            log.error("setNX redis error, key : {}", key);
+            log.error("setNX redis error, key : {}, msg : {}", key, e.getMessage(), e);
         }
         return obj != null ? (Boolean) obj : false;
     }
@@ -136,8 +134,7 @@ public class RedisLock {
      * 2.锁已经存在则获取锁的到期时间,和当前时间比较,超时的话,则设置新的值
      *
      * @return true if lock is acquired, false acquire timeouted
-     * @throws InterruptedException
-     *             in case of thread interruption
+     * @throws InterruptedException in case of thread interruption
      */
     public synchronized boolean lock() throws InterruptedException {
         int timeout = timeoutMsecs;
