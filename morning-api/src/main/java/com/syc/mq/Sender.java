@@ -1,3 +1,4 @@
+/*
 package com.syc.mq;
 
 import com.syc.model.entity.mybatis.entity.Orders;
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+*/
 /**
  * @author choxsu
  * @date 2018/12/04
- */
+ *//*
+
 @Component
 @Slf4j
 public class Sender {
@@ -39,3 +42,4 @@ public class Sender {
     }
 
 }
+*/

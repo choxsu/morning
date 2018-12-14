@@ -5,7 +5,6 @@ import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
 import com.syc.api.service.common.RedisService;
 import com.syc.model.entity.mybatis.entity.Orders;
-import com.syc.mq.Sender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -161,7 +160,7 @@ public class DemoController {
     }
 
 
-    @Autowired
+/*    @Autowired
     private Sender sender;
 
     @RequestMapping(value = "/sendDelay", method = RequestMethod.GET)
@@ -179,5 +178,5 @@ public class DemoController {
         sender.sendDelay(orders);
 
         return Ret.ok().set("msg", "订单后台处理中。。。");
-    }
+    }*/
 }

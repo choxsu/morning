@@ -1,8 +1,7 @@
 package com.syc.choxsu.test;
 
+import com.syc.api.service.TestService;
 import com.syc.model.entity.mybatis.entity.Orders;
-import com.syc.mq.Sender;
-import com.syc.runner.TimeOutRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RabbitmqApplicationTest {
 
     @Autowired
-    private Sender sender;
+    private TestService testService;
+
+    class ThreadA extends Thread{
+
+        private String key;
+
+        public ThreadA(String key) {
+            this.key=key;
+        }
+
+        @Override
+        public void run() {
+            testService.seckill(key);
+        }
+    }
 
     @Test
-    public void hello(){
-        sender.sender();
-        Orders orders = new Orders();
-        orders.setStatus(0);
-        sender.sendDelay(orders);
+    public void seckill(){
+
+        for (int i = 0; i < 100; i++) {
+            ThreadA threadA = new ThreadA("Chosu");
+            threadA.start();
+        }
     }
+
 
 }

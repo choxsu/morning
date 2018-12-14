@@ -1,3 +1,4 @@
+/*
 package com.syc.mq;
 
 import com.alibaba.fastjson.JSONObject;
@@ -16,10 +17,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+*/
 /**
  * @author choxsu
  * @date 2018/12/04
- */
+ *//*
+
 @Component
 @Slf4j
 public class Receiver {
@@ -46,3 +49,4 @@ public class Receiver {
         log.info("###########################################");
     }
 }
+*/
