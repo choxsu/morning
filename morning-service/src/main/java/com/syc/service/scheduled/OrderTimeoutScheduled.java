@@ -1,3 +1,4 @@
+/*
 package com.syc.service.scheduled;
 
 import com.syc.model.entity.mybatis.entity.Orders;
@@ -16,10 +17,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * @author choxsu
  * @date 2018/11/27
- */
+ *//*
+
 @Slf4j
 @Component
 public class OrderTimeoutScheduled {
@@ -96,3 +99,4 @@ public class OrderTimeoutScheduled {
 
 
 }
+*/

@@ -4,7 +4,6 @@ import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
 import com.syc.api.service.common.RedisService;
-import com.syc.model.entity.mybatis.entity.Orders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,6 +1,6 @@
 package com.syc.service.dao;
 
-import com.syc.model.entity.mybatis.entity.Orders;
+//import com.syc.model.entity.mybatis.entity.Orders;
 import com.syc.service.sql.OrdersSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
@@ -21,7 +21,7 @@ public interface OrdersDao {
      * @param id 主键
      * @return 实例对象
      */
-    Orders queryById(Integer id);
+    //Orders queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -30,7 +30,7 @@ public interface OrdersDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Orders> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    //List<Orders> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -39,7 +39,7 @@ public interface OrdersDao {
      * @param orders 实例对象
      * @return 对象列表
      */
-    List<Orders> queryAll(Orders orders);
+    //List<Orders> queryAll(Orders orders);
 
     /**
      * 新增数据
@@ -47,7 +47,7 @@ public interface OrdersDao {
      * @param orders 实例对象
      * @return 影响行数
      */
-    int insert(Orders orders);
+//    int insert(Orders orders);
 
     /**
      * 修改数据
@@ -55,7 +55,7 @@ public interface OrdersDao {
      * @param orders 实例对象
      * @return 影响行数
      */
-    int update(Orders orders);
+//    int update(Orders orders);
 
     /**
      * 通过主键删除数据
@@ -72,10 +72,10 @@ public interface OrdersDao {
      * @param status    订单状态
      * @return
      */
-    @SelectProvider(type = OrdersSqlProvider.class, method = "queryByStatus")
-    @ResultMap("OrdersMap")
-    List<Orders> queryByStatus(@Param("payStatus") int payStatus, @Param("status") int status);
+//    @SelectProvider(type = OrdersSqlProvider.class, method = "queryByStatus")
+//    @ResultMap("OrdersMap")
+//    List<Orders> queryByStatus(@Param("payStatus") int payStatus, @Param("status") int status);
 
-    @Update("update orders SET status = #{status} ,cancel_time = UNIX_TIMESTAMP()  where id = #{id}")
-    int updateStatusById(@Param("status") Integer status,@Param("id") Integer id);
+//    @Update("update orders SET status = #{status} ,cancel_time = UNIX_TIMESTAMP()  where id = #{id}")
+//    int updateStatusById(@Param("status") Integer status,@Param("id") Integer id);
 }
