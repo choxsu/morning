@@ -34,10 +34,10 @@ public class TestService {
                     System.out.println("没有库存可抢购！");
                     return false;
                 }
-                String pro = (String) pronum;
+                Integer pro = (Integer) pronum;
                 //修改库存
-                if (Integer.parseInt(pro) - 1 >= 0) {
-                    redisTemplate.opsForValue().set("pronum", String.valueOf(Integer.parseInt(pro) - 1));
+                if (pro - 1 >= 0) {
+                    redisTemplate.opsForValue().set("pronum", String.valueOf(pro - 1));
                     System.out.println("库存数量:" + pronum + "     成功!!!" + Thread.currentThread().getName());
                 } else {
                     System.out.println("手慢拍大腿");
