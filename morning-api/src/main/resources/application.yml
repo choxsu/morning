@@ -1,5 +1,8 @@
 server:
   port: 3333
+  undertow:
+    accesslog:
+      enabled: false
 spring:
   profiles:
     active: dev
@@ -15,7 +18,6 @@ spring:
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.syc.model.entity.mybatis.entity
-
 pagehelper:
   helperDialect: mysql
   reasonable: true
