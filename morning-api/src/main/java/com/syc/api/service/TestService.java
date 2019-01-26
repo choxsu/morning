@@ -26,15 +26,15 @@ public class TestService {
      */
     public boolean seckill(String key) {
 
-        RLock fairLock = redissonClient.getFairLock(key);
+        RLock lock = redissonClient.getLock(key);
         try {
-            if (fairLock.tryLock(100, TimeUnit.SECONDS)) {
+            if (lock.tryLock(10, TimeUnit.SECONDS)) {
                 Object pronum = redisTemplate.opsForValue().get("pronum");
                 if (pronum == null) {
                     System.out.println("没有库存可抢购！");
                     return false;
                 }
-                Integer pro = (Integer) pronum;
+                int pro = Integer.valueOf(pronum.toString());
                 //修改库存
                 if (pro - 1 >= 0) {
                     redisTemplate.opsForValue().set("pronum", String.valueOf(pro - 1));
@@ -44,12 +44,12 @@ public class TestService {
                 }
                 return true;
             }
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            fairLock.unlock();
+            lock.unlock();
         }
+
         return false;
     }
 }
