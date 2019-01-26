@@ -1,14 +1,23 @@
 package com.syc.api.service;
 
-import com.syc.lock.RedisLock;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TestService {
 
+    //    @Autowired
+//    private RedisLock redisLock;
     @Autowired
-    private RedisLock redisLock;
+    private RedissonClient redissonClient;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /***
      * 抢购代码
@@ -17,15 +26,18 @@ public class TestService {
      */
     public boolean seckill(String key) {
 
-        redisLock.setLockKey(key).setTimeoutMsecs(500).setExpireMsecs(1000);
+        RLock fairLock = redissonClient.getFairLock(key);
         try {
-            if (redisLock.lock()) {
-                // 需要加锁的代码
-                String pronum = redisLock.get("pronum");
-
+            if (fairLock.tryLock(100, TimeUnit.SECONDS)) {
+                Object pronum = redisTemplate.opsForValue().get("pronum");
+                if (pronum == null) {
+                    System.out.println("没有库存可抢购！");
+                    return false;
+                }
+                String pro = (String) pronum;
                 //修改库存
-                if (Integer.parseInt(pronum) - 1 >= 0) {
-                    redisLock.set("pronum", String.valueOf(Integer.parseInt(pronum) - 1));
+                if (Integer.parseInt(pro) - 1 >= 0) {
+                    redisTemplate.opsForValue().set("pronum", String.valueOf(Integer.parseInt(pro) - 1));
                     System.out.println("库存数量:" + pronum + "     成功!!!" + Thread.currentThread().getName());
                 } else {
                     System.out.println("手慢拍大腿");
@@ -36,9 +48,7 @@ public class TestService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            // 为了让分布式锁的算法更稳键些，持有锁的客户端在解锁之前应该再检查一次自己的锁是否已经超时，再去做DEL操作，因为可能客户端因为某个耗时的操作而挂起，
-            // 操作完的时候锁因为超时已经被别人获得，这时就不必解锁了。 ————这里没有做
-            redisLock.unlock();
+            fairLock.unlock();
         }
         return false;
     }
