@@ -62,7 +62,7 @@ public class AppConfig {
     public RedissonClient getRedisson() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://" + host + ":" + port).setPassword(password);
-        //添加主从配置
+        config.setLockWatchdogTimeout(15 * 1000);
         return Redisson.create(config);
     }
 
