@@ -1,6 +1,7 @@
 package com.syc.service.service;
 
 import com.github.pagehelper.Page;
+import com.jfinal.kit.Ret;
 import com.syc.model.entity.mybatis.entity.Blog;
 
 import java.util.List;
@@ -58,4 +59,5 @@ public interface BlogService {
     boolean delete(Integer id);
 
 
+    Ret txTest();
 }

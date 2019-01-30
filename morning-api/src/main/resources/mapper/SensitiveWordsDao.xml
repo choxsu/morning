@@ -13,7 +13,7 @@
     <select id="queryById" resultMap="SensitiveWordsMap">
         select
           id, word, status, word_pinyin
-        from sblog.sensitive_words
+        from blog.sensitive_words
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -25,7 +25,7 @@
     <select id="queryAllByLimit" resultMap="SensitiveWordsMap">
         select
         id, word, status, word_pinyin
-        from sblog.sensitive_words
+        from blog.sensitive_words
         limit #{offset}, #{limit}
     </select>
 
@@ -33,7 +33,7 @@
     <select id="queryAll" resultMap="SensitiveWordsMap">
         select
           id, word, status, word_pinyin
-        from sblog.sensitive_words
+        from blog.sensitive_words
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -52,13 +52,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sblog.sensitive_words(word, status, word_pinyin)
+        insert into blog.sensitive_words(word, status, word_pinyin)
         values (#{word}, #{status}, #{wordPinyin})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sblog.sensitive_words
+        update blog.sensitive_words
         <set>
             <if test="word != null and word != ''">
                 word = #{word},
@@ -75,7 +75,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sblog.sensitive_words where id = #{id}
+        delete from blog.sensitive_words where id = #{id}
     </delete>
 
 </mapper>

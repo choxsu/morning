@@ -23,7 +23,7 @@
     <select id="queryById" resultMap="BlogMap">
         select
           id, accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent
-        from sblog.blog
+        from blog.blog
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -35,7 +35,7 @@
     <select id="queryAllByLimit" resultMap="BlogMap">
         select
         id, accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent
-        from sblog.blog
+        from blog.blog
         limit #{offset}, #{limit}
     </select>
 
@@ -43,7 +43,7 @@
     <select id="queryAll" resultMap="BlogMap">
         select
           id, accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent
-        from sblog.blog
+        from blog.blog
         <where>
             <if test="blog.id != null">
                 and id = #{blog.id}
@@ -98,13 +98,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sblog.blog(accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent)
+        insert into blog.blog(accountId, title, content, createAt, updateAt, clickCount, likeCount, favoriteCount, category, isDelete, tag_id, category_id, markedContent)
         values (#{accountid}, #{title}, #{content}, #{createat}, #{updateat}, #{clickcount}, #{likecount}, #{favoritecount}, #{category}, #{isdelete}, #{tagId}, #{categoryId}, #{markedcontent})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sblog.blog
+        update blog.blog
         <set>
             <if test="accountid != null">
                 accountId = #{accountid},
@@ -151,7 +151,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sblog.blog where id = #{id}
+        delete from blog.blog where id = #{id}
     </delete>
 
 </mapper>

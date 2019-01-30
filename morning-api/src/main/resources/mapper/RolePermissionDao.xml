@@ -11,7 +11,7 @@
     <select id="queryById" resultMap="RolePermissionMap">
         select
           roleId, permissionId
-        from sblog.role_permission
+        from blog.role_permission
         <where>
             <if test="roleid != null">
                 and roleId = #{roleid}
@@ -26,7 +26,7 @@
     <select id="queryAllByLimit" resultMap="RolePermissionMap">
         select
         roleId, permissionId
-        from sblog.role_permission
+        from blog.role_permission
         limit #{offset}, #{limit}
     </select>
 
@@ -34,7 +34,7 @@
     <select id="queryAll" resultMap="RolePermissionMap">
         select
           roleId, permissionId
-        from sblog.role_permission
+        from blog.role_permission
         <where>
             <if test="roleid != null">
                 and roleId = #{roleid}
@@ -47,13 +47,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="roleid" useGeneratedKeys="true">
-        insert into sblog.role_permission()
+        insert into blog.role_permission()
         values ()
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sblog.role_permission
+        update blog.role_permission
         <set>
         </set>
         where roleId = #{roleid}
@@ -61,7 +61,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sblog.role_permission where roleId = #{roleid}
+        delete from blog.role_permission where roleId = #{roleid}
     </delete>
 
 </mapper>

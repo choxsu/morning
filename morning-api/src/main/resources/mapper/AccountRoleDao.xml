@@ -11,7 +11,7 @@
     <select id="queryById" resultMap="AccountRoleMap">
         select
           accountId, roleId
-        from sblog.account_role
+        from blog.account_role
         <where>
             <if test="accountid != null">
                 and accountId = #{accountid}
@@ -26,7 +26,7 @@
     <select id="queryAllByLimit" resultMap="AccountRoleMap">
         select
         accountId, roleId
-        from sblog.account_role
+        from blog.account_role
         limit #{offset}, #{limit}
     </select>
 
@@ -34,7 +34,7 @@
     <select id="queryAll" resultMap="AccountRoleMap">
         select
           accountId, roleId
-        from sblog.account_role
+        from blog.account_role
         <where>
             <if test="accountid != null">
                 and accountId = #{accountid}
@@ -47,13 +47,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="accountid" useGeneratedKeys="true">
-        insert into sblog.account_role()
+        insert into blog.account_role()
         values ()
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sblog.account_role
+        update blog.account_role
         <set>
         </set>
         where accountId = #{accountid}
@@ -61,7 +61,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sblog.account_role where accountId = #{accountid}
+        delete from blog.account_role where accountId = #{accountid}
     </delete>
 
 </mapper>

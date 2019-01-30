@@ -2,16 +2,23 @@ package com.syc.service.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jfinal.kit.Ret;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+import com.syc.common.aop.JFinalTx;
 import com.syc.service.dao.BlogDao;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.service.common.CommonService;
 import com.syc.service.service.BlogService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service("blogService")
@@ -65,5 +72,31 @@ public class BlogServiceImpl extends CommonService implements BlogService {
     @Override
     public boolean delete(Integer id) {
         return false;
+    }
+
+
+    //@JFinalTx
+    @Transactional
+    @Override
+    public Ret txTest() {
+        Date date = new Date();
+        /*Record record = new Record();
+        record.set("accountId", 1);
+        record.set("title", "测试");
+        record.set("content", "内容测试");
+        record.set("createAt", date);
+        record.set("updateAt", date);
+        record.set("category", "note");
+        Db.save("blog", record);*/
+        Blog blog = new Blog();
+        blog.setAccountid(1);
+        blog.setTitle("测试");
+        blog.setContent("内容测试");
+        blog.setCreateat(date);
+        blog.setUpdateat(date);
+        blog.setCategory("note");
+        blogDao.insert(blog);
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        return Ret.ok("msg", "保存成功");
     }
 }

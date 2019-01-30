@@ -15,7 +15,7 @@
     <select id="queryById" resultMap="VisitorMap">
         select
           id, ip, url, method, client, requestTime
-        from sblog.visitor
+        from blog.visitor
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -27,7 +27,7 @@
     <select id="queryAllByLimit" resultMap="VisitorMap">
         select
         id, ip, url, method, client, requestTime
-        from sblog.visitor
+        from blog.visitor
         limit #{offset}, #{limit}
     </select>
 
@@ -35,7 +35,7 @@
     <select id="queryAll" resultMap="VisitorMap">
         select
           id, ip, url, method, client, requestTime
-        from sblog.visitor
+        from blog.visitor
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -60,13 +60,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sblog.visitor(ip, url, method, client, requestTime)
+        insert into blog.visitor(ip, url, method, client, requestTime)
         values (#{ip}, #{url}, #{method}, #{client}, #{requesttime})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sblog.visitor
+        update blog.visitor
         <set>
             <if test="ip != null and ip != ''">
                 ip = #{ip},
@@ -89,7 +89,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sblog.visitor where id = #{id}
+        delete from blog.visitor where id = #{id}
     </delete>
 
 </mapper>
