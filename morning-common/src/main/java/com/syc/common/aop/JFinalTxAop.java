@@ -12,6 +12,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
+import org.springframework.transaction.support.SimpleTransactionStatus;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -26,6 +28,7 @@ import java.sql.SQLException;
 public class JFinalTxAop {
 
 
+
     /**
      * 自定义JFinal 事物注解
      * value中的意思解释
@@ -33,7 +36,8 @@ public class JFinalTxAop {
      * @annotation 表示注解只能支持方法上
      * @within 表示注解在类下面所有的方法 ， 暂时不使用这种方式
      */
-    @Pointcut("@annotation(com.syc.common.aop.JFinalTx)")
+    //@Pointcut("@annotation(com.syc.common.aop.JFinalTx)")
+    @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
     private void method() {}
 
     @Around(value = "method()", argNames = "pjp")
@@ -62,7 +66,6 @@ public class JFinalTxAop {
             autoCommit = conn.getAutoCommit();
             config.setThreadLocalConnection(conn);
             conn.setTransactionIsolation(getTransactionLevel(config));// conn.setTransactionIsolation(transactionLevel);
-
             conn.setAutoCommit(false);
             retVal = pjp.proceed();
             conn.commit();
