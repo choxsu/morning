@@ -99,6 +99,7 @@ public class BlogServiceImpl extends CommonService implements BlogService {
         blog.setIsdelete(0);
         blog.setCategory("note");
         blogDao.insert(blog);
+        //手动回滚DEMO,这种回滚是无需抛出异常，就可以回滚
         if (JFinalTxAop.setRollbackOnly()){
             return Ret.fail("msg", "保存失败，数据被手动回滚！");
         }

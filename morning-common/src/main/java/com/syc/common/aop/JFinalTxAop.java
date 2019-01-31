@@ -108,6 +108,7 @@ public class JFinalTxAop {
             }
             throw t instanceof RuntimeException ? (RuntimeException) t : new ActiveRecordException(t);
         } finally {
+            canCommit = true;
             try {
                 if (conn != null) {
                     if (autoCommit != null)
