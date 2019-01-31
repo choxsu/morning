@@ -45,7 +45,7 @@ public class JFinalTxAop {
     private void methodAnno() {
     }
 
-    private static Boolean autoCommit = null;
+    private static Boolean canCommit = true;
 
     /**
      * 兼容@Transactional可以放在类上和方法上
@@ -75,7 +75,7 @@ public class JFinalTxAop {
                 throw new ActiveRecordException(e);
             }
         }
-
+        Boolean autoCommit = null;
         try {
             conn = config.getConnection();
             autoCommit = conn.getAutoCommit();
@@ -83,7 +83,7 @@ public class JFinalTxAop {
             conn.setTransactionIsolation(getTransactionLevel(config));// conn.setTransactionIsolation(transactionLevel);
             conn.setAutoCommit(false);
             retVal = pjp.proceed();
-            if (autoCommit) {
+            if (canCommit) {
                 conn.commit();
             } else {
                 try {
@@ -155,7 +155,7 @@ public class JFinalTxAop {
     }
 
     public static boolean setRollbackOnly() {
-        autoCommit = false;
+        canCommit = false;
         try {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } catch (NoTransactionException e) {
