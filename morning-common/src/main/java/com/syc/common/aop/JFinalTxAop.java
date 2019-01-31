@@ -27,7 +27,6 @@ import java.sql.SQLException;
 @Component
 public class JFinalTxAop {
 
-
     /**
      * 自定义JFinal 事物注解
      * value中的意思解释
@@ -35,12 +34,15 @@ public class JFinalTxAop {
      * @annotation 表示注解只能支持方法上
      * @within 表示注解在类下面所有的方法
      */
-    @Pointcut("@within(org.springframework.transaction.annotation.Transactional) || @annotation(org.springframework.transaction.annotation.Transactional)")
-    private void method() { }
+    @Pointcut("@within(org.springframework.transaction.annotation.Transactional)")
+    private void methodWithin() { }
+
+    @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
+    private void methodAnno() { }
 
     private static Boolean autoCommit = null;
 
-    @Around(value = "method()")
+    @Around(value = "methodWithin() || methodAnno()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         Object retVal = null;
         Config config = getConfigWithTxConfig(pjp);

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 @Service("blogService")
 public class BlogServiceImpl extends CommonService implements BlogService {
 
@@ -75,6 +74,7 @@ public class BlogServiceImpl extends CommonService implements BlogService {
     }
 
 
+    @Transactional
     @Override
     public Ret txTest() {
         Date date = new Date();
