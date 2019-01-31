@@ -12,8 +12,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.interceptor.TransactionInterceptor;
-import org.springframework.transaction.support.SimpleTransactionStatus;
+import org.springframework.transaction.NoTransactionException;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -28,19 +28,19 @@ import java.sql.SQLException;
 public class JFinalTxAop {
 
 
-
     /**
      * 自定义JFinal 事物注解
      * value中的意思解释
      *
      * @annotation 表示注解只能支持方法上
-     * @within 表示注解在类下面所有的方法 ， 暂时不使用这种方式
+     * @within 表示注解在类下面所有的方法
      */
-    //@Pointcut("@annotation(com.syc.common.aop.JFinalTx)")
-    @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
-    private void method() {}
+    @Pointcut("@within(org.springframework.transaction.annotation.Transactional) || @annotation(org.springframework.transaction.annotation.Transactional)")
+    private void method() { }
 
-    @Around(value = "method()", argNames = "pjp")
+    private static Boolean autoCommit = null;
+
+    @Around(value = "method()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         Object retVal = null;
         Config config = getConfigWithTxConfig(pjp);
@@ -60,7 +60,6 @@ public class JFinalTxAop {
             }
         }
 
-        Boolean autoCommit = null;
         try {
             conn = config.getConnection();
             autoCommit = conn.getAutoCommit();
@@ -68,7 +67,15 @@ public class JFinalTxAop {
             conn.setTransactionIsolation(getTransactionLevel(config));// conn.setTransactionIsolation(transactionLevel);
             conn.setAutoCommit(false);
             retVal = pjp.proceed();
-            conn.commit();
+            if (autoCommit) {
+                conn.commit();
+            } else {
+                try {
+                    conn.rollback();
+                } catch (Exception e1) {
+                    LogKit.error(e1.getMessage(), e1);
+                }
+            }
         } catch (NestedTransactionHelpException e) {
             if (conn != null) try {
                 conn.rollback();
@@ -129,5 +136,15 @@ public class JFinalTxAop {
             return config;
         }
         return null;
+    }
+
+    public static boolean setRollbackOnly() {
+        autoCommit = false;
+        try {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        } catch (NoTransactionException e) {
+            return false;
+        }
+        return true;
     }
 }

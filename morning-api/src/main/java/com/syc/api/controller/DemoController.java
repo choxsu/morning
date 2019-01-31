@@ -194,7 +194,7 @@ public class DemoController {
         if (o == null || Integer.parseInt(o.toString()) == 0){
             redisService.set(pronum, 100);
         }
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 1000; i++) {
             ThreadA threadA = new ThreadA("Chosu");
             threadA.start();
         }

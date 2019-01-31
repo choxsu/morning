@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.syc.common.aop.JFinalTxAop;
 import com.syc.model.entity.mybatis.entity.Blog;
 import com.syc.service.common.CommonService;
 import com.syc.service.dao.BlogDao;
@@ -74,13 +75,12 @@ public class BlogServiceImpl extends CommonService implements BlogService {
     }
 
 
-    @Transactional
     @Override
     public Ret txTest() {
         Date date = new Date();
         Record record = new Record();
         record.set("accountId", 1);
-        record.set("title", "测试");
+        record.set("title", "测试JFinal");
         record.set("content", "内容测试");
         record.set("createAt", date);
         record.set("updateAt", date);
@@ -89,7 +89,7 @@ public class BlogServiceImpl extends CommonService implements BlogService {
 
         Blog blog = new Blog();
         blog.setAccountid(1);
-        blog.setTitle("测试");
+        blog.setTitle("测试Mybatis");
         blog.setContent("内容测试");
         blog.setCreateat(date);
         blog.setUpdateat(date);
@@ -99,7 +99,9 @@ public class BlogServiceImpl extends CommonService implements BlogService {
         blog.setIsdelete(0);
         blog.setCategory("note");
         blogDao.insert(blog);
-        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        if (JFinalTxAop.setRollbackOnly()){
+            return Ret.fail("msg", "保存失败，数据被手动回滚！");
+        }
         return Ret.ok("msg", "保存成功");
     }
 }
