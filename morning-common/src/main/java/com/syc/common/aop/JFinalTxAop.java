@@ -28,20 +28,34 @@ import java.sql.SQLException;
 public class JFinalTxAop {
 
     /**
-     * 自定义JFinal 事物注解
-     * value中的意思解释
+     * 自定义JFinal 事物注解:类上面
      *
-     * @annotation 表示注解只能支持方法上
      * @within 表示注解在类下面所有的方法
      */
     @Pointcut("@within(org.springframework.transaction.annotation.Transactional)")
-    private void methodWithin() { }
+    private void methodWithin() {
+    }
 
+    /**
+     * 自定义JFinal 事物注解:方法上面
+     *
+     * @annotation 表示注解只能支持方法上
+     */
     @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
-    private void methodAnno() { }
+    private void methodAnno() {
+    }
 
     private static Boolean autoCommit = null;
 
+    /**
+     * 兼容@Transactional可以放在类上和方法上
+     * 当放类上时，类中所有方法都支持事物注解，
+     * 如果类上没有@Transactional，然而是放在方法上的，那么只有此方法支持事物注解
+     *
+     * @param pjp 切入点目标对象
+     * @return 返回切入方法的返回数据
+     * @throws Throwable
+     */
     @Around(value = "methodWithin() || methodAnno()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         Object retVal = null;
