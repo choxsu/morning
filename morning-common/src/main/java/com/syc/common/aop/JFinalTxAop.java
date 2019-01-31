@@ -26,7 +26,10 @@ import java.sql.SQLException;
 @Aspect
 @Component
 public class JFinalTxAop {
-
+    /**
+     * 是否可以手动提交事物，默认可以自动提交
+     */
+    private static Boolean canCommit = true;
     /**
      * 自定义JFinal 事物注解:类上面
      *
@@ -44,8 +47,6 @@ public class JFinalTxAop {
     @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
     private void methodAnno() {
     }
-
-    private static Boolean canCommit = true;
 
     /**
      * 兼容@Transactional可以放在类上和方法上
