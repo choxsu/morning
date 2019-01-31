@@ -29,7 +29,7 @@ public class JFinalTxAop {
     /**
      * 是否可以手动提交事物，默认可以自动提交
      */
-    private static Boolean canCommit = true;
+    private static boolean canCommit = true;
     /**
      * 自定义JFinal 事物注解:类上面
      *
