@@ -1,5 +1,6 @@
 package com.syc.config;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.source.ClassPathSourceFactory;
@@ -7,6 +8,7 @@ import com.syc.model.entity.jf._MappingKit;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -55,13 +57,17 @@ public class AppConfig {
     private String host;
     @Value("${spring.redis.port}")
     private String port;
-    @Value("${spring.redis.password}")
+    @Value("${spring.redis.password:''}")
     private String password;
 
     @Bean
     public RedissonClient getRedisson() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://" + host + ":" + port).setPassword(password);
+        SingleServerConfig singleServerConfig = config.useSingleServer().setAddress("redis://" + host + ":" + port);
+        if (StrKit.notBlank(password)) {
+            singleServerConfig.setPassword(password);
+        }
+
         config.setLockWatchdogTimeout(15 * 1000);
         return Redisson.create(config);
     }
