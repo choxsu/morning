@@ -17,6 +17,7 @@
         <module>morning-service</module>
         <module>morning-api</module>
         <module>morning-model</module>
+        <module>morning-config</module>
         <module>morning-common</module>
     </modules>
 
