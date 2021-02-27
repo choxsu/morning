@@ -1,26 +1,24 @@
 server:
-  port: 3334
+  port: 3333
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/blog?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/morning_db?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
-    password: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     host: 127.0.0.1
     port: 6379
-    password: choxsu-redis-pwd
-#  rabbitmq:
-#    host: 192.168.73.130
-#    port: 5672
-#    username: choxsu-admin
-#    password: choxsu-admin-pwd@su
+    # 没有密码留空
+    password:
+
   mail:
     default-encoding: utf-8
     host: smtp.163.com
     port: 465
     username: choxsu@163.com
-    password: ---------  # 授权码
+    password: 你的有效授权码  # 授权码
     properties:
       mail:
         smtp:
@@ -33,4 +31,4 @@ spring:
 # 开发环境下，配置mybatis的sql打印配置
 logging:
   level:
-    com.syc.service.dao: debug
+    com.syc.service.dao: info

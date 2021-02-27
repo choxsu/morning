@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/api/blog")
-public class ApiBlogController extends BaseApiController {
+public class
+ApiBlogController extends BaseApiController {
 
 
     private final BlogService blogService;
@@ -49,7 +50,7 @@ public class ApiBlogController extends BaseApiController {
      * @apiSuccess {int} data.categoryId 分类id，暂时弃用
      * @apiSuccess {String} data.markedcontent markdown内容
      */
-    @RequestMapping(value = "/v1/detail/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/v1/detail/{id}")
     public Result detail(String token, @PathVariable("id") Integer id) {
         Blog blog;
         try {

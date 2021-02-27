@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class EmailKit {
 
     private static final Logger log = LoggerFactory.getLogger(EmailKit.class);
 
-    @Autowired
+    @Resource
     private JavaMailSender jms;
 
     @Value("${spring.mail.username}")
