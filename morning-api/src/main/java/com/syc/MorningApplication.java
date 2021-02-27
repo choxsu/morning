@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,17 +17,12 @@ import javax.management.MXBean;
  */
 @SpringBootApplication(scanBasePackages = {"com.syc"})
 @MapperScan("com.syc.service.dao")
-@RestController
+@Controller
 public class MorningApplication {
 
     @RequestMapping("/")
     public String home() {
-        return "<div style='text-align: center;\n" +
-                "    margin-top: 200px;\n" +
-                "    font-size: 36px;\n" +
-                "    color: currentColor;'>Choxsu's Blog Api " +
-                "<br/>" +
-                "Welcome!</div>";
+        return "index";
     }
 
 
