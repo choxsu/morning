@@ -6,7 +6,7 @@ import com.syc.model.entity.MoOrders;
 /**
  * @Entity com.syc.model.entity.MoOrders
  */
-public interface MoOrdersMapper extends BaseMapper {
+public interface MoOrdersMapper extends BaseMapper<MoOrders> {
     /**
      *
      * @mbg.generated 2021-03-04 14:11:35

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.syc.model.entity.MoAccount
  */
 @Mapper
-public interface MoAccountMapper extends BaseMapper {
+public interface MoAccountMapper extends BaseMapper<MoAccount> {
     /**
      *
      * @mbg.generated 2021-03-04 14:03:07

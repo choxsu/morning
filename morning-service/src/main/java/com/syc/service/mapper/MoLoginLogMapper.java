@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.syc.model.entity.MoLoginLog
  */
 @Mapper
-public interface MoLoginLogMapper extends BaseMapper {
+public interface MoLoginLogMapper extends BaseMapper<MoLoginLog> {
     /**
      *
      * @mbg.generated 2021-03-04 14:03:07

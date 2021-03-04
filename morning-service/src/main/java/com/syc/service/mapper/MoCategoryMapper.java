@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.syc.model.entity.MoCategory
  */
 @Mapper
-public interface MoCategoryMapper extends BaseMapper {
+public interface MoCategoryMapper extends BaseMapper<MoCategory> {
     /**
      *
      * @mbg.generated 2021-03-04 14:03:07

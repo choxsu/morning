@@ -6,7 +6,7 @@ import com.syc.model.entity.MoSysPermission;
 /**
  * @Entity com.syc.model.entity.MoSysPermission
  */
-public interface MoSysPermissionMapper extends BaseMapper {
+public interface MoSysPermissionMapper extends BaseMapper<MoSysPermission> {
     /**
      *
      * @mbg.generated 2021-03-04 14:11:59

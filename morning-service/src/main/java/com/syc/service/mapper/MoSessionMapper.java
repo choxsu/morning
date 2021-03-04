@@ -6,7 +6,7 @@ import com.syc.model.entity.MoSession;
 /**
  * @Entity com.syc.model.entity.MoSession
  */
-public interface MoSessionMapper extends BaseMapper {
+public interface MoSessionMapper extends BaseMapper<MoSession> {
     /**
      *
      * @mbg.generated 2021-03-04 14:11:59

@@ -23,8 +23,8 @@ export function createStore() {
     },
 
     actions: {
-      getAllPosts({commit, state}, {tagId = '', category = '', pageNumber = 1, pageSize = 5} = {}) {
-        return articleApi.getAllPublishArticles(tagId, category, pageNumber, pageSize).then(res => {
+      getAllPosts({commit, state}, {pageNumber = 1, pageSize = 5} = {}) {
+        return articleApi.getAllPublishArticles(pageNumber, pageSize).then(res => {
           let data =  res.data.data;
           commit('GET_ALL_POSTS', {blogList: data.list, allPage: data.totalPage, curPage: data.pageNumber});
           return new Promise((resolve, reject) => {

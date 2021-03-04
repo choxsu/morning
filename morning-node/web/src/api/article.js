@@ -7,10 +7,10 @@ if (typeof window === 'undefined') {
   Axios.defaults.baseURL = 'http://127.0.0.1:3333';
 }
 export default {
-  getAllPublishArticles(tagId = '', category = '', pageNumber = 1, pageSize = 10) {
-    return Axios.get(`/api/index/v1/list?tagId=${tagId}&category=${category}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  getAllPublishArticles(pageNumber = 1, pageSize = 10) {
+    return Axios.get(`/api/article/listByPage?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   },
   getArticle(id) {
-    return Axios.get('/api/blog/v1/detail/' + id);
+    return Axios.get('/api/article/detail/' + id);
   },
 };
