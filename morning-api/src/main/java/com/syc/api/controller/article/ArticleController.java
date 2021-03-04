@@ -5,6 +5,7 @@
  */
 package com.syc.api.controller.article;
 
+import com.syc.api.controller.common.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/article")
-public class ArticleApiController {
+public class ArticleController extends BaseController {
+
+
 
 
 
