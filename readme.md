@@ -9,13 +9,12 @@
 ### 项目结构
 ```
 morning
-├─doc
-├─morning-api 
-├─morning-common
-├─morning-config
-├─morning-model
-├─morning-node
-└─morning-service
+├─doc                 # sql文件等
+├─morning-api         # 服务api
+├─morning-common      # 公共模块
+├─morning-model       # 实体相关
+├─morning-web         # 后台管理页面
+└─morning-service     # 服务层
 ```
 
 ### 部署启动
