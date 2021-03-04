@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.syc.service.mapper.BlogTagMapper">
-  <resultMap id="BaseResultMap" type="com.syc.model.entity.BlogTag">
+<mapper namespace="com.syc.service.mapper.MoCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.syc.model.entity.MoCategory">
     <!--@mbg.generated-->
-    <id column="blog_tag_id" jdbcType="INTEGER" property="id" />
-    <result column="blog_tag_name" jdbcType="VARCHAR" property="name" />
-    <result column="blog_tag_status" jdbcType="INTEGER" property="status" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    blog_tag.id as blog_tag_id, blog_tag.`name` as `blog_tag_name`, blog_tag.`status` as `blog_tag_status`
+    id, `name`, `status`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
-    from blog_tag blog_tag
-    where blog_tag.id = #{id,jdbcType=INTEGER}
+    from mo_category
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
-    delete from blog_tag
+    delete from mo_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.BlogTag" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.MoCategory" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into blog_tag (`name`, `status`)
+    insert into mo_category (`name`, `status`)
     values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.BlogTag" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.MoCategory" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into blog_tag
+    insert into mo_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         `name`,
@@ -48,9 +48,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.syc.model.entity.BlogTag">
+  <update id="updateByPrimaryKeySelective" parameterType="com.syc.model.entity.MoCategory">
     <!--@mbg.generated-->
-    update blog_tag
+    update mo_category
     <set>
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
@@ -61,9 +61,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.syc.model.entity.BlogTag">
+  <update id="updateByPrimaryKey" parameterType="com.syc.model.entity.MoCategory">
     <!--@mbg.generated-->
-    update blog_tag
+    update mo_category
     set `name` = #{name,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

@@ -15,11 +15,9 @@ spring:
     suffix: .html
 
 
-mybatis:
-  mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.syc.model.entity.mybatis.entity
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+mybatis-plus:
+  configuration:
+    log-prefix: mo
+  global-config:
+    db-config:
+      id-type: auto

@@ -96,7 +96,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
-            <version>3.5</version>
+            <version>4.9.06</version>
         </dependency>
 
 
