@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.service.mapper.AccountRoleMapper">
+  <resultMap id="BaseResultMap" type="com.syc.model.entity.AccountRoleKey">
+    <!--@mbg.generated-->
+    <id column="account_role_accountId" jdbcType="INTEGER" property="accountid" />
+    <id column="account_role_roleId" jdbcType="INTEGER" property="roleid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.syc.model.entity.AccountRoleKey">
+    <!--@mbg.generated-->
+    delete from account_role
+    where accountId = #{accountid,jdbcType=INTEGER}
+      and roleId = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="accountId" keyProperty="accountid" parameterType="com.syc.model.entity.AccountRoleKey" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into account_role (roleId)
+    values (#{roleid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="accountId" keyProperty="accountid" parameterType="com.syc.model.entity.AccountRoleKey" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into account_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

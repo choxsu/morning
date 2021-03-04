@@ -5,7 +5,6 @@ import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
 import com.syc.api.service.TestService;
 import com.syc.api.service.common.RedisService;
-import com.syc.service.service.BlogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,12 +33,8 @@ public class DemoController {
     private RedisService redisService;
     @Autowired
     private EmailKit emailKit;
-    @Autowired
-    private BlogService blogService;
 
     final String MS = "MS";
-    //20个线程池并发数
-    static ExecutorService executor = Executors.newFixedThreadPool(20);
 
     /**
      * @api {get} /demo/test #1Redis数据保存
@@ -199,12 +194,6 @@ public class DemoController {
             threadA.start();
         }
         return "success";
-    }
-
-    @RequestMapping(value = "/tx", method = RequestMethod.GET)
-    public Object tx(){
-        Ret ret = blogService.txTest();
-        return ret;
     }
 
     class ThreadA extends Thread{

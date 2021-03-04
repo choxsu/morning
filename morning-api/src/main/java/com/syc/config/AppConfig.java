@@ -4,7 +4,6 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.template.source.ClassPathSourceFactory;
-import com.syc.model.entity.jf._MappingKit;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -35,7 +34,6 @@ public class AppConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(this.dataSource);
         arp.setDialect(new MysqlDialect());
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
-        _MappingKit.mapping(arp);
         arp.setShowSql(true);
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         // arp.addSqlTemplate("/sql/all_sqls.sql");

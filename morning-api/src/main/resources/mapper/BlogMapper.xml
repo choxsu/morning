@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.service.mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.syc.model.entity.Blog">
+    <!--@mbg.generated-->
+    <id column="blog_id" jdbcType="INTEGER" property="id" />
+    <result column="blog_accountId" jdbcType="INTEGER" property="accountid" />
+    <result column="blog_title" jdbcType="VARCHAR" property="title" />
+    <result column="blog_content" jdbcType="VARCHAR" property="content" />
+    <result column="blog_markedContent" jdbcType="VARCHAR" property="markedcontent" />
+    <result column="blog_createAt" jdbcType="TIMESTAMP" property="createat" />
+    <result column="blog_updateAt" jdbcType="TIMESTAMP" property="updateat" />
+    <result column="blog_clickCount" jdbcType="INTEGER" property="clickcount" />
+    <result column="blog_likeCount" jdbcType="INTEGER" property="likecount" />
+    <result column="blog_favoriteCount" jdbcType="INTEGER" property="favoritecount" />
+    <result column="blog_category" jdbcType="VARCHAR" property="category" />
+    <result column="blog_isDelete" jdbcType="INTEGER" property="isdelete" />
+    <result column="blog_tag_id" jdbcType="INTEGER" property="tagId" />
+    <result column="blog_category_id" jdbcType="INTEGER" property="categoryId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    blog.id as blog_id, blog.accountId as blog_accountId, blog.title as blog_title, blog.content as blog_content, 
+    blog.markedContent as blog_markedContent, blog.createAt as blog_createAt, blog.updateAt as blog_updateAt, 
+    blog.clickCount as blog_clickCount, blog.likeCount as blog_likeCount, blog.favoriteCount as blog_favoriteCount, 
+    blog.category as blog_category, blog.isDelete as blog_isDelete, blog.tag_id as blog_tag_id, 
+    blog.category_id as blog_category_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from blog blog
+    where blog.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.Blog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog (accountId, title, content, 
+      markedContent, createAt, updateAt, 
+      clickCount, likeCount, favoriteCount, 
+      category, isDelete, tag_id, 
+      category_id)
+    values (#{accountid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{markedcontent,jdbcType=VARCHAR}, #{createat,jdbcType=TIMESTAMP}, #{updateat,jdbcType=TIMESTAMP}, 
+      #{clickcount,jdbcType=INTEGER}, #{likecount,jdbcType=INTEGER}, #{favoritecount,jdbcType=INTEGER}, 
+      #{category,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.Blog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        accountId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="markedcontent != null">
+        markedContent,
+      </if>
+      <if test="createat != null">
+        createAt,
+      </if>
+      <if test="updateat != null">
+        updateAt,
+      </if>
+      <if test="clickcount != null">
+        clickCount,
+      </if>
+      <if test="likecount != null">
+        likeCount,
+      </if>
+      <if test="favoritecount != null">
+        favoriteCount,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="isdelete != null">
+        isDelete,
+      </if>
+      <if test="tagId != null">
+        tag_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="markedcontent != null">
+        #{markedcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateat != null">
+        #{updateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickcount != null">
+        #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="likecount != null">
+        #{likecount,jdbcType=INTEGER},
+      </if>
+      <if test="favoritecount != null">
+        #{favoritecount,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="tagId != null">
+        #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.syc.model.entity.Blog">
+    <!--@mbg.generated-->
+    update blog
+    <set>
+      <if test="accountid != null">
+        accountId = #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="markedcontent != null">
+        markedContent = #{markedcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        createAt = #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateat != null">
+        updateAt = #{updateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickcount != null">
+        clickCount = #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="likecount != null">
+        likeCount = #{likecount,jdbcType=INTEGER},
+      </if>
+      <if test="favoritecount != null">
+        favoriteCount = #{favoritecount,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        isDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="tagId != null">
+        tag_id = #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.syc.model.entity.Blog">
+    <!--@mbg.generated-->
+    update blog
+    set accountId = #{accountid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      markedContent = #{markedcontent,jdbcType=VARCHAR},
+      createAt = #{createat,jdbcType=TIMESTAMP},
+      updateAt = #{updateat,jdbcType=TIMESTAMP},
+      clickCount = #{clickcount,jdbcType=INTEGER},
+      likeCount = #{likecount,jdbcType=INTEGER},
+      favoriteCount = #{favoritecount,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      isDelete = #{isdelete,jdbcType=INTEGER},
+      tag_id = #{tagId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

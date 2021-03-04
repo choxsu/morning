@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.service.mapper.AuthCodeMapper">
+  <resultMap id="BaseResultMap" type="com.syc.model.entity.AuthCode">
+    <!--@mbg.generated-->
+    <id column="auth_code_id" jdbcType="VARCHAR" property="id" />
+    <result column="auth_code_accountId" jdbcType="INTEGER" property="accountid" />
+    <result column="auth_code_expireAt" jdbcType="BIGINT" property="expireat" />
+    <result column="auth_code_type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    auth_code.id as auth_code_id, auth_code.accountId as auth_code_accountId, auth_code.expireAt as auth_code_expireAt, 
+    auth_code.`type` as `auth_code_type`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from auth_code auth_code
+    where auth_code.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from auth_code
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.AuthCode" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into auth_code (accountId, expireAt, `type`
+      )
+    values (#{accountid,jdbcType=INTEGER}, #{expireat,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.AuthCode" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into auth_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        accountId,
+      </if>
+      <if test="expireat != null">
+        expireAt,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="expireat != null">
+        #{expireat,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.syc.model.entity.AuthCode">
+    <!--@mbg.generated-->
+    update auth_code
+    <set>
+      <if test="accountid != null">
+        accountId = #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="expireat != null">
+        expireAt = #{expireat,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.syc.model.entity.AuthCode">
+    <!--@mbg.generated-->
+    update auth_code
+    set accountId = #{accountid,jdbcType=INTEGER},
+      expireAt = #{expireat,jdbcType=BIGINT},
+      `type` = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
