@@ -10,14 +10,18 @@ import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.time.Duration;
 
 /**
  * @author choxsu
@@ -51,17 +55,26 @@ public class AppConfig {
         return redisTemplate;
     }
 
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private String port;
-    @Value("${spring.redis.password:''}")
-    private String password;
 
     @Bean
-    public RedissonClient getRedisson() {
+    public RedissonClient getRedisson(RedisProperties redisProperties) {
         Config config = new Config();
-        SingleServerConfig singleServerConfig = config.useSingleServer().setAddress("redis://" + host + ":" + port);
+//        RedisProperties.Pool pool = redisProperties.getJedis().getPool();
+//        if (pool == null) {
+//            pool = redisProperties.getLettuce().getPool();
+//        }
+//        if (pool == null) {
+//            pool = new RedisProperties.Pool();
+//        }
+        SingleServerConfig singleServerConfig = config.useSingleServer()
+                .setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort());
+        // 使用默认配置会好一点，不做配置
+        // 默认值：10 最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+//        singleServerConfig.setConnectionMinimumIdleSize(pool.getMaxIdle());
+        // 默认值：64 连接池最大容量。连接池的连接数量自动弹性伸缩。
+//        singleServerConfig.setConnectionPoolSize(pool.getMaxActive());
+
+        String password = redisProperties.getPassword();
         if (StrKit.notBlank(password)) {
             singleServerConfig.setPassword(password);
         }
