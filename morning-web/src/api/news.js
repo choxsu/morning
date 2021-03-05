@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getPostList(params) {
   return request({
-    url: '/morning-web/post/list',
+    url: '/api/article/listByPage',
     method: 'get',
     params
   })

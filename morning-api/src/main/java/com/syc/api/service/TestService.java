@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-@Service
+//@Service
 public class TestService {
 
     //    @Autowired
 //    private RedisLock redisLock;
-    @Autowired
+//    @Autowired
     private RedissonClient redissonClient;
 
-    @Autowired
+//    @Autowired
     private RedisTemplate redisTemplate;
 
     /***

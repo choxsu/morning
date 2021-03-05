@@ -11,6 +11,7 @@ import com.syc.api.service.article.ArticleApiService;
 import com.syc.common.util.ResultModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -29,7 +30,8 @@ public class ArticleApiController extends BaseController {
 
 
     @GetMapping("/listByPage")
-    public ResultModel listByPage(Integer pageNumber, Integer pageSize) {
+    public ResultModel listByPage(@RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
+                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
 
         return articleApiService.listByPage(pageNumber, pageSize);
     }

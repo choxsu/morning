@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author choxsu
  * @date 2019/01/26
  */
-@Service("redissonService")
+//@Service("redissonService")
 public class RedissonService {
 
     @Autowired

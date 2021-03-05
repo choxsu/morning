@@ -1,13 +1,15 @@
 const Mock = require('mockjs')
 
 const data = Mock.mock({
-  'items|300': [{
-    id: '@id',
-    title: '@csentence(10, 20)',
+  'items|150': [{
+    "id|+1": 2,
+    title: '@ctitle(10, 50)',
+    category_id: 1,
+    category: '企业类目',
     'status|1': ['published', 'draft', 'deleted'],
     author: '苏小秋',
     display_time: '@datetime',
-    pageviews: '@integer(300, 5000)'
+    pageviews: '@integer(300, 10000)'
   }]
 })
 

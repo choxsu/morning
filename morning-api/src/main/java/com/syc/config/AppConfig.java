@@ -56,7 +56,7 @@ public class AppConfig {
     }
 
 
-    @Bean
+//    @Bean
     public RedissonClient getRedisson(RedisProperties redisProperties) {
         Config config = new Config();
 //        RedisProperties.Pool pool = redisProperties.getJedis().getPool();
