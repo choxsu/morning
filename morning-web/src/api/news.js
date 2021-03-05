@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getPostList(params) {
   return request({
-    url: '/vue-admin-template/table/list',
+    url: '/morning-web/post/list',
     method: 'get',
     params
   })
@@ -11,7 +11,7 @@ export function getPostList(params) {
 
 export function getCategoryList(params) {
   return request({
-    url: '/vue-admin-template/table/list',
+    url: '/morning-web/post/list',
     method: 'get',
     params
   })

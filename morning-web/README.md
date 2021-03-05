@@ -1,16 +1,16 @@
-# vue-admin-template
+# morning-web
 
 > 这是一个极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
 
-[线上地址](http://panjiachen.github.io/vue-admin-template)
+[线上地址](http://panjiachen.github.io/morning-web)
 
-[国内访问](https://panjiachen.gitee.io/vue-admin-template)
+[国内访问](https://panjiachen.gitee.io/morning-web)
 
-目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，若你想使用旧版本，可以切换分支到[tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0)，它不依赖 `vue-cli`。
+目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，若你想使用旧版本，可以切换分支到[tag/3.11.0](https://github.com/PanJiaChen/morning-web/tree/tag/3.11.0)，它不依赖 `vue-cli`。
 
 ## Extra
 
-如果你想要根据用户角色来动态生成侧边栏和 router，你可以使用该分支[permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
+如果你想要根据用户角色来动态生成侧边栏和 router，你可以使用该分支[permission-control](https://github.com/PanJiaChen/morning-web/tree/permission-control)
 
 ## 相关项目
 
@@ -34,10 +34,10 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+git clone https://github.com/PanJiaChen/morning-web.git
 
 # 进入项目目录
-cd vue-admin-template
+cd morning-web
 
 # 安装依赖
 npm install
@@ -97,6 +97,6 @@ Modern browsers and Internet Explorer 10+.
 
 ## License
 
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
+[MIT](https://github.com/PanJiaChen/morning-web/blob/master/LICENSE) license.
 
 Copyright (c) 2017-present PanJiaChen

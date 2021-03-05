@@ -55,11 +55,11 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/news',
+    path: '/cms',
     component: Layout,
     redirect: '/news/post',
-    name: 'News',
-    meta: { title: '新闻中心', icon: 'el-icon-news' },
+    name: 'Cms',
+    meta: { title: '内容管理', icon: 'el-icon-news' },
     children: [
       {
         path: 'post',
