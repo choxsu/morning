@@ -18,7 +18,7 @@ module.exports = [
     response: config => {
       const items = data.items
       return {
-        code: 20000,
+        code: 1,
         data: {
           total: items.length,
           items: items
