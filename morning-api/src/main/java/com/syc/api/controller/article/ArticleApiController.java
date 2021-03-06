@@ -31,9 +31,10 @@ public class ArticleApiController extends BaseController {
 
     @GetMapping("/listByPage")
     public ResultModel listByPage(@RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
-                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
+                                  @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                  String title) {
 
-        return articleApiService.listByPage(pageNumber, pageSize);
+        return articleApiService.listByPage(pageNumber, pageSize, title);
     }
 
     @PutMapping("/save")

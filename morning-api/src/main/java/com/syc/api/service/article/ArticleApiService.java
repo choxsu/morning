@@ -6,6 +6,7 @@
 package com.syc.api.service.article;
 
 import com.jfinal.kit.Kv;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -32,11 +33,18 @@ public class ArticleApiService {
     @Resource
     private MoArticleMapper moArticleMapper;
 
-    public ResultModel listByPage(Integer pageNumber, Integer pageSize) {
+    public ResultModel listByPage(Integer pageNumber, Integer pageSize, String title) {
 //        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
 //        List<MoArticle> records = iPage.getRecords();
         String select  = "select id,user_id,title,author,content,content_type,click_count,status,category_id,create_at";
-        Page<Record> page = Db.paginate(pageNumber, pageSize, select, "from mo_article order by id desc");
+        String from = "from mo_article where 1 = 1 ";
+        List<Object> params = new ArrayList<>();
+        if(StrKit.notBlank(title)) {
+            from += " and title like ? ";
+            params.add("%" + title + "%");
+        }
+        from += " order by id desc";
+        Page<Record> page = Db.paginate(pageNumber, pageSize, select, from, params.toArray());
         List<Record> list = page.getList();
         return ResultModel.success(ResultModel.SUCCESS_MSG, getBackPage(page.getTotalPage(), list));
     }
