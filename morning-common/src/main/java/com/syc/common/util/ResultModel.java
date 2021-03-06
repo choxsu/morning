@@ -33,6 +33,12 @@ public class ResultModel implements Serializable {
     public ResultModel() {}
 
 
+    public ResultModel(Integer code) {
+        this.code = code;
+        this.isSuccess = SUCCESS.equals(code);
+    }
+
+
     public ResultModel(Integer code, String msg, Object data) {
         this.msg = msg;
         this.code = code;

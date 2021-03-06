@@ -9,10 +9,10 @@ import com.jfinal.ext.cors.EnableCORS;
 import com.syc.api.controller.common.BaseController;
 import com.syc.api.service.article.ArticleApiService;
 import com.syc.common.util.ResultModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.syc.model.request.ArticleRO;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -34,6 +34,12 @@ public class ArticleApiController extends BaseController {
                                   @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
 
         return articleApiService.listByPage(pageNumber, pageSize);
+    }
+
+    @PutMapping("/save")
+    public ResultModel save(@RequestBody @Validated ArticleRO articleRO) {
+
+        return articleApiService.save(articleRO);
     }
 
 

@@ -12,7 +12,7 @@
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
       </el-select>-->
       <el-button class="filter-item" size="small" type="primary" icon="el-icon-search" @click="handleFilter">
-        Search
+        搜索
       </el-button>
       <el-button class="filter-item" size="small" style="margin-left: 10px;" type="primary" icon="el-icon-plus" @click="handleCreate">
         新增
@@ -32,7 +32,7 @@
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="标题">
@@ -47,12 +47,12 @@
       </el-table-column>
       <el-table-column label="浏览次数" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.click_count }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="类目" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.category }}
+          {{ scope.row.category_id | categoryFilter }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="状态" width="110" align="center">
@@ -60,10 +60,10 @@
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status | statusFilterToStr}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="发布时间" width="200">
+      <el-table-column align="center" prop="carete_time" label="发布时间" width="200">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          <span>{{ scope.row.create_at }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
@@ -84,36 +84,94 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
+    <pagination v-show="total > listQuery.limit" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
+
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
+        <el-form-item label="类别" prop="categoryId">
+          <el-select v-model="temp.categoryId" class="filter-item" placeholder="请选择">
+            <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="标题" prop="title">
+          <el-input v-model="temp.title" />
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-select v-model="temp.status" class="filter-item" placeholder="请选择">
+            <el-option v-for="item in statusOptions" :key="item.status" :label="item.desc" :value="item.status" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="内容">
+          <el-input v-model="temp.content" :autosize="{ minRows: 2, maxRows: 4}" type="textarea" placeholder="Please input" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">
+          取消
+        </el-button>
+        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
+          确认
+        </el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { getPostList } from '@/api/news'
+import { getArticleList,createArticle } from '@/api/news'
 import Pagination from '@/components/Pagination'
+const calendarTypeOptions = [
+  { key: '1', display_name: '产品动态' },
+  { key: '2', display_name: '公司动态' }
+]
+
+const statusOptions = [
+  { status: 'published', color: "success",  "desc": "发布"},
+  { status: 'draft', color: "gray",  "desc": "草稿"}
+]
+
+const statusShowOptions = [
+  { status: 'published', color: "success",  "desc": "发布"},
+  { status: 'draft', color: "gray",  "desc": "草稿"},
+  { status: 'deleted', color: "danger", "desc": "删除"}
+]
+
+const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
+
+const statusColorValue = statusShowOptions.reduce((acc, cur) => {
+  acc[cur.status] = cur.color
+  return acc
+}, {})
+
+
+const statusDescValue = statusShowOptions.reduce((acc, cur) => {
+  acc[cur.status] = cur.desc
+  return acc
+}, {})
 
 export default {
   components: { Pagination },
   filters: {
     statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+      return statusColorValue[status]
     },
     statusFilterToStr(status) {
-      const statusMap = {
-        published: '发布',
-        draft: '草稿',
-        deleted: '删除'
-      }
-      return statusMap[status]
+      return statusDescValue[status]
+    },
+    categoryFilter(categoryId) {
+      return calendarTypeKeyValue[categoryId]
     }
   },
   data() {
     return {
+      calendarTypeOptions,
+      statusOptions,
+      statusShowOptions,
       total: 0,
       list: [],
       listLoading: true,
@@ -125,7 +183,25 @@ export default {
         type: undefined,
         sort: '+id'
       },
-      downloadLoading: false
+      downloadLoading: false,
+      temp: {
+        id: undefined,
+        content: '',
+        title: '',
+        status: 'published',
+        categoryId: ''
+      },
+
+      dialogFormVisible: false,
+      dialogStatus: '',
+      textMap: {
+        update: '编辑',
+        create: '新增'
+      },
+      rules: {
+        categoryId: [{ required: true, message: '类别必须选择', trigger: 'change' }],
+        title: [{ required: true, message: '标题必须填写', trigger: 'blur' }]
+      },
     }
   },
   created() {
@@ -134,20 +210,36 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getPostList().then(response => {
-        this.total = response.data.total
-        this.list = response.data.items
-
+      getArticleList(this.listQuery).then(response => {
+        if (response.data.success) {
+          let data = response.data;
+          this.total = data.data.total | 0
+          this.list = data.data.items
+        }
         this.listLoading = false
       }).finally(() => {
         this.listLoading = false
       })
     },
     handleFilter() {
-      this.$message.success("搜索")
+      this.fetchData()
+    },
+    resetTemp() {
+      this.temp = {
+        id: undefined,
+        content: '',
+        title: '',
+        status: 'published',
+        categoryId: ''
+      }
     },
     handleCreate() {
-      this.$message.success("创建")
+      this.resetTemp()
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     handleDownload() {
       this.$notify.success({title: "提示",message: "导出"})
@@ -160,6 +252,26 @@ export default {
     },
     handleDelete(row){
       console.log(row)
+    },
+    createData() {
+      this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            this.temp.author = 'vue-element-admin'
+            createArticle(this.temp).then((response) => {
+              this.dialogFormVisible = false
+              this.$notify({
+                title: 'Success',
+                message: response.data.msg,
+                type: 'success',
+                duration: 2000
+              })
+              this.fetchData()
+            })
+          }
+      })
+    },
+    updateData() {
+      this.$message.success("更新")
     }
 
   }

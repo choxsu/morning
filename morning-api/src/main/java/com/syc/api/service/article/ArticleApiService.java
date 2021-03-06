@@ -5,18 +5,20 @@
  */
 package com.syc.api.service.article;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jfinal.kit.Kv;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.syc.common.util.ResultModel;
-import com.syc.model.entity.MoArticle;
+import com.syc.model.request.ArticleRO;
 import com.syc.service.mapper.MoArticleMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.EntityWriter;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author choxsu
@@ -31,10 +33,39 @@ public class ArticleApiService {
     private MoArticleMapper moArticleMapper;
 
     public ResultModel listByPage(Integer pageNumber, Integer pageSize) {
-        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
+//        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
+//        List<MoArticle> records = iPage.getRecords();
+        String select  = "select id,user_id,title,author,content,content_type,click_count,status,category_id,create_at";
+        Page<Record> page = Db.paginate(pageNumber, pageSize, select, "from mo_article ");
+        List<Record> list = page.getList();
+        return ResultModel.success(ResultModel.SUCCESS_MSG, getBackPage(page.getTotalPage(), list));
+    }
 
-        List<MoArticle> records = iPage.getRecords();
+    public ResultModel save(ArticleRO articleRO) {
+        Record article = new Record();
+        article.set("user_id", 1);
+        article.set("title", articleRO.getTitle());
+        article.set("content_type", 1);
+        article.set("content", articleRO.getContent());
+        article.set("author", "choxsu");
+        article.set("status", articleRO.getStatus());
+        article.set("category_id", articleRO.getCategoryId());
+        article.set("create_at", LocalDateTime.now());
+        Db.save("mo_article", article);
+        return ResultModel.success();
+    }
 
-        return ResultModel.success(ResultModel.SUCCESS_MSG, records);
+    public static Kv getBackPage(long total, List items) {
+        List<Object> list = new ArrayList<>();
+        for (Object item : items) {
+            if (item instanceof Record) {
+                Record record = (Record) item;
+                Map<String, Object> columns = record.getColumns();
+                list.add(columns);
+            } else {
+                list.add(item);
+            }
+        }
+        return Kv.by("total", total).set("items", list);
     }
 }
