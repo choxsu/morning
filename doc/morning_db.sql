@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 04/03/2021 13:54:52
+ Date: 06/03/2021 15:59:14
 */
 
 SET NAMES utf8mb4;
@@ -41,19 +41,19 @@ CREATE TABLE `mo_account` (
 DROP TABLE IF EXISTS `mo_article`;
 CREATE TABLE `mo_article` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `account_id` int DEFAULT NULL COMMENT '账户id',
+  `user_id` int DEFAULT NULL COMMENT '账户id',
   `title` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
-  `context_type` int NOT NULL DEFAULT '1' COMMENT '内容格式 1-富文本 2-markdown',
+  `content_type` int NOT NULL DEFAULT '1' COMMENT '内容格式 1-富文本 2-markdown',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '内容',
+  `author` varchar(255) DEFAULT NULL COMMENT '作者',
   `click_count` int NOT NULL DEFAULT '0' COMMENT '点击次数',
-  `is_delete` int NOT NULL DEFAULT '0' COMMENT '是否删除 0否 1是',
-  `status` int DEFAULT NULL COMMENT '状态 0-草稿 1-发布',
+  `status` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态 draft-草稿 published-发布 deleted-删除',
   `category_id` int DEFAULT NULL COMMENT '类型id',
   `create_at` datetime NOT NULL COMMENT '创建时间',
-  `update_at` datetime NOT NULL COMMENT '修改时间',
+  `update_at` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `index_account_id` (`account_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  KEY `index_account_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Table structure for mo_auth_code
@@ -186,7 +186,7 @@ CREATE TABLE `mo_sys_user` (
   `create_at` datetime NOT NULL COMMENT '注册时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `un_username` (`username`) COMMENT '用户名唯一索引'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Table structure for mo_sys_user_role
