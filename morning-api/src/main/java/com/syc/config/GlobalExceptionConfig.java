@@ -6,6 +6,7 @@
 package com.syc.config;
 
 import com.syc.common.util.ResultModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,6 +25,7 @@ import java.util.Set;
  * @describe
  */
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionConfig {
 
     /**
@@ -69,6 +71,14 @@ public class GlobalExceptionConfig {
             return errorResult;
         }
         errorResult.setMsg(ex.getMessage());
+        return errorResult;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResultModel serveException(Exception ex) {
+        log.error(ex.getMessage());
+        ResultModel errorResult = new ResultModel(ResultModel.FAILED);
+        errorResult.setMsg("服务器异常，请稍后再试！");
         return errorResult;
     }
 

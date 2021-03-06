@@ -36,7 +36,7 @@ public class ArticleApiService {
 //        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
 //        List<MoArticle> records = iPage.getRecords();
         String select  = "select id,user_id,title,author,content,content_type,click_count,status,category_id,create_at";
-        Page<Record> page = Db.paginate(pageNumber, pageSize, select, "from mo_article ");
+        Page<Record> page = Db.paginate(pageNumber, pageSize, select, "from mo_article order by id desc");
         List<Record> list = page.getList();
         return ResultModel.success(ResultModel.SUCCESS_MSG, getBackPage(page.getTotalPage(), list));
     }
