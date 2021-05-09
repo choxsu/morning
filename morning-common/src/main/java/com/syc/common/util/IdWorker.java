@@ -11,26 +11,25 @@ import java.util.List;
  */
 public class IdWorker {
 
-    private long workerId;
-    private long datacenterId;
+    private final long workerId;
+    private final long datacenterId;
     private long sequence;
 
-    private long twepoch = 1288834974657L;
+    private final long twepoch = 1288834974657L;
 
-    private long workerIdBits = 5L;
-    private long datacenterIdBits = 5L;
+    private final long workerIdBits = 5L;
+    private final long datacenterIdBits = 5L;
 
     // 这个是二进制运算，就是 5 bit最多只能有31个数字，也就是说机器id最多只能是32以内
-    private long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    private final long maxWorkerId = ~(-1L << workerIdBits);
 
     // 这个是一个意思，就是 5 bit最多只能有31个数字，机房id最多只能是32以内
-    private long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
-    private long sequenceBits = 12L;
+    private final long maxDatacenterId = ~(-1L << datacenterIdBits);
+    private final long sequenceBits = 12L;
 
-    private long workerIdShift = sequenceBits;
-    private long datacenterIdShift = sequenceBits + workerIdBits;
-    private long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
-    private long sequenceMask = -1L ^ (-1L << sequenceBits);
+    private final long datacenterIdShift = sequenceBits + workerIdBits;
+    private final long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+    private final long sequenceMask = ~(-1L << sequenceBits);
 
     private long lastTimestamp = -1L;
 
@@ -95,7 +94,7 @@ public class IdWorker {
         // 将机器id左移放到5 bit那儿；将序号放最后12 bit；
         // 最后拼接起来成一个 64 bit的二进制数字，转换成 10 进制就是个 long 型
         return ((timestamp - twepoch) << timestampLeftShift) | (datacenterId << datacenterIdShift)
-                | (workerId << workerIdShift) | sequence;
+                | (workerId << sequenceBits) | sequence;
     }
 
     private long tilNextMillis(long lastTimestamp) {
@@ -119,7 +118,7 @@ public class IdWorker {
             thread = new Thread(() -> System.out.println(worker.nextId()));
             threadList.add(thread);
         }
-        threadList.forEach(t -> t.start());
+        threadList.forEach(Thread::start);
     }
 
 }

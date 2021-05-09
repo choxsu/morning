@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.service.mapper.MoSessionMapper">
+  <resultMap id="BaseResultMap" type="com.syc.model.entity.MoSession">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="expire_at" jdbcType="BIGINT" property="expireAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, account_id, expire_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mo_session
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from mo_session
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.MoSession" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mo_session (account_id, expire_at)
+    values (#{accountId,jdbcType=INTEGER}, #{expireAt,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.syc.model.entity.MoSession" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mo_session
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="expireAt != null">
+        expire_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="expireAt != null">
+        #{expireAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.syc.model.entity.MoSession">
+    <!--@mbg.generated-->
+    update mo_session
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="expireAt != null">
+        expire_at = #{expireAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.syc.model.entity.MoSession">
+    <!--@mbg.generated-->
+    update mo_session
+    set account_id = #{accountId,jdbcType=INTEGER},
+      expire_at = #{expireAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
