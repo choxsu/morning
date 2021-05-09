@@ -16,7 +16,7 @@ import javax.management.MXBean;
  * scanBasePackages 这个是在分模块的情况下，扫描报下的自动配置,基于spring boot 2.0
  */
 @SpringBootApplication(scanBasePackages = {"com.syc"})
-@MapperScan("com.syc.service.dao")
+@MapperScan("com.syc.service.mapper")
 @Controller
 public class MorningApplication {
 

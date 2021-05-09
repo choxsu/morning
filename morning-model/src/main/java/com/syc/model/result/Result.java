@@ -5,13 +5,15 @@ import lombok.Getter;
 @Getter
 public class Result implements java.io.Serializable {
 
-    protected static final String msgSuccess = "ok";
-    protected static final String msgFailed = "fail";
-    protected static final String msgNoAuth = "No authority";
+    private static final String msgSuccess = "ok";
+    private static final String msgFailed = "fail";
+    private static final String msgNoAuth = "No authority";
 
-    protected static final int codeNoAuth = -1;
-    protected static final int codeFailed = 0;
-    protected static final int codeSuccess = 1;
+    private static final int codeNoAuth = -1;
+    private static final int codeFailed = 0;
+    private static final int codeSuccess = 1;
+
+
 
     /**
      * 提示代码 0失败，1成功，-1无访问权限
@@ -28,12 +30,23 @@ public class Result implements java.io.Serializable {
      */
     private Object data;
 
+    /**
+     * 是否成功
+     */
+    private boolean isSuccess;
+
+    public Result() {
+
+    }
+
     public Result(int code) {
         this.code = code;
+        this.isSuccess = (this.code == codeSuccess) ;
     }
 
     private Result setCode(int code){
         this.code = code;
+        this.isSuccess = (this.code == codeSuccess) ;
         return this;
     }
 
@@ -48,7 +61,7 @@ public class Result implements java.io.Serializable {
     }
 
     public boolean isSuccess(){
-        return this.code == codeSuccess;
+        return this.isSuccess;
     }
 
     public static Result noAuth(){
@@ -59,8 +72,26 @@ public class Result implements java.io.Serializable {
         return new Result(codeFailed).setMsg(msgFailed);
     }
 
+    public static Result fail(String msg){
+        return new Result(codeFailed).setMsg(msg);
+    }
+
+    public static Result fail(String msg, Object data){
+        return new Result(codeFailed).setMsg(msg).setData(data);
+    }
+
+
     public static Result ok(){
         return new Result(codeSuccess).setMsg(msgSuccess);
     }
+
+    public static Result ok(String msg){
+        return new Result(codeSuccess).setMsg(msg);
+    }
+
+    public static Result ok(String msg, Object data){
+        return new Result(codeSuccess).setMsg(msg).setData(data);
+    }
+
 
 }
