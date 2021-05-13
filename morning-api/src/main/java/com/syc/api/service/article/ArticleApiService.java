@@ -12,7 +12,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.syc.common.util.ResultModel;
 import com.syc.model.request.ArticleRO;
-import com.syc.service.mapper.MoArticleMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,8 +29,8 @@ import java.util.Map;
 public class ArticleApiService {
 
 
-    @Resource
-    private MoArticleMapper moArticleMapper;
+//    @Resource
+//    private MoArticleMapper moArticleMapper;
 
     public ResultModel listByPage(Integer pageNumber, Integer pageSize, String title) {
 //        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));

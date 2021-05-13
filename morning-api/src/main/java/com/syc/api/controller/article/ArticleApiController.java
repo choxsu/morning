@@ -10,6 +10,7 @@ import com.syc.api.controller.common.BaseController;
 import com.syc.api.service.article.ArticleApiService;
 import com.syc.common.util.ResultModel;
 import com.syc.model.request.ArticleRO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,11 @@ import javax.annotation.Resource;
 @RequestMapping("/api/article")
 public class ArticleApiController extends BaseController {
 
-    @Resource
-    private ArticleApiService articleApiService;
+    private final ArticleApiService articleApiService;
+
+    public ArticleApiController(ArticleApiService articleApiService) {
+        this.articleApiService = articleApiService;
+    }
 
 
     @GetMapping("/listByPage")

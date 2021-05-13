@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/morning_db?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
-    password: 12345678
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
@@ -27,7 +27,7 @@ spring:
     port: 6379
     # 没有密码留空
     password:
-    lettuce:
+    jedis:
       pool:
         # 连接池最大连接数(使用负值表示没有限制) 默认为8
         max-active: 2000

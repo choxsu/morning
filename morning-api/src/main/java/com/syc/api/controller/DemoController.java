@@ -2,7 +2,6 @@ package com.syc.api.controller;
 
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
-import com.syc.api.kit.EmailKit;
 import com.syc.api.service.TestService;
 import com.syc.api.service.common.RedisService;
 //import com.syc.service.service.BlogService;
@@ -32,8 +31,8 @@ public class DemoController {
     @Autowired
     @Qualifier(value = "redisService")
     private RedisService redisService;
-    @Autowired
-    private EmailKit emailKit;
+//    @Autowired
+//    private EmailKit emailKit;
 //    @Autowired
 //    private BlogService blogService;
 
@@ -116,51 +115,51 @@ public class DemoController {
         return Ret.ok("data", map);
     }
 
-    /**
-     * @api {get} /demo/sendMail #1邮件发送【text版本】
-     * @apiName #1邮件发送【text版本】
-     * @apiGroup Mail
-     * @apiVersion 1.0.0
-     * @apiDescription 邮件发送测试接口，这个只能发送文字，email是必须传递的参数
-     * @apiParam {String} email 目标邮箱，我们发送到的邮箱
-     * @apiSuccess {String} state  ok 成功 fail 失败
-     * @apiSuccess {String} msg  提示信息
-     * @apiSuccess {Object} data  返回的数据
-     */
-    @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
-    public Map sendMail(@RequestParam("email") String email) {
-        boolean b = emailKit.sendEmail(
-                email,
-                "标题 123 ",
-                "内容 <div style='color:red;'>123</div> ");
-        if (!b) {
-            return Ret.fail().set("msg", "邮件发送失败");
-        }
-        return Ret.ok().set("msg", "发送到邮件：" + email + " 成功！");
-    }
+//    /**
+//     * @api {get} /demo/sendMail #1邮件发送【text版本】
+//     * @apiName #1邮件发送【text版本】
+//     * @apiGroup Mail
+//     * @apiVersion 1.0.0
+//     * @apiDescription 邮件发送测试接口，这个只能发送文字，email是必须传递的参数
+//     * @apiParam {String} email 目标邮箱，我们发送到的邮箱
+//     * @apiSuccess {String} state  ok 成功 fail 失败
+//     * @apiSuccess {String} msg  提示信息
+//     * @apiSuccess {Object} data  返回的数据
+//     */
+//    @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
+//    public Map sendMail(@RequestParam("email") String email) {
+//        boolean b = emailKit.sendEmail(
+//                email,
+//                "标题 123 ",
+//                "内容 <div style='color:red;'>123</div> ");
+//        if (!b) {
+//            return Ret.fail().set("msg", "邮件发送失败");
+//        }
+//        return Ret.ok().set("msg", "发送到邮件：" + email + " 成功！");
+//    }
 
-    /**
-     * @api {get} /demo/sendHtmlMail #2邮件发送【HTML版本】
-     * @apiName #2邮件发送【HTML版本】
-     * @apiGroup Mail
-     * @apiVersion 1.0.0
-     * @apiDescription 邮件发送测试接口，HTML版本，email是必须传递的参数
-     * @apiParam {String} email 目标邮箱，我们发送到的邮箱
-     * @apiSuccess {String} state  ok 成功 fail 失败
-     * @apiSuccess {String} msg  提示信息
-     * @apiSuccess {Object} data  返回的数据
-     */
-    @RequestMapping(value = "/sendHtmlMail", method = RequestMethod.GET)
-    public Map sendHtmlMail(@RequestParam("email") String email) {
-        boolean b = emailKit.sendHtmlEmail(
-                email,
-                "标题 123 ",
-                "内容 <div style='color:red;'>123</div>");
-        if (!b) {
-            return Ret.fail().set("msg", "邮件发送失败");
-        }
-        return Ret.ok().set("msg", "发送到邮件：" + email + " 成功！");
-    }
+//    /**
+//     * @api {get} /demo/sendHtmlMail #2邮件发送【HTML版本】
+//     * @apiName #2邮件发送【HTML版本】
+//     * @apiGroup Mail
+//     * @apiVersion 1.0.0
+//     * @apiDescription 邮件发送测试接口，HTML版本，email是必须传递的参数
+//     * @apiParam {String} email 目标邮箱，我们发送到的邮箱
+//     * @apiSuccess {String} state  ok 成功 fail 失败
+//     * @apiSuccess {String} msg  提示信息
+//     * @apiSuccess {Object} data  返回的数据
+//     */
+//    @RequestMapping(value = "/sendHtmlMail", method = RequestMethod.GET)
+//    public Map sendHtmlMail(@RequestParam("email") String email) {
+//        boolean b = emailKit.sendHtmlEmail(
+//                email,
+//                "标题 123 ",
+//                "内容 <div style='color:red;'>123</div>");
+//        if (!b) {
+//            return Ret.fail().set("msg", "邮件发送失败");
+//        }
+//        return Ret.ok().set("msg", "发送到邮件：" + email + " 成功！");
+//    }
 
 
 /*    @Autowired
