@@ -14,7 +14,6 @@ import com.syc.common.util.ResultModel;
 import com.syc.model.request.ArticleRO;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ArticleApiService {
 //        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
 //        List<MoArticle> records = iPage.getRecords();
         String select  = "select *";
-        String from = "from mo_article where 1 = 1 ";
+        String from = "from cms_article where 1 = 1 ";
         List<Object> params = new ArrayList<>();
         if(StrKit.notBlank(title)) {
             from += " and title like ? ";
@@ -54,11 +53,11 @@ public class ArticleApiService {
         article.set("title", articleRO.getTitle());
         article.set("content_type", 1);
         article.set("content", articleRO.getContent());
-        article.set("author", "choxsu");
+        article.set("author", articleRO.getAuthor());
         article.set("status", articleRO.getStatus());
         article.set("category_id", articleRO.getCategoryId());
         article.set("create_at", LocalDateTime.now());
-        Db.save("mo_article", article);
+        Db.save("cms_article", article);
         return ResultModel.success();
     }
 

@@ -256,7 +256,7 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
           if (valid) {
-            this.temp.author = 'vue-element-admin'
+            this.temp.author = 'QiuChen'
             createArticle(this.temp).then((response) => {
               this.dialogFormVisible = false
               this.$notify({

@@ -9,7 +9,6 @@ import java.util.Date;
 
 /**
  * null
- * @TableName mo_article
  */
 @Data
 public class ArticleRO implements Serializable {
@@ -37,7 +36,7 @@ public class ArticleRO implements Serializable {
      */
     private String content;
 
-
+    private String author;
     /**
      * 状态 draft-草稿 published-发布 deleted-删除
      */
