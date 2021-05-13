@@ -35,7 +35,7 @@ public class ArticleApiService {
     public ResultModel listByPage(Integer pageNumber, Integer pageSize, String title) {
 //        IPage<MoArticle> iPage = moArticleMapper.selectPage(new Page<>(pageNumber, pageSize), Wrappers.lambdaQuery(MoArticle.class));
 //        List<MoArticle> records = iPage.getRecords();
-        String select  = "select id,user_id,title,author,content,content_type,click_count,status,category_id,create_at";
+        String select  = "select *";
         String from = "from mo_article where 1 = 1 ";
         List<Object> params = new ArrayList<>();
         if(StrKit.notBlank(title)) {
@@ -50,7 +50,7 @@ public class ArticleApiService {
 
     public ResultModel save(ArticleRO articleRO) {
         Record article = new Record();
-        article.set("user_id", 1);
+        article.set("account_id", 1);
         article.set("title", articleRO.getTitle());
         article.set("content_type", 1);
         article.set("content", articleRO.getContent());

@@ -25,11 +25,7 @@ import Layout from '@/layout'
   }
  */
 
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
+
 export const constantRoutes = [
   {
     path: '/login',
@@ -57,20 +53,20 @@ export const constantRoutes = [
   {
     path: '/cms',
     component: Layout,
-    redirect: '/news/post',
+    redirect: '/cms/post',
     name: 'Cms',
     meta: { title: '内容管理', icon: 'el-icon-news' },
     children: [
       {
         path: 'post',
         name: 'Post',
-        component: () => import('@/views/news/post'),
-        meta: { title: '新闻管理' }
+        component: () => import('@/views/content/post'),
+        meta: { title: '文章管理' }
       },
       {
         path: 'category',
         name: 'Category',
-        component: () => import('@/views/news/category'),
+        component: () => import('@/views/content/category'),
         meta: { title: '类别管理' }
       },
     ]

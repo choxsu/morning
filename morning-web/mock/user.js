@@ -49,7 +49,7 @@ module.exports = [
 
   // get user info
   {
-    url: '/morning-web/user/info\.*',
+    url: '/morning-web/user/info',
     type: 'get',
     response: config => {
       const { token } = config.query
@@ -59,7 +59,7 @@ module.exports = [
       if (!info) {
         return {
           code: 50008,
-          message: 'Login failed, unable to get user details.'
+          message: '登录失败, 不能获取到用户详情.'
         }
       }
 

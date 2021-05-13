@@ -1,8 +1,8 @@
 {
   "name": "morning-web",
   "version": "4.4.0",
-  "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
-  "author": "Pan <panfree23@gmail.com>",
+  "description": "主要是做一个全新前后端分离的CMS管理系统 & axios & iconfont & permission control & lint",
+  "author": "Qiuchen <choxsu@163.com>",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
