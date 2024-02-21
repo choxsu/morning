@@ -18,7 +18,7 @@ morning
 ```
 
 ### 部署启动
-讲doc目录下的sql文件导入mysql。
+将doc目录下的sql文件导入mysql。
 
 配置morning-api下的application-dev.yml里的配置信息
 
