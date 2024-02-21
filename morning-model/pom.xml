@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>morning</artifactId>
-        <groupId>com.choxsu.syc</groupId>
-        <version>1.0</version>
+        <groupId>com.syc</groupId>
+        <version>${reversion}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,9 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.choxsu.syc</groupId>
+            <groupId>com.syc</groupId>
             <artifactId>morning-common</artifactId>
-            <version>1.0</version>
         </dependency>
 
     </dependencies>
