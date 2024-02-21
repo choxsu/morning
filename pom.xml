@@ -15,7 +15,6 @@
 
     <modules>
         <module>morning-admin</module>
-        <module>morning-modules</module>
         <module>morning-framework</module>
         <module>morning-common</module>
         <module>morning-starter</module>
