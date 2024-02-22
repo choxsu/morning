@@ -31,9 +31,9 @@ public class SwaggerConfig {
     private boolean enabled;
 
     /**
-     * 版本情况
+     * 版本
      */
-    @Value("${morning.version:1.0.0}")
+    @Value("${sys.version:1.0.1}")
     private String version;
 
 
@@ -43,18 +43,12 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30)
-                // 是否启用Swagger
                 .enable(enabled)
-                // 用来创建该API的基本信息，展示在文档的页面中（自定义展示的信息）
                 .apiInfo(apiInfo())
-                // 设置哪些接口暴露给Swagger展示
                 .select()
-                // 扫描所有有注解的api，用这种方式更灵活
                 .apis(RequestHandlerSelectors.basePackage("com.syc"))
-                // 扫描指定包中的swagger注解
                 .paths(PathSelectors.any())
                 .build()
-                /* 设置安全模式，swagger可以设置访问token */
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());
     }
@@ -105,7 +99,7 @@ public class SwaggerConfig {
                 // 描述
                 .description("描述：Morning的接口文档列表")
                 // 作者信息
-                .contact(new Contact("styc", null, null))
+                .contact(new Contact("syc", null, null))
                 // 版本
                 .version("版本号:" + version)
                 .build();

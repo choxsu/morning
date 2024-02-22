@@ -18,6 +18,7 @@
         <module>morning-framework</module>
         <module>morning-common</module>
         <module>morning-starter</module>
+        <module>morning-cms</module>
     </modules>
 
 

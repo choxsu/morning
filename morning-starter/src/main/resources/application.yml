@@ -1,17 +1,16 @@
 # 项目相关配置
-morning:
+sys:
   # 名称
   name: moring-server
   # 版本
-  version: 1.0.0
-  frameworkVersion: 1.0.0
+  version: 1.0.1
 
 server:
   port: 9090
 
 spring:
   application:
-    name: ${morning.name}
+    name: ${sys.name}
   profiles:
     active: @profiles.active@
   # 文件上传

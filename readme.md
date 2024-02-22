@@ -16,11 +16,13 @@
 ```
 morning
 ├─doc                 # 文档说明
-├─morning-api         # 服务api
+├─morning-admin       # 后台管理模块
 ├─morning-common      # 公共模块
-├─morning-model       # 实体相关
-├─morning-web         # 后台管理页面
-└─morning-service     # 服务层
+├─morning-framework   # 框架层
+├─morning-starter     # 服务入口
+├─morning-service     # 服务层
+├─morning-web         # 前端vuejs
+└─sql                 # sql目录
 ```
 
 ### 部署启动
