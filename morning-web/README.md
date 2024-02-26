@@ -1,50 +1,52 @@
 # morning-web
 
-> 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，
+This template should help get you started developing with Vue 3 in Vite.
 
-## Build Setup
+## Recommended IDE Setup
 
-```bash
-# 克隆项目
-git clone https://github.com/choxsu/morning.git
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-# 进入项目目录
-cd morning/morning-web
+## Type Support for `.vue` Imports in TS
 
-# 安装依赖
-npm install
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-# 设置淘宝源注册仓库
-npm install --registry=https://registry.npm.taobao.org
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-# 启动服务
-npm run dev
+1. Disable the built-in TypeScript Extension
+    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+pnpm install
 ```
 
-浏览器访问 [http://localhost:9528](http://localhost:9528)
+### Compile and Hot-Reload for Development
 
-## 发布
-
-```bash
-# 构建测试环境
-npm run build:stage
-
-# 构建生产环境
-npm run build:prod
+```sh
+pnpm dev
 ```
 
-## 其它
+### Type-Check, Compile and Minify for Production
 
-```bash
-# 预览发布环境效果
-npm run preview
+```sh
+pnpm build
+```
 
-# 预览发布环境效果 + 静态资源分析
-npm run preview -- --report
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-# 代码格式检查
-npm run lint
+```sh
+pnpm test:unit
+```
 
-# 代码格式检查并自动修复
-npm run lint -- --fix
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+pnpm lint
 ```
