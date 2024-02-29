@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping
+@RequestMapping("/system/auth")
 @ApiResource(name = "登录路由", resBizType = ResBizTypeEnum.SYSTEM)
 @Tag(name = "登录路由", description = "用于登录相关的操作")
 public class SysLoginController {

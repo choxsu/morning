@@ -1,31 +1,30 @@
+import type { App } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import FrontLayout from '@/layout/FrontLayout.vue'
+import remainingRouter from './modules/remaining'
+
+
+
+// 创建路由实例
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'Front',
-      component: FrontLayout,
-      children: [
-        {
-          path: '/',
-          name: 'home',
-          component: () => import('@/views/home/HomeView.vue')
-        },
-        {
-          path: '/about',
-          name: 'about',
-          component: () => import('@/views/about/AboutView.vue')
-        }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: () => import('@/views/login/Login.vue')
-    }
-  ]
+  history: createWebHistory(), // createWebHashHistory URL带#，createWebHistory URL不带#
+  strict: true,
+  routes: remainingRouter as RouteRecordRaw[],
+  scrollBehavior: () => ({ left: 0, top: 0 })
 })
+
+export const resetRouter = (): void => {
+  const resetWhiteNameList = ['Redirect', 'Login', 'NoFind', 'Root']
+  router.getRoutes().forEach((route) => {
+    const { name } = route
+    if (name && !resetWhiteNameList.includes(name as string)) {
+      router.hasRoute(name) && router.removeRoute(name)
+    }
+  })
+}
+
+export const setupRouter = (app: App<Element>) => {
+  app.use(router)
+}
 
 export default router

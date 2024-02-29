@@ -32,6 +32,10 @@
             <artifactId>swagger-models</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.xingyuv</groupId>
+            <artifactId>spring-boot-starter-captcha-plus</artifactId> <!-- 验证码，一般用于登录使用 -->
+        </dependency>
     </dependencies>
 
 </project>

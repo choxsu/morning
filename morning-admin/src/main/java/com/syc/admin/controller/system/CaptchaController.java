@@ -2,28 +2,38 @@ package com.syc.admin.controller.system;
 
 
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.StrUtil;
 import com.google.code.kaptcha.Producer;
 import com.syc.common.annotation.Log;
 import com.syc.common.constant.CacheConstants;
 import com.syc.common.constant.Constants;
 import com.syc.common.core.RedisCache;
 import com.syc.common.domain.R;
+import com.syc.common.utils.ServletUtils;
+import com.syc.common.utils.ip.IpUtils;
 import com.syc.common.utils.uuid.IdUtils;
 import com.syc.framework.api.sysconfig.ConfigExpander;
 import com.syc.framework.service.SysConfigService;
+import com.xingyuv.captcha.model.common.ResponseModel;
+import com.xingyuv.captcha.model.vo.CaptchaVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import com.xingyuv.captcha.service.CaptchaService;
 /**
  * 验证码操作处理
  *
@@ -31,7 +41,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @Log(openLog = false)
-@Tag(name = "验证码", description = "用于登录的验证码")
+@Tag(name = "管理后台 - 验证码")
 public class CaptchaController {
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -44,48 +54,34 @@ public class CaptchaController {
     @Autowired
     private SysConfigService configService;
 
+    @Resource
+    private CaptchaService captchaService;
+
     /**
      * 生成验证码
      */
-    @GetMapping(value = "/captchaImage", name = "生产验证码")
-    @Operation(tags = "验证码", summary = "生产验证码", description = "调用此接口获取验证码")
-    public R getCode()  {
-        R ajax = R.ok();
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
-        ajax.put("captchaEnabled", captchaEnabled);
-        if (!captchaEnabled) {
-            return ajax;
+    @PostMapping(value = "/system/captcha/get", name = "生产验证码")
+    @Operation(summary = "生产验证码", description = "调用此接口获取验证码")
+    public ResponseModel getCode(@RequestBody CaptchaVO data, HttpServletRequest request)  {
+        assert request.getRemoteHost() != null;
+        data.setBrowserInfo(getRemoteId(request));
+        return captchaService.get(data);
+    }
+
+
+    @PostMapping("/check")
+    @Operation(summary = "校验验证码")
+    public ResponseModel check(@RequestBody CaptchaVO data, HttpServletRequest request) {
+        data.setBrowserInfo(getRemoteId(request));
+        return captchaService.check(data);
+    }
+
+    public static String getRemoteId(HttpServletRequest request) {
+        String ip = IpUtils.getIpAddr(request);
+        String ua = request.getHeader("user-agent");
+        if (StrUtil.isNotBlank(ip)) {
+            return ip + ua;
         }
-
-        // 保存验证码信息
-        String uuid = IdUtils.simpleUUID();
-        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
-
-        String capStr = null, code = null;
-        BufferedImage image = null;
-
-        String captchaType = ConfigExpander.getLoginCaptchaType();
-        if ("math".equals(captchaType)) {
-            String capText = captchaProducerMath.createText();
-            capStr = capText.substring(0, capText.lastIndexOf("@"));
-            code = capText.substring(capText.lastIndexOf("@") + 1);
-            image = captchaProducerMath.createImage(capStr);
-        } else if ("char".equals(captchaType)) {
-            capStr = code = captchaProducer.createText();
-            image = captchaProducer.createImage(capStr);
-        }
-
-        redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
-        // 转换流信息写出
-        FastByteArrayOutputStream os = new FastByteArrayOutputStream();
-        try {
-            ImageIO.write(image, "jpg", os);
-        } catch (IOException e) {
-            return R.error(e.getMessage());
-        }
-
-        ajax.put("uuid", uuid);
-        ajax.put("img", Base64.encode(os.toByteArray()));
-        return ajax;
+        return request.getRemoteAddr() + ua;
     }
 }
