@@ -64,17 +64,6 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
-                  <el-form-item v-if="loginData.tenantEnable === 'true'" prop="tenantName">
-                    <el-input
-                      v-model="loginData.loginForm.tenantName"
-                      :placeholder="t('login.tenantNamePlaceholder')"
-                      :prefix-icon="iconHouse"
-                      link
-                      type="primary"
-                    />
-                  </el-form-item>
-                </el-col>
-                <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
                   <el-form-item prop="username">
                     <el-input
                       v-model="loginData.loginForm.username"
@@ -172,7 +161,7 @@ const route = useRoute()
 const appStore = useAppStore()
 const { getPrefixCls } = useDesign()
 const prefixCls = getPrefixCls('login')
-const iconHouse = useIcon({ icon: 'ep:house' })
+// const iconHouse = useIcon({ icon: 'ep:house' })
 const iconAvatar = useIcon({ icon: 'ep:avatar' })
 const iconLock = useIcon({ icon: 'ep:lock' })
 const formLogin = ref<any>()
@@ -215,13 +204,7 @@ const getCode = async () => {
     verify.value.show()
   }
 }
-//获取租户ID
-const getTenantId = async () => {
-  if (loginData.tenantEnable) {
-    const res = await LoginApi.getTenantIdByName(loginData.loginForm.tenantName)
-    authUtil.setTenantId(res)
-  }
-}
+
 // 记住我
 const getCookie = () => {
   const loginForm = authUtil.getLoginForm()
@@ -231,7 +214,6 @@ const getCookie = () => {
       username: loginForm.username ? loginForm.username : loginData.loginForm.username,
       password: loginForm.password ? loginForm.password : loginData.loginForm.password,
       rememberMe: loginForm.rememberMe ? true : false,
-      tenantName: loginForm.tenantName ? loginForm.tenantName : loginData.loginForm.tenantName
     }
   }
 }
@@ -262,7 +244,6 @@ const tryLogin = async () => {
 const handleLogin = async (params) => {
   loginLoading.value = true
   try {
-    await getTenantId()
     const data = await validForm()
     if (!data) {
       return

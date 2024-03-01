@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.syc.framework.mapper.SysMenuMapper">
+<mapper namespace="com.syc.module.framework.mapper.SysMenuMapper">
 
-    <resultMap type="com.syc.common.domain.entity.SysMenuEntity" id="SysMenuResult">
+    <resultMap type="com.syc.module.common.domain.entity.SysMenuEntity" id="SysMenuResult">
         <id property="menuId" column="menu_id"/>
         <result property="menuName" column="menu_name"/>
         <result property="parentName" column="parent_name"/>
@@ -26,13 +26,13 @@
         <result property="remark" column="remark"/>
     </resultMap>
 
-    <resultMap id="RoleAuthResult" type="com.syc.common.domain.model.SysRoleAuth">
+    <resultMap id="RoleAuthResult" type="com.syc.module.common.domain.model.SysRoleAuth">
         <result property="roleID" column="role_id"/>
         <result property="perms" column="perms"/>
         <result property="resourceCode" column="resource_code"/>
     </resultMap>
 
-    <select id="selectMenuTreeAll" resultType="com.syc.common.domain.entity.SysMenuEntity">
+    <select id="selectMenuTreeAll" resultType="com.syc.module.common.domain.entity.SysMenuEntity">
         select distinct m.menu_id,
                         m.parent_id,
                         m.menu_name,
@@ -116,7 +116,7 @@
           and ur.user_id = #{userId}
     </select>
 
-    <select id="selectMenuListByUserId" parameterType="com.syc.common.domain.entity.SysMenuEntity" resultMap="SysMenuResult">
+    <select id="selectMenuListByUserId" parameterType="com.syc.module.common.domain.entity.SysMenuEntity" resultMap="SysMenuResult">
         select distinct m.menu_id, m.parent_id, m.menu_name, m.path, m.component, m.`query`, m.visible, m.status,
         ifnull(m.perms,'') as perms, m.is_frame, m.is_cache, m.menu_type, m.icon, m.order_num, m.create_time
         from sys_menu m

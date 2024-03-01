@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.syc.framework.mapper.SysResourceMapper">
+<mapper namespace="com.syc.module.framework.mapper.SysResourceMapper">
 
     <select id="selectResourceCodeByRoleId" resultType="java.lang.String">
         select sr.resource_code
@@ -35,7 +35,7 @@
         from sys_resource
     </sql>
 
-    <select id="selectResourceList" resultType="com.syc.common.domain.entity.SysResourceEntity">
+    <select id="selectResourceList" resultType="com.syc.module.common.domain.entity.SysResourceEntity">
         <include refid="selectResourceVo"/>
         <where>
             <if test="resourceCode != null and resourceCode != ''">
@@ -50,7 +50,7 @@
         </where>
     </select>
 
-    <select id="selectResourceListByUserId" resultType="com.syc.common.domain.entity.SysResourceEntity">
+    <select id="selectResourceListByUserId" resultType="com.syc.module.common.domain.entity.SysResourceEntity">
         select distinct r.resource_id, r.app_code, r.resource_code, r.resource_name, r.class_name, r.method_name,
         r.modular_name, r.url, r.http_method, r.resource_biz_type, r.required_permission_flag,r.create_time
         from sys_resource r

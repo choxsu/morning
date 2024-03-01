@@ -2,14 +2,15 @@ swagger:
   enabled: true
 --- # 数据源配置
 spring:
+  # 数据源配置项
+  autoconfigure:
+    exclude:
+      - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   #数据源配置
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
     dynamic:
-      # 性能分析插件(有性能损耗 不建议生产环境使用)
-      # 文档 https://baomidou.com/pages/833fab/
-      p6spy: true
       # 设置默认的数据源或者数据源组,默认值即为 master
       primary: master
       # 严格模式 匹配不到数据源则报错

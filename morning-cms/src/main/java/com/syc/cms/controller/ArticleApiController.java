@@ -8,8 +8,8 @@ package com.syc.cms.controller;
 
 import com.syc.cms.domain.entity.CmsArticle;
 import com.syc.cms.service.ArticleApiService;
-import com.syc.common.core.BaseController;
-import com.syc.common.domain.R;
+import com.syc.module.common.core.BaseController;
+import com.syc.module.common.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

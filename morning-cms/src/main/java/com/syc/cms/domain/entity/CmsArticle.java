@@ -1,12 +1,9 @@
 package com.syc.cms.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.syc.common.domain.BaseEntity;
+import com.syc.module.common.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author su

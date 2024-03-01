@@ -22,16 +22,6 @@ export const refreshToken = () => {
   return request.post({ url: '/system/auth/refresh-token?refreshToken=' + getRefreshToken() })
 }
 
-// 使用租户名，获得租户编号
-export const getTenantIdByName = (name: string) => {
-  return request.get({ url: '/system/tenant/get-id-by-name?name=' + name })
-}
-
-// 使用租户域名，获得租户信息
-export const getTenantByWebsite = (website: string) => {
-  return request.get({ url: '/system/tenant/get-by-website?website=' + website })
-}
-
 // 登出
 export const loginOut = () => {
   return request.post({ url: '/system/auth/logout' })
@@ -71,14 +61,14 @@ export const socialAuthRedirect = (type: number, redirectUri: string) => {
   })
 }
 // 获取验证图片以及 token
-export const getCode = (params) => {
-  return request.getOriginal({
-    url: '/system/captchaImage',
-    params
+export const getCode = (data) => {
+  return request.postOriginal({
+    url: '/system/captcha/get',
+    data
   })
 }
 
 // 滑动或者点选验证
 export const reqCheck = (data) => {
-  return request.postOriginal({ url: 'system/captcha/check', data })
+  return request.postOriginal({ url: '/system/captcha/check', data })
 }

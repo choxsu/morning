@@ -1,7 +1,7 @@
 package com.syc.cms.service;
 
 import com.syc.cms.domain.entity.CmsArticle;
-import com.syc.common.domain.R;
+import com.syc.module.common.domain.R;
 
 /**
  * @author xq.su

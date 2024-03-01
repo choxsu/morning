@@ -97,9 +97,9 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 
 import { useIcon } from '@/hooks/web/useIcon'
 
-import { setTenantId, setToken } from '@/utils/auth'
+import { setToken } from '@/utils/auth'
 import { usePermissionStore } from '@/store/modules/permission'
-import { getTenantIdByName, sendSmsCode, smsLogin } from '@/api/login'
+import { sendSmsCode, smsLogin } from '@/api/login'
 import LoginFormTitle from './LoginFormTitle.vue'
 import { LoginStateEnum, useFormValid, useLoginState } from './useLogin'
 import { ElLoading } from 'element-plus'
@@ -151,7 +151,6 @@ const smsVO = reactive({
 const mobileCodeTimer = ref(0)
 const redirect = ref<string>('')
 const getSmsCode = async () => {
-  await getTenantId()
   smsVO.smsCode.mobile = loginData.loginForm.mobileNumber
   await sendSmsCode(smsVO.smsCode).then(async () => {
     message.success(t('login.SmsSendMsg'))
@@ -174,16 +173,9 @@ watch(
     immediate: true
   }
 )
-// 获取租户 ID
-const getTenantId = async () => {
-  if (loginData.tenantEnable === 'true') {
-    const res = await getTenantIdByName(loginData.loginForm.tenantName)
-    setTenantId(res)
-  }
-}
+
 // 登录
 const signIn = async () => {
-  await getTenantId()
   const data = await validForm()
   if (!data) return
   ElLoading.service({

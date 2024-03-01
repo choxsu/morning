@@ -16,17 +16,6 @@
         </el-form-item>
       </el-col>
       <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
-        <el-form-item v-if="loginData.tenantEnable === 'true'" prop="tenantName">
-          <el-input
-            v-model="loginData.loginForm.tenantName"
-            :placeholder="t('login.tenantNamePlaceholder')"
-            :prefix-icon="iconHouse"
-            link
-            type="primary"
-          />
-        </el-form-item>
-      </el-col>
-      <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
         <el-form-item prop="username">
           <el-input
             v-model="loginData.loginForm.username"
@@ -159,7 +148,7 @@ defineOptions({ name: 'LoginForm' })
 
 const { t } = useI18n()
 const message = useMessage()
-const iconHouse = useIcon({ icon: 'ep:house' })
+// const iconHouse = useIcon({ icon: 'ep:house' })
 const iconAvatar = useIcon({ icon: 'ep:avatar' })
 const iconLock = useIcon({ icon: 'ep:lock' })
 const formLogin = ref()
@@ -185,9 +174,11 @@ const loginData = reactive({
   loginForm: {
     username: 'admin',
     password: 'admin123',
-    code: '',
-    uuid: '',
-    rememberMe: false
+    rememberMe: false,
+    captchaVerification: '',
+    socialCode: '',
+    socialState: '',
+    socialType: ''
   }
 })
 
@@ -218,7 +209,8 @@ const getCookie = () => {
       ...loginData.loginForm,
       username: loginForm.username ? loginForm.username : loginData.loginForm.username,
       password: loginForm.password ? loginForm.password : loginData.loginForm.password,
-      rememberMe: loginForm.rememberMe ? true : false
+      rememberMe: loginForm.rememberMe ? true : false,
+      captchaVerification: ''
     }
   }
 }
@@ -233,6 +225,7 @@ const handleLogin = async () => {
       return
     }
     const res = await LoginApi.login(loginData.loginForm)
+
     if (!res) {
       return
     }
@@ -268,15 +261,6 @@ const doSocialLogin = async (type: number) => {
     message.error('此方式未配置')
   } else {
     loginLoading.value = true
-    if (loginData.tenantEnable === 'true') {
-      // 如果获取不到，则需要弹出提示，进行处理
-      if (!authUtil.getTenantId()) {
-        await message.prompt('请输入租户名称', t('common.reminder')).then(async ({ value }) => {
-          const res = await LoginApi.getTenantIdByName(value)
-          authUtil.setTenantId(res)
-        })
-      }
-    }
     // 计算 redirectUri
     // tricky: type、redirect需要先encode一次，否则钉钉回调会丢失。
     // 配合 Login/SocialLogin.vue#getUrlValue() 使用

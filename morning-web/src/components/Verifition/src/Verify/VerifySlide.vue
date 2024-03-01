@@ -364,12 +364,11 @@ const getPictrue = async () => {
     captchaType: captchaType.value
   }
   const res = await getCode(data)
-  console.log(res)
-  if (res.code == 200 || res.captchaEnabled === true) {
-    backImgBase.value = res.img
-    blockBackImgBase.value = res.img
-    backToken.value = res.uuid
-    // secretKey.value = res.repData.secretKey
+  if (res.repCode == '0000') {
+    backImgBase.value = res.repData.originalImageBase64
+    blockBackImgBase.value = res.repData.jigsawImageBase64
+    backToken.value = res.repData.token
+    secretKey.value = res.repData.secretKey
   } else {
     tipWords.value = res.repMsg
   }

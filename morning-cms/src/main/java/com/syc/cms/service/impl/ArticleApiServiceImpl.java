@@ -2,7 +2,7 @@ package com.syc.cms.service.impl;
 
 import com.syc.cms.domain.entity.CmsArticle;
 import com.syc.cms.service.ArticleApiService;
-import com.syc.common.domain.R;
+import com.syc.module.common.domain.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
