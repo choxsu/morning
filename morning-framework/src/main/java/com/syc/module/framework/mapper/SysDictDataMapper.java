@@ -53,4 +53,9 @@ public interface SysDictDataMapper extends BaseMapperX<SysDictDataEntity> {
 
     }
 
+    default List<SysDictDataEntity> selectListByStatusAndDictType(Integer status, String dictType) {
+        return selectList(new LambdaQueryWrapperX<SysDictDataEntity>()
+                .eqIfPresent(SysDictDataEntity::getStatus, status)
+                .eqIfPresent(SysDictDataEntity::getDictType, dictType));
+    }
 }

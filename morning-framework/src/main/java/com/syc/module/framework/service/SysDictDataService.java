@@ -3,6 +3,9 @@ package com.syc.module.framework.service;
 
 import com.syc.module.common.domain.PageResult;
 import com.syc.module.common.domain.entity.SysDictDataEntity;
+import org.springframework.lang.Nullable;
+
+import java.util.List;
 
 public interface SysDictDataService {
 
@@ -40,4 +43,12 @@ public interface SysDictDataService {
      void deleteDictDataByIds(Long[] dictCodes);
 
 
+    /**
+     * 获得字典数据列表
+     *
+     * @param status   状态
+     * @param dictType 字典类型
+     * @return 字典数据全列表
+     */
+    List<SysDictDataEntity> getDictDataList(@Nullable Integer status, @Nullable String dictType);
 }

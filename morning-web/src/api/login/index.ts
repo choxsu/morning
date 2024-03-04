@@ -29,7 +29,7 @@ export const loginOut = () => {
 
 // 获取用户权限信息
 export const getInfo = () => {
-  return request.get({ url: '/system/auth/get-permission-info' })
+  return request.get({ url: '/system/auth/getInfo' })
 }
 
 //获取登录验证码

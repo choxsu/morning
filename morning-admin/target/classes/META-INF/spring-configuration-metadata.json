@@ -1,0 +1,175 @@
+{
+  "groups": [
+    {
+      "name": "aj.captcha",
+      "type": "com.syc.module.admin.config.captcha.AjCaptchaProperties",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "morning.swagger",
+      "type": "com.syc.module.admin.config.swagger.SwaggerProperties",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aj.captcha.aes-status",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.cache-number",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.cache-type",
+      "type": "com.syc.module.admin.config.captcha.AjCaptchaProperties$StorageType",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.click-word-count",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.font-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.font-style",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.font-type",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.history-data-clear-enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.interference-options",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.jigsaw",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.pic-click",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-check-minute-limit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-frequency-limit-enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-get-lock-limit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-get-lock-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-get-minute-limit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.req-verify-minute-limit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.slip-offset",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.timing-clear",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.type",
+      "type": "com.xingyuv.captcha.model.common.CaptchaTypeEnum",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.water-font",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "aj.captcha.water-mark",
+      "type": "java.lang.String",
+      "sourceType": "com.syc.module.admin.config.captcha.AjCaptchaProperties"
+    },
+    {
+      "name": "morning.swagger.author",
+      "type": "java.lang.String",
+      "description": "作者",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.description",
+      "type": "java.lang.String",
+      "description": "描述",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.email",
+      "type": "java.lang.String",
+      "description": "email",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.license",
+      "type": "java.lang.String",
+      "description": "license",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.license-url",
+      "type": "java.lang.String",
+      "description": "license-url",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.title",
+      "type": "java.lang.String",
+      "description": "标题",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.url",
+      "type": "java.lang.String",
+      "description": "url",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    },
+    {
+      "name": "morning.swagger.version",
+      "type": "java.lang.String",
+      "description": "版本",
+      "sourceType": "com.syc.module.admin.config.swagger.SwaggerProperties"
+    }
+  ],
+  "hints": []
+}

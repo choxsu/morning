@@ -1,14 +1,18 @@
 package com.syc.module.admin.controller.system;
 
 
+import cn.hutool.core.bean.BeanUtil;
+import com.syc.module.admin.controller.system.vo.dict.DictDataSimpleRespVO;
 import com.syc.module.common.annotation.Anonymous;
 import com.syc.module.common.annotation.ApiResource;
 import com.syc.module.common.domain.PageResult;
 import com.syc.module.common.domain.R;
 import com.syc.module.common.domain.entity.SysDictDataEntity;
+import com.syc.module.common.enums.CommonStatusEnum;
 import com.syc.module.common.enums.ResBizTypeEnum;
 import com.syc.module.framework.service.SysDictDataService;
 import com.syc.module.framework.service.SysDictTypeService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
@@ -17,9 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/system/dict/data")
+@RequestMapping("/system/dict-data")
 @ApiResource(name = "字典数据管理", resBizType = ResBizTypeEnum.SYSTEM)
 public class SysDictDataController {
     @Autowired
@@ -33,6 +38,13 @@ public class SysDictDataController {
     public R page(SysDictDataEntity dictData) {
         PageResult<SysDictDataEntity> page = dictDataService.page(dictData);
         return R.ok().put(page);
+    }
+
+    @GetMapping(value = {"/list-all-simple", "simple-list"})
+    @Operation(summary = "获得全部字典数据列表", description = "一般用于管理后台缓存字典数据在本地")
+    public R<List<DictDataSimpleRespVO>> getSimpleDictDataList() {
+        List<SysDictDataEntity> list = dictDataService.getDictDataList(CommonStatusEnum.ENABLE.getStatus(), null);
+        return R.ok(list.stream().map(r-> BeanUtil.toBean(r, DictDataSimpleRespVO.class)).collect(Collectors.toList()));
     }
 
     /**

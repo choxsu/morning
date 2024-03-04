@@ -1,0 +1,6 @@
+com\syc\cms\domain\entity\CmsArticle.class
+com\syc\cms\domain\entity\CmsCategory.class
+com\syc\cms\domain\entity\CmsOrders.class
+com\syc\cms\controller\ArticleApiController.class
+com\syc\cms\service\ArticleApiService.class
+com\syc\cms\service\impl\ArticleApiServiceImpl.class

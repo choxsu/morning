@@ -29,7 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 public class CaptchaController {
 
 
-    private CaptchaService captchaService = new BlockPuzzleCaptchaServiceImpl();
+    @Resource
+    private CaptchaService captchaService;
 
     /**
      * 生成验证码

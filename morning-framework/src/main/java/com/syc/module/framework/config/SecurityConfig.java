@@ -3,7 +3,6 @@ package com.syc.module.framework.config;
 
 import com.syc.module.framework.security.filter.JwtAuthenticationTokenFilter;
 import com.syc.module.framework.security.handle.AuthenticationEntryPointImpl;
-import com.syc.module.framework.security.handle.LogoutSuccessHandlerImpl;
 import com.syc.module.framework.security.properties.PermitAllUrlProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -38,12 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 认证失败处理类
      */
     final AuthenticationEntryPointImpl unauthorizedHandler;
-
-
-    /**
-     * 退出处理类
-     */
-    final LogoutSuccessHandlerImpl logoutSuccessHandler;
 
     /**
      * token认证过滤器
@@ -119,8 +112,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
-        // 添加Logout filter
-        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter

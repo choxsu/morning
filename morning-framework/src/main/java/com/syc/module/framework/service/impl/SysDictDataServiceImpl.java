@@ -8,6 +8,7 @@ import com.syc.module.framework.service.SysDictDataService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -57,4 +58,16 @@ public class SysDictDataServiceImpl implements SysDictDataService {
             DictUtils.setDictCache(data.getDictType(), dictDatas);
         }
     }
+
+
+    @Override
+    public List<SysDictDataEntity> getDictDataList(Integer status, String dictType) {
+        List<SysDictDataEntity> list = dictDataMapper.selectListByStatusAndDictType(status, dictType);
+        list.sort(COMPARATOR_TYPE_AND_SORT);
+        return list;
+    }
+
+    private static final Comparator<SysDictDataEntity> COMPARATOR_TYPE_AND_SORT = Comparator
+            .comparing(SysDictDataEntity::getDictType)
+            .thenComparingLong(SysDictDataEntity::getDictSort);
 }

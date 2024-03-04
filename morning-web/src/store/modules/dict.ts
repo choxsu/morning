@@ -48,7 +48,7 @@ export const useDictStore = defineStore('dict', {
         const res = await getSimpleDictDataList()
         // 设置数据
         const dictDataMap = new Map<string, any>()
-        res.forEach((dictData: DictDataVO) => {
+        res?.forEach((dictData: DictDataVO) => {
           // 获得 dictType 层级
           const enumValueObj = dictDataMap[dictData.dictType]
           if (!enumValueObj) {

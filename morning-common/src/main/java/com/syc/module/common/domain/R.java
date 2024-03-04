@@ -13,10 +13,10 @@ import java.util.Map;
  *
  * @author xq su
  */
-public class R extends HashMap<String, Object> {
+public class R<T> extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
 
-    public R setData(Object data) {
+    public R<T> setData(Object data) {
         put("data", data);
         return this;
     }
@@ -26,10 +26,9 @@ public class R extends HashMap<String, Object> {
      *
      * @param key
      * @param clazz
-     * @param <T>
      * @return
      */
-    public <T> T getData(String key, Class<T> clazz) {
+    public T getData(String key, Class<T> clazz) {
         //默认是map
         Object data = get(key);
         String s = JSONUtil.toJsonStr(data);
@@ -40,10 +39,9 @@ public class R extends HashMap<String, Object> {
      * 逆转
      *
      * @param clazz
-     * @param <T>
      * @return
      */
-    public <T> T getData(Class<T> clazz) {
+    public T getData(Class<T> clazz) {
         Object data = get("data");
         String s = JSONUtil.toJsonStr(data);
         return JSONUtil.toBean(s, clazz);
@@ -55,57 +53,52 @@ public class R extends HashMap<String, Object> {
         put("msg", "success");
     }
 
-    public static R error() {
+
+    public static <T> R<T> error() {
         return error(500, "未知异常，请联系管理员");
     }
 
-    public static R error(String msg) {
+    public static <T> R<T> error(String msg) {
         return error(500, msg);
     }
 
-    public static R error(int code, String msg) {
-        R r = new R();
+    public static <T> R<T> error(int code, String msg) {
+        R<T> r = new R<>();
         r.put("code", code);
         r.put("msg", msg);
         return r;
     }
 
-    public static R error(BizCodeEnum bizCodeEnum) {
-        R r = new R();
+    public static <T> R<T> error(BizCodeEnum bizCodeEnum) {
+        R<T> r = new R<>();
         r.put("code", bizCodeEnum.getCode());
         r.put("msg", bizCodeEnum.getMsg());
         return r;
     }
 
-    public static R ok(String msg) {
-        R r = new R();
+    public static <T> R<T> ok(String msg) {
+        R<T> r = new R<>();
         r.put("msg", msg);
         return r;
     }
 
-    public static R ok(Object data) {
-        R r = new R();
+    public static <T> R<T> ok(Object data) {
+        R<T> r = new R<>();
         r.put("data", data);
         return r;
     }
 
-    public static R ok(Map<String, Object> map) {
-        R r = new R();
-        r.putAll(map);
-        return r;
-    }
-
-    public static R ok() {
-        return new R();
+    public static <T> R<T> ok() {
+        return new R<>();
     }
 
     @Override
-    public R put(String key, Object value) {
+    public R<T> put(String key, Object value) {
         super.put(key, value);
         return this;
     }
 
-    public R put(Object value) {
+    public R<T> put(Object value) {
         super.put("data", value);
         return this;
     }
@@ -116,7 +109,7 @@ public class R extends HashMap<String, Object> {
         return this;
     }
 
-    public R put(IPage page) {
+    public R<T> put(IPage page) {
         super.put("rows", page.getRecords());
         super.put("total", page.getTotal());
         return this;
