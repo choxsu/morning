@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
@@ -51,6 +52,11 @@ public class AliyunOssService implements OssService {
      */
     private String bucketName;
 
+    /**
+     * 自定义域名
+     */
+    private String customDomain;
+
     private OSS aliyunOssClient;
 
     @PostConstruct
@@ -81,6 +87,9 @@ public class AliyunOssService implements OssService {
         }
         // 获取文件访问路径
         String fileUrl = "https://" + bucketName + "." + endpoint + "/" + fileName;
+        if (StrUtil.isNotBlank(customDomain)) {
+            fileUrl = customDomain + "/" + fileName;
+        }
         FileInfo fileInfo = new FileInfo();
         fileInfo.setName(fileName);
         fileInfo.setUrl(fileUrl);

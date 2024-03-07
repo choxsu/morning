@@ -11,6 +11,9 @@ import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * @author xq.su
+ */
 @Tag(name = "07.文件接口")
 @RestController
 @RequestMapping("/api/v1/files")

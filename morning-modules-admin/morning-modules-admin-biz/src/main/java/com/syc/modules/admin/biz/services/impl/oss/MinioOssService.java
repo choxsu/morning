@@ -55,7 +55,7 @@ public class MinioOssService implements OssService {
      */
     private String bucketName;
     /**
-     * 自定义域名(https://oss.youlai.tech)
+     * 自定义域名
      */
     private String customDomain;
 
@@ -97,7 +97,8 @@ public class MinioOssService implements OssService {
 
             // 返回文件路径
             String fileUrl;
-            if (StrUtil.isBlank(customDomain)) { // 未配置自定义域名
+            // 未配置自定义域名
+            if (StrUtil.isBlank(customDomain)) {
                 GetPresignedObjectUrlArgs getPresignedObjectUrlArgs = GetPresignedObjectUrlArgs.builder()
                         .bucket(bucketName).object(fileName)
                         .method(Method.GET)

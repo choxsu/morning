@@ -63,7 +63,7 @@ jwt:
 
 oss:
   # OSS 类型 (目前支持aliyun、minio)
-  type: minio
+  type: aliyun
   # MinIO 对象存储服务
   minio:
     # 服务Endpoint
@@ -79,13 +79,12 @@ oss:
   # 阿里云OSS对象存储服务
   aliyun:
     # 服务Endpoint
-    endpoint: oss-cn-hangzhou.aliyuncs.com
+    endpoint: oss-cn-chengdu.aliyuncs.com
     # 访问凭据
-    access-key-id: your-access-key-id
-    # 凭据密钥
-    access-key-secret: your-access-key-secret
+
     # 存储桶名称
-    bucket-name: default
+    bucket-name: typora-for-styc-file
+    custom-domain: https://assets.styc.cc
 
 # springdoc配置： https://springdoc.org/properties.html
 springdoc:
