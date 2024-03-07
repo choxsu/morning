@@ -12,22 +12,18 @@
     <artifactId>morning-starter</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.syc</groupId>
-            <artifactId>morning-admin</artifactId>
-        </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.syc</groupId>
+            <artifactId>morning-modules-admin-biz</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

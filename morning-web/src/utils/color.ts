@@ -1,174 +1,287 @@
 /**
- * 判断是否 十六进制颜色值.
- * 输入形式可为 #fff000 #f00
- *
- * @param   String  color   十六进制颜色值
- * @return  Boolean
+ * 颜色生成
  */
-export const isHexColor = (color: string) => {
-  const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-f]{6})$/
-  return reg.test(color)
-}
+type RGB = {
+  r: number;
+  g: number;
+  b: number;
+};
+type HSL = {
+  h: number;
+  s: number;
+  l: number;
+};
+type HEX =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "A"
+  | "B"
+  | "C"
+  | "D"
+  | "E"
+  | "F";
+
+const RGBUnit = 255;
+const HEX_MAP: Record<HEX, number> = {
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  A: 10,
+  B: 11,
+  C: 12,
+  D: 13,
+  E: 14,
+  F: 15,
+};
+const rgbWhite = {
+  r: 255,
+  g: 255,
+  b: 255,
+};
+const rgbBlack = {
+  r: 0,
+  g: 0,
+  b: 0,
+};
 
 /**
- * RGB 颜色值转换为 十六进制颜色值.
- * r, g, 和 b 需要在 [0, 255] 范围内
- *
- * @return  String          类似#ff00ff
- * @param r
- * @param g
- * @param b
+ * RGB颜色转HSL颜色值
+ * @param r 红色值
+ * @param g 绿色值
+ * @param b 蓝色值
+ * @returns { h: [0, 360]; s: [0, 1]; l: [0, 1] }
  */
-export const rgbToHex = (r: number, g: number, b: number) => {
-  // tslint:disable-next-line:no-bitwise
-  const hex = ((r << 16) | (g << 8) | b).toString(16)
-  return '#' + new Array(Math.abs(hex.length - 7)).join('0') + hex
-}
+function rgbToHsl(rgb: RGB): HSL {
+  let { r, g, b } = rgb;
+  const hsl = {
+    h: 0,
+    s: 0,
+    l: 0,
+  };
 
-/**
- * Transform a HEX color to its RGB representation
- * @param {string} hex The color to transform
- * @returns The RGB representation of the passed color
- */
-export const hexToRGB = (hex: string, opacity?: number) => {
-  let sHex = hex.toLowerCase()
-  if (isHexColor(hex)) {
-    if (sHex.length === 4) {
-      let sColorNew = '#'
-      for (let i = 1; i < 4; i += 1) {
-        sColorNew += sHex.slice(i, i + 1).concat(sHex.slice(i, i + 1))
-      }
-      sHex = sColorNew
-    }
-    const sColorChange: number[] = []
-    for (let i = 1; i < 7; i += 2) {
-      sColorChange.push(parseInt('0x' + sHex.slice(i, i + 2)))
-    }
-    return opacity
-      ? 'RGBA(' + sColorChange.join(',') + ',' + opacity + ')'
-      : 'RGB(' + sColorChange.join(',') + ')'
+  // 计算rgb基数 ∈ [0, 1]
+  r /= RGBUnit;
+  g /= RGBUnit;
+  b /= RGBUnit;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+
+  // 计算h
+  if (max === min) {
+    hsl.h = 0;
+  } else if (max === r) {
+    hsl.h = 60 * ((g - b) / (max - min)) + (g >= b ? 0 : 360);
+  } else if (max === g) {
+    hsl.h = 60 * ((b - r) / (max - min)) + 120;
+  } else {
+    hsl.h = 60 * ((r - g) / (max - min)) + 240;
   }
-  return sHex
-}
+  hsl.h = hsl.h > 360 ? hsl.h - 360 : hsl.h;
 
-export const colorIsDark = (color: string) => {
-  if (!isHexColor(color)) return
-  const [r, g, b] = hexToRGB(color)
-    .replace(/(?:\(|\)|rgb|RGB)*/g, '')
-    .split(',')
-    .map((item) => Number(item))
-  return r * 0.299 + g * 0.578 + b * 0.114 < 192
-}
+  // 计算l
+  hsl.l = (max + min) / 2;
 
-/**
- * Darkens a HEX color given the passed percentage
- * @param {string} color The color to process
- * @param {number} amount The amount to change the color by
- * @returns {string} The HEX representation of the processed color
- */
-export const darken = (color: string, amount: number) => {
-  color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
-  amount = Math.trunc((255 * amount) / 100)
-  return `#${subtractLight(color.substring(0, 2), amount)}${subtractLight(
-    color.substring(2, 4),
-    amount
-  )}${subtractLight(color.substring(4, 6), amount)}`
+  // 计算s
+  if (hsl.l === 0 || max === min) {
+    // 灰/白/黑
+    hsl.s = 0;
+  } else if (hsl.l > 0 && hsl.l <= 0.5) {
+    hsl.s = (max - min) / (max + min);
+  } else {
+    hsl.s = (max - min) / (2 - (max + min));
+  }
+
+  return hsl;
 }
 
 /**
- * Lightens a 6 char HEX color according to the passed percentage
- * @param {string} color The color to change
- * @param {number} amount The amount to change the color by
- * @returns {string} The processed color represented as HEX
+ * hsl -> rgb
+ * @param h [0, 360]
+ * @param s [0, 1]
+ * @param l [0, 1]
+ * @returns RGB
  */
-export const lighten = (color: string, amount: number) => {
-  color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
-  amount = Math.trunc((255 * amount) / 100)
-  return `#${addLight(color.substring(0, 2), amount)}${addLight(
-    color.substring(2, 4),
-    amount
-  )}${addLight(color.substring(4, 6), amount)}`
-}
+function hslToRgb(hsl: HSL): RGB {
+  const { h, s, l } = hsl;
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  const p = 2 * l - q;
+  const hUnit = h / 360; // 色相转换为 [0, 1]
 
-/* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
-/**
- * Sums the passed percentage to the R, G or B of a HEX color
- * @param {string} color The color to change
- * @param {number} amount The amount to change the color by
- * @returns {string} The processed part of the color
- */
-const addLight = (color: string, amount: number) => {
-  const cc = parseInt(color, 16) + amount
-  const c = cc > 255 ? 255 : cc
-  return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`
-}
+  const Cr = fillCircleVal(hUnit + 1 / 3);
+  const Cg = fillCircleVal(hUnit);
+  const Cb = fillCircleVal(hUnit - 1 / 3);
 
-/**
- * Calculates luminance of an rgb color
- * @param {number} r red
- * @param {number} g green
- * @param {number} b blue
- */
-const luminanace = (r: number, g: number, b: number) => {
-  const a = [r, g, b].map((v) => {
-    v /= 255
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)
-  })
-  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722
-}
+  // 保持 [0, 1] 环状取值
+  function fillCircleVal(val: number): number {
+    return val < 0 ? val + 1 : val > 1 ? val - 1 : val;
+  }
 
-/**
- * Calculates contrast between two rgb colors
- * @param {string} rgb1 rgb color 1
- * @param {string} rgb2 rgb color 2
- */
-const contrast = (rgb1: string[], rgb2: number[]) => {
-  return (
-    (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) /
-    (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
-  )
+  function computedRgb(val: number): number {
+    let colorVal: number;
+    if (val < 1 / 6) {
+      colorVal = p + (q - p) * 6 * val;
+    } else if (val >= 1 / 6 && val < 1 / 2) {
+      colorVal = q;
+    } else if (val >= 1 / 2 && val < 2 / 3) {
+      colorVal = p + (q - p) * 6 * (2 / 3 - val);
+    } else {
+      colorVal = p;
+    }
+    return colorVal * 255;
+  }
+
+  return {
+    r: Number(computedRgb(Cr).toFixed(0)),
+    g: Number(computedRgb(Cg).toFixed(0)),
+    b: Number(computedRgb(Cb).toFixed(0)),
+  };
 }
 
 /**
- * Determines what the best text color is (black or white) based con the contrast with the background
- * @param hexColor - Last selected color by the user
+ * 16进制颜色转换RGB
+ * @param color #rrggbb
+ * @returns RGB
  */
-export const calculateBestTextColor = (hexColor: string) => {
-  const rgbColor = hexToRGB(hexColor.substring(1))
-  const contrastWithBlack = contrast(rgbColor.split(','), [0, 0, 0])
+function hexToRGB(hex: string): RGB {
+  hex = hex.toUpperCase();
+  const hexRegExp = /^#([0-9A-F]{6})$/;
+  if (!hexRegExp.test(hex)) {
+    throw new Error("请传入合法的16进制颜色值，eg: #FF0000");
+  }
 
-  return contrastWithBlack >= 12 ? '#000000' : '#FFFFFF'
+  const hexValArr = (hexRegExp.exec(hex)?.[1] || "000000").split(
+    ""
+  ) as Array<HEX>;
+
+  return {
+    r: HEX_MAP[hexValArr[0]] * 16 + HEX_MAP[hexValArr[1]],
+    g: HEX_MAP[hexValArr[2]] * 16 + HEX_MAP[hexValArr[3]],
+    b: HEX_MAP[hexValArr[4]] * 16 + HEX_MAP[hexValArr[5]],
+  };
 }
 
 /**
- * Subtracts the indicated percentage to the R, G or B of a HEX color
- * @param {string} color The color to change
- * @param {number} amount The amount to change the color by
- * @returns {string} The processed part of the color
+ * rgb 转 16进制
+ * @param rgb RGB
+ * @returns #HEX{6}
  */
-const subtractLight = (color: string, amount: number) => {
-  const cc = parseInt(color, 16) - amount
-  const c = cc < 0 ? 0 : cc
-  return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`
+function rgbToHex(rgb: RGB): string {
+  const HEX_MAP_REVERSE: Record<string, HEX> = {};
+  for (const key in HEX_MAP) {
+    HEX_MAP_REVERSE[HEX_MAP[key as HEX]] = key as HEX;
+  }
+  function getRemainderAndQuotient(val: number): string {
+    val = Math.round(val);
+    return `${HEX_MAP_REVERSE[Math.floor(val / 16)]}${
+      HEX_MAP_REVERSE[val % 16]
+    }`;
+  }
+
+  return `#${getRemainderAndQuotient(rgb.r)}${getRemainderAndQuotient(
+    rgb.g
+  )}${getRemainderAndQuotient(rgb.b)}`;
 }
 
-// 预设颜色
-export const PREDEFINE_COLORS = [
-  '#ff4500',
-  '#ff8c00',
-  '#ffd700',
-  '#90ee90',
-  '#00ced1',
-  '#1e90ff',
-  '#c71585',
-  '#409EFF',
-  '#909399',
-  '#C0C4CC',
-  '#b7390b',
-  '#ff7800',
-  '#fad400',
-  '#5b8c5f',
-  '#00babd',
-  '#1f73c3',
-  '#711f57'
-]
+// hsl 转 16进制
+function hslToHex(hsl: HSL): string {
+  return rgbToHex(hslToRgb(hsl));
+}
+
+// 16进制 转 hsl
+function hexToHsl(hex: string): HSL {
+  return rgbToHsl(hexToRGB(hex));
+}
+
+// 生成混合色（混黑 + 混白）
+function genMixColor(base: string | RGB | HSL): {
+  DEFAULT: string;
+  dark: {
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
+    7: string;
+    8: string;
+    9: string;
+  };
+  light: {
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
+    7: string;
+    8: string;
+    9: string;
+  };
+} {
+  // 基准色统一转换为RGB
+  if (typeof base === "string") {
+    base = hexToRGB(base);
+  } else if ("h" in base) {
+    base = hslToRgb(base);
+  }
+
+  // 混合色
+  function mix(color: RGB, mixColor: RGB, weight: number): RGB {
+    return {
+      r: color.r * (1 - weight) + mixColor.r * weight,
+      g: color.g * (1 - weight) + mixColor.g * weight,
+      b: color.b * (1 - weight) + mixColor.b * weight,
+    };
+  }
+
+  return {
+    DEFAULT: rgbToHex(base),
+    dark: {
+      1: rgbToHex(mix(base, rgbBlack, 0.1)),
+      2: rgbToHex(mix(base, rgbBlack, 0.2)),
+      3: rgbToHex(mix(base, rgbBlack, 0.3)),
+      4: rgbToHex(mix(base, rgbBlack, 0.4)),
+      5: rgbToHex(mix(base, rgbBlack, 0.5)),
+      6: rgbToHex(mix(base, rgbBlack, 0.6)),
+      7: rgbToHex(mix(base, rgbBlack, 0.7)),
+      8: rgbToHex(mix(base, rgbBlack, 0.78)),
+      9: rgbToHex(mix(base, rgbBlack, 0.85)),
+    },
+    light: {
+      1: rgbToHex(mix(base, rgbWhite, 0.1)),
+      2: rgbToHex(mix(base, rgbWhite, 0.2)),
+      3: rgbToHex(mix(base, rgbWhite, 0.3)),
+      4: rgbToHex(mix(base, rgbWhite, 0.4)),
+      5: rgbToHex(mix(base, rgbWhite, 0.5)),
+      6: rgbToHex(mix(base, rgbWhite, 0.6)),
+      7: rgbToHex(mix(base, rgbWhite, 0.7)),
+      8: rgbToHex(mix(base, rgbWhite, 0.78)),
+      9: rgbToHex(mix(base, rgbWhite, 0.85)),
+    },
+  };
+}
+
+export {
+  genMixColor,
+  rgbToHsl,
+  rgbToHex,
+  hslToRgb,
+  hslToHex,
+  hexToRGB,
+  hexToHsl,
+};

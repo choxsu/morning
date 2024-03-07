@@ -1,5 +1,7 @@
 package com.syc.server;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +12,8 @@ import java.util.TimeZone;
  * @author chox su
  * @date 2018/01/17 18:04
  */
-@SpringBootApplication(scanBasePackages = {"com.syc.server", "com.syc.module"})
+@SpringBootApplication(scanBasePackages = {"com.syc.server", "com.syc.modules", "com.syc.framework"})
+@MapperScan("com.syc.modules.**.**.mapper")
 public class MorningApplication {
 
 

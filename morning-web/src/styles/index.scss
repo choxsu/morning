@@ -1,35 +1,28 @@
-@import './var.css';
-@import 'element-plus/theme-chalk/dark/css-vars.css';
+@use "./reset";
 
-.reset-margin [class*='el-icon'] + span {
-  margin-left: 2px !important;
+.app-container {
+  padding: 10px;
 }
 
-// 解决抽屉弹出时，body宽度变化的问题
-.el-popup-parent--hidden {
-  width: 100% !important;
+.search-container {
+  padding: 18px 0 0 10px;
+  margin-bottom: 10px;
+  background-color: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 4px;
+  box-shadow: var(--el-box-shadow-light);
 }
 
-// 解决表格内容超过表格总宽度后，横向滚动条前端顶不到表格边缘的问题
-.el-scrollbar__bar {
-  display: flex;
-  justify-content: flex-start;
+.table-container > .el-card__header {
+  padding: calc(var(--el-card-padding) - 8px) var(--el-card-padding);
 }
 
-/* nprogress 适配 element-plus 的主题色 */
-#nprogress {
-  & .bar {
-    background-color: var(--el-color-primary) !important;
-  }
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
 
-  & .peg {
-    box-shadow:
-      0 0 10px var(--el-color-primary),
-      0 0 5px var(--el-color-primary) !important;
-  }
-
-  & .spinner-icon {
-    border-top-color: var(--el-color-primary);
-    border-left-color: var(--el-color-primary);
+  &:hover {
+    color: rgb(32 160 255);
   }
 }

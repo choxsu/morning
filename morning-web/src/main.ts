@@ -1,72 +1,28 @@
-// 引入unocss css
-import '@/plugins/unocss'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "@/router";
+import { setupStore } from "@/store";
+import { setupDirective } from "@/directive";
+import { setupElIcons, setupI18n, setupPermission } from "@/plugins";
 
-// 导入全局的svg图标
-import '@/plugins/svgIcon'
+// 本地SVG图标
+import "virtual:svg-icons-register";
 
-// 初始化多语言
-import { setupI18n } from '@/plugins/vueI18n'
+// 样式
+import "element-plus/theme-chalk/dark/css-vars.css";
+import "@/styles/index.scss";
+import "uno.css";
+import "animate.css";
 
-// 引入状态管理
-import { setupStore } from '@/store'
-
-// 全局组件
-import { setupGlobCom } from '@/components'
-
-// 引入 element-plus
-import { setupElementPlus } from '@/plugins/elementPlus'
-
-// 引入 form-create
-import { setupFormCreate } from '@/plugins/formCreate'
-
-// 引入全局样式
-import '@/styles/index.scss'
-
-// 引入动画
-import '@/plugins/animate.css'
-
-// 路由
-import router, { setupRouter } from '@/router'
-
-// 权限
-import { setupAuth } from '@/directives'
-
-import { createApp } from 'vue'
-
-import App from './App.vue'
-
-import './permission'
-
-import '@/plugins/tongji' // 百度统计
-import Logger from '@/utils/Logger'
-
-import VueDOMPurifyHTML from 'vue-dompurify-html' // 解决v-html 的安全隐患
-
-// 创建实例
-const setupAll = async () => {
-  const app = createApp(App)
-
-  await setupI18n(app)
-
-  setupStore(app)
-
-  setupGlobCom(app)
-
-  setupElementPlus(app)
-
-  setupFormCreate(app)
-
-  setupRouter(app)
-
-  setupAuth(app)
-
-  await router.isReady()
-
-  app.use(VueDOMPurifyHTML)
-
-  app.mount('#app')
-}
-
-setupAll()
-
-Logger.prettyPrimary(`欢迎使用`, import.meta.env.VITE_APP_TITLE)
+const app = createApp(App);
+// 全局注册 自定义指令(directive)
+setupDirective(app);
+// 全局注册 状态管理(store)
+setupStore(app);
+// 全局注册Element-plus图标
+setupElIcons(app);
+// 国际化
+setupI18n(app);
+// 注册动态路由
+setupPermission();
+app.use(router).mount("#app");

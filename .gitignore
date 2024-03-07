@@ -23,5 +23,7 @@
 *.rar
 *.iml
 
+target
+
 .flattened-pom.xml
 

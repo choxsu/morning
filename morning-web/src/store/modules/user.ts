@@ -1,102 +1,94 @@
-import { store } from '../index'
-import { defineStore } from 'pinia'
-import { getAccessToken, removeToken } from '@/utils/auth'
-import { CACHE_KEY, useCache } from '@/hooks/web/useCache'
-import { getInfo, loginOut } from '@/api/login'
+import { loginApi, logoutApi } from "@/api/auth";
+import { getUserInfoApi } from "@/api/user";
+import { resetRouter } from "@/router";
+import { store } from "@/store";
 
-const { wsCache } = useCache()
+import { LoginData } from "@/api/auth/types";
+import { UserInfo } from "@/api/user/types";
 
-interface UserVO {
-  id: number
-  avatar: string
-  nickname: string
-  deptId: number
-}
-
-interface UserInfoVO {
-  permissions: string[]
-  roles: string[]
-  isSetUser: boolean
-  user: UserVO
-}
-
-export const useUserStore = defineStore('admin-user', {
-  state: (): UserInfoVO => ({
-    permissions: [],
+export const useUserStore = defineStore("user", () => {
+  const user = ref<UserInfo>({
     roles: [],
-    isSetUser: false,
-    user: {
-      id: 0,
-      avatar: '',
-      nickname: '',
-      deptId: 0
-    }
-  }),
-  getters: {
-    getPermissions(): string[] {
-      return this.permissions
-    },
-    getRoles(): string[] {
-      return this.roles
-    },
-    getIsSetUser(): boolean {
-      return this.isSetUser
-    },
-    getUser(): UserVO {
-      return this.user
-    }
-  },
-  actions: {
-    async setUserInfoAction() {
-      if (!getAccessToken()) {
-        this.resetState()
-        return null
-      }
-      let userInfo = wsCache.get(CACHE_KEY.USER)
-      if (!userInfo) {
-        userInfo = await getInfo()
-      }
-      this.permissions = userInfo.permissions
-      this.roles = userInfo.roles
-      this.user = userInfo.user
-      this.isSetUser = true
-      wsCache.set(CACHE_KEY.USER, userInfo)
-      wsCache.set(CACHE_KEY.ROLE_ROUTERS, userInfo.menus)
-    },
-    async setUserAvatarAction(avatar: string) {
-      const userInfo = wsCache.get(CACHE_KEY.USER)
-      // NOTE: 是否需要像`setUserInfoAction`一样判断`userInfo != null`
-      this.user.avatar = avatar
-      userInfo.user.avatar = avatar
-      wsCache.set(CACHE_KEY.USER, userInfo)
-    },
-    async setUserNicknameAction(nickname: string) {
-      const userInfo = wsCache.get(CACHE_KEY.USER)
-      // NOTE: 是否需要像`setUserInfoAction`一样判断`userInfo != null`
-      this.user.nickname = nickname
-      userInfo.user.nickname = nickname
-      wsCache.set(CACHE_KEY.USER, userInfo)
-    },
-    async loginOut() {
-      await loginOut()
-      removeToken()
-      wsCache.clear()
-      this.resetState()
-    },
-    resetState() {
-      this.permissions = []
-      this.roles = []
-      this.isSetUser = false
-      this.user = {
-        id: 0,
-        avatar: '',
-        nickname: '',
-        deptId: 0
-      }
-    }
-  }
-})
+    perms: [],
+  });
 
-export const useUserStoreWithOut = () => {
-  return useUserStore(store)
+  /**
+   * 登录
+   *
+   * @param {LoginData}
+   * @returns
+   */
+  function login(loginData: LoginData) {
+    return new Promise<void>((resolve, reject) => {
+      loginApi(loginData)
+        .then((response) => {
+          const { tokenType, accessToken } = response.data;
+          localStorage.setItem("token", tokenType + " " + accessToken); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
+  // 获取信息(用户昵称、头像、角色集合、权限集合)
+  function getUserInfo() {
+    return new Promise<UserInfo>((resolve, reject) => {
+      getUserInfoApi()
+        .then(({ data }) => {
+          if (!data) {
+            reject("Verification failed, please Login again.");
+            return;
+          }
+          if (!data.roles || data.roles.length <= 0) {
+            reject("getUserInfo: roles must be a non-null array!");
+            return;
+          }
+          Object.assign(user.value, { ...data });
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
+  // user logout
+  function logout() {
+    return new Promise<void>((resolve, reject) => {
+      logoutApi()
+        .then(() => {
+          localStorage.setItem("token", "");
+          location.reload(); // 清空路由
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
+  // remove token
+  function resetToken() {
+    console.log("resetToken");
+    return new Promise<void>((resolve) => {
+      localStorage.setItem("token", "");
+      resetRouter();
+      resolve();
+    });
+  }
+
+  return {
+    user,
+    login,
+    getUserInfo,
+    logout,
+    resetToken,
+  };
+});
+
+// 非setup
+export function useUserStoreHook() {
+  return useUserStore(store);
 }

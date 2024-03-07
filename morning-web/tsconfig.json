@@ -5,39 +5,31 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "jsx": "preserve",
+    "noLib": false,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "strictFunctionTypes": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": [
-      "@intlify/unplugin-vue-i18n/types",
-      "vite/client",
-      "element-plus/global",
-      "@types/qrcode",
-      "vite-plugin-svg-icons/client"
-    ],
-    "outDir": "target", // 请保留这个属性，防止tsconfig.json文件报错
-    "typeRoots": ["./node_modules/@types/", "./types"]
+    "types": ["vite/client", "unplugin-icons/types/vue", "element-plus/global"],
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "allowSyntheticDefaultImports": true /* 允许默认导入 */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
   },
   "include": [
-    "src",
-    "types/**/*.d.ts",
-    "src/types/auto-imports.d.ts",
-    "src/types/auto-components.d.ts"
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/typings/**/*.d.ts",
+    "mock/**/*.ts",
+    "vite.config.ts"
   ],
-  "exclude": ["dist", "target", "node_modules"]
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }

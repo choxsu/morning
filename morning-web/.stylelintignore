@@ -1,6 +1,11 @@
-/dist/*
-/public/*
-public/*
-/dist*
-/src/types/env.d.ts
-/docs/**/*
+dist
+node_modules
+public
+.husky
+.vscode
+.idea
+*.sh
+*.md
+
+src/assets
+stats.html
