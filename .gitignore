@@ -24,6 +24,7 @@
 *.iml
 
 target
+**/target/**
 
 .flattened-pom.xml
 

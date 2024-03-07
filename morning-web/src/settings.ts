@@ -1,6 +1,6 @@
 const defaultSettings: AppSettings = {
   title: "MorningWeb",
-  version: "v0.9.1",
+  version: "v0.9.2",
   showSettings: true,
   tagsView: true,
   fixedHeader: false,

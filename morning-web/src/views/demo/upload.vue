@@ -2,17 +2,18 @@
 <script setup lang="ts">
 import SingleUpload from "@/components/Upload/SingleUpload.vue";
 import MultiUpload from "@/components/Upload/MultiUpload.vue";
-
 const singlePicUrl = ref(
-  "https://oss.youlai.tech/youlai-boot/2023/05/20/2b6d8b49fa1047348a0a41cef5aaf69e.gif"
+  "https://assets.styc.cc/20240307/176210e4694f4a7f8d63d43fed0a4f29.jpg"
 );
 // 这里放外链图片，防止被删
 const multiPicUrls = ref([
-  "https://s2.loli.net/2023/05/24/yNsxFC8rLHMZQcK.jpg",
-  "https://s2.loli.net/2023/05/24/RuHFMwW4rG5lIqs.jpg",
-  "https://s2.loli.net/2023/05/24/ZPiGbcpR91WqInB.jpg",
-  "https://s2.loli.net/2023/05/24/e1bcnEq3MFdmlNL.jpg",
-  "https://s2.loli.net/2023/05/24/wZTSPj1yDQNcuhU.jpg",
+  "https://assets.styc.cc/20240307/22eec2fc7f69462f8a9bcec66651f474.jpg",
+  "https://assets.styc.cc/images/202303281437652.png",
+  "https://assets.styc.cc/images/202303281440060.png",
+  "https://assets.styc.cc/images/202303281443478.png",
+  "https://assets.styc.cc/images/202304161642554.png",
+  "https://assets.styc.cc/20240307/318f524993e5472b8d5d6f04efd56547.jpg",
+  "https://assets.styc.cc/20240307/efaae2ae580c4801a00a8780299780f2.jpg",
 ]);
 </script>
 <template>
@@ -27,10 +28,10 @@ const multiPicUrls = ref([
 
     <el-form>
       <el-form-item label="单图上传">
-        <single-upload v-model="singlePicUrl" />
+        <SingleUpload v-model="singlePicUrl" />
       </el-form-item>
       <el-form-item label="多图上传">
-        <multi-upload v-model="multiPicUrls" />
+        <MultiUpload v-model="multiPicUrls" />
       </el-form-item>
     </el-form>
   </div>

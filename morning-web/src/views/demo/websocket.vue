@@ -8,8 +8,7 @@ import { useUserStoreHook } from "@/store/modules/user";
 const userStore = useUserStoreHook();
 
 const isConnected = ref(false);
-const socketEndpoint = ref("http://47.117.115.107:8989/ws"); // 线上
-// const socketEndpoint = ref("http://localhost:8989/ws"); // 本地
+const socketEndpoint = ref("http://localhost:8989/ws"); // 本地
 
 const receiver = ref("root");
 
