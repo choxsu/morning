@@ -121,4 +121,14 @@ export interface MenuForm {
    * 【目录】只有一个子路由是否始终显示
    */
   alwaysShow?: number;
+
+  /**
+   * 是否内链
+   */
+  isInner: boolean;
+
+  /**
+   * 内链地址
+   */
+  innerLinkUrl?: string;
 }

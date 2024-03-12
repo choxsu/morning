@@ -55,6 +55,16 @@ public class RouteVO {
         @Schema(description = "【目录】只有一个子路由是否始终显示", example = "true")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private Boolean alwaysShow;
+
+
+        @Schema(description = "是否内链", example = "true")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private Boolean isInner;
+
+        @Schema(description = "内链链接", example = "true")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private String innerLinkUrl;
+
     }
 
     @Schema(description = "子路由列表")

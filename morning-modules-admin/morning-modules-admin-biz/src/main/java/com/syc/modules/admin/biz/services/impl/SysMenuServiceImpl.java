@@ -191,6 +191,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 && ObjectUtil.equals(routeBO.getAlwaysShow(), 1)) {
             meta.setAlwaysShow(true);
         }
+        if (routeBO.getIsInner() != null && routeBO.getIsInner()) {
+            meta.setIsInner(routeBO.getIsInner());
+            meta.setInnerLinkUrl(routeBO.getInnerLinkUrl());
+        }
 
         routeVO.setMeta(meta);
         return routeVO;
@@ -204,16 +208,23 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public boolean saveMenu(MenuForm menuForm) {
 
         MenuTypeEnum menuType = menuForm.getType();
-
-        if (menuType == MenuTypeEnum.CATALOG) {  // 如果是外链
+        // 如果是外链
+        if (menuType == MenuTypeEnum.CATALOG) {
             String path = menuForm.getPath();
             if (menuForm.getParentId() == 0 && !path.startsWith("/")) {
-                menuForm.setPath("/" + path); // 一级目录需以 / 开头
+                // 一级目录需以 / 开头
+                menuForm.setPath("/" + path);
             }
             menuForm.setComponent("Layout");
-        } else if (menuType == MenuTypeEnum.EXTLINK) {   // 如果是目录
+        }
+        // 如果是目录
+        else if (menuType == MenuTypeEnum.EXTLINK) {
 
             menuForm.setComponent(null);
+        }
+        // 如果是内链
+        else if (menuForm.getIsInner()) {
+            menuForm.setComponent("iframe/index");
         }
 
         SysMenu entity = menuConverter.form2Entity(menuForm);

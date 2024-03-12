@@ -1,6 +1,8 @@
 package com.syc.modules.admin.api.model.bo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.syc.modules.common.enums.MenuTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.List;
@@ -77,5 +79,9 @@ public class RouteBO {
      * 【菜单】是否开启页面缓存(1:是 0:否)
      */
     private Integer keepAlive;
+
+    private Boolean isInner;
+
+    private String innerLinkUrl;
 
 }

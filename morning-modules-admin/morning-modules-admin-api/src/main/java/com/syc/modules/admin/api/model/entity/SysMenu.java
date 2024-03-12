@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.syc.modules.common.base.BaseEntity;
 import com.syc.modules.common.enums.MenuTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -89,5 +90,15 @@ public class SysMenu extends BaseEntity {
      */
     private Integer alwaysShow;
 
+    /**
+     * 是否内链
+     */
+    private Boolean isInner;
+
+
+    /**
+     * 内链链接
+     */
+    private String innerLinkUrl;
 
 }

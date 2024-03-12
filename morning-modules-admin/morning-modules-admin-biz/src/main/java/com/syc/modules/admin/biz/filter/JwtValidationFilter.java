@@ -47,7 +47,10 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         try {
             if (StrUtil.isNotBlank(token)) {
                 Map<String, Object> payload = JwtUtils.parseToken(token);
-
+                if (payload == null) {
+                    ResponseUtils.writeErrMsg(response, ResultCode.TOKEN_INVALID);
+                    return;
+                }
                 String jti = Convert.toStr(payload.get(JWTPayload.JWT_ID));
                 Boolean isTokenBlacklisted  = redisTemplate.hasKey(SecurityConstants.BLACKLIST_TOKEN_PREFIX + jti);
                 if (Boolean.TRUE.equals(isTokenBlacklisted)) {

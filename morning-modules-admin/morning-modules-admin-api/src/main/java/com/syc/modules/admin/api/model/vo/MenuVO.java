@@ -48,4 +48,12 @@ public class MenuVO {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private List<MenuVO> children;
 
+    @Schema(description = "是否内链")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean isInner;
+
+    @Schema(description = "内链链接")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String innerLinkUrl;
+
 }

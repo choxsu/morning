@@ -93,12 +93,6 @@
           @click.prevent="handleLogin"
           >{{ $t("login.login") }}
         </el-button>
-
-        <!-- 账号密码提示 -->
-        <div class="mt-10 text-sm">
-          <span>{{ $t("login.username") }}: admin</span>
-          <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
-        </div>
       </el-form>
     </el-card>
 

@@ -47,5 +47,11 @@ public class MenuForm {
     @Schema(description = "【目录】只有一个子路由是否始终显示", example = "1")
     private Integer alwaysShow;
 
+    @Schema(description = "是否内链", example = "true")
+    private Boolean isInner;
+
+    @Schema(description = "内链链接", example = "https://baidu.com")
+    private String innerLinkUrl;
+
 
 }

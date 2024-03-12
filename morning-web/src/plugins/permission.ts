@@ -11,8 +11,6 @@ export function setupPermission() {
     NProgress.start();
 
     const hasToken = localStorage.getItem("token");
-    debugger;
-    console.log(hasToken);
     if (hasToken) {
       if (to.path === "/login") {
         // 如果已登录，跳转首页

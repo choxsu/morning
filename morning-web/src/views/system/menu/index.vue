@@ -211,6 +211,7 @@
             v-model="formData.component"
             placeholder="system/user/index"
             style="width: 95%"
+            :disabled="formData.isInner"
           >
             <template v-if="formData.type == MenuTypeEnum.MENU" #prepend
               >src/views/</template
@@ -227,8 +228,8 @@
           label="显示状态"
         >
           <el-radio-group v-model="formData.visible">
-            <el-radio :label="1">显示</el-radio>
-            <el-radio :label="0">隐藏</el-radio>
+            <el-radio :value="1">显示</el-radio>
+            <el-radio :value="0">隐藏</el-radio>
           </el-radio-group>
         </el-form-item>
 
@@ -250,8 +251,8 @@
           </template>
 
           <el-radio-group v-model="formData.alwaysShow">
-            <el-radio :label="1">是</el-radio>
-            <el-radio :label="0">否</el-radio>
+            <el-radio :value="1">是</el-radio>
+            <el-radio :value="0">否</el-radio>
           </el-radio-group>
         </el-form-item>
 
@@ -260,9 +261,30 @@
           label="是否缓存"
         >
           <el-radio-group v-model="formData.keepAlive">
-            <el-radio :label="1">是</el-radio>
-            <el-radio :label="0">否</el-radio>
+            <el-radio :value="1">是</el-radio>
+            <el-radio :value="0">否</el-radio>
           </el-radio-group>
+        </el-form-item>
+
+        <el-form-item
+          v-if="formData.type === MenuTypeEnum.MENU"
+          label="是否内链"
+        >
+          <el-radio-group v-model="formData.isInner" @change="innerChange">
+            <el-radio :value="true">是</el-radio>
+            <el-radio :value="false">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+        <el-form-item
+          v-if="formData.type == MenuTypeEnum.MENU && formData.isInner"
+          label="内链地址"
+          prop="path"
+        >
+          <el-input
+            v-model="formData.innerLinkUrl"
+            placeholder="请输入内链完整路径"
+          />
         </el-form-item>
 
         <el-form-item label="排序" prop="sort">
@@ -328,6 +350,7 @@ import {
 } from "@/api/menu";
 
 import { MenuTypeEnum } from "@/enums/MenuTypeEnum";
+import { el } from "element-plus/es/locale";
 
 const queryFormRef = ref(ElForm);
 const menuFormRef = ref(ElForm);
@@ -350,6 +373,7 @@ const formData = reactive<MenuForm>({
   type: MenuTypeEnum.MENU,
   alwaysShow: 0,
   keepAlive: 0,
+  isInner: false,
 });
 
 const rules = reactive({
@@ -497,6 +521,14 @@ function resetForm() {
   formData.redirect = undefined;
   formData.alwaysShow = undefined;
   formData.keepAlive = undefined;
+}
+
+function innerChange() {
+  if (formData.isInner) {
+    formData.component = "iframe/index";
+  } else {
+    formData.component = "";
+  }
 }
 
 onMounted(() => {
