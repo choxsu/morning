@@ -198,7 +198,8 @@ function handleLogin() {
         .login(loginData.value)
         .then(() => {
           const query: LocationQuery = route.query;
-          const redirect = (query.redirect as LocationQueryValue) ?? "/";
+          const redirect =
+            (query.redirect as LocationQueryValue) ?? "/dashboard";
           const otherQueryParams = Object.keys(query).reduce(
             (acc: any, cur: string) => {
               if (cur !== "redirect") {
@@ -208,6 +209,7 @@ function handleLogin() {
             },
             {}
           );
+          console.log(redirect);
 
           router.push({ path: redirect, query: otherQueryParams });
         })

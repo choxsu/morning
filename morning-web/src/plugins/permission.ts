@@ -5,15 +5,18 @@ import NProgress from "@/utils/nprogress";
 
 export function setupPermission() {
   // 白名单路由
-  const whiteList = ["/login"];
+  const whiteList = ["/login", "/401", "/404"];
 
   router.beforeEach(async (to, from, next) => {
     NProgress.start();
+
     const hasToken = localStorage.getItem("token");
+    debugger;
+    console.log(hasToken);
     if (hasToken) {
       if (to.path === "/login") {
         // 如果已登录，跳转首页
-        next({ path: "/" });
+        next({ path: "/dashboard" });
         NProgress.done();
       } else {
         const userStore = useUserStore();
@@ -36,6 +39,7 @@ export function setupPermission() {
             });
             next({ ...to, replace: true });
           } catch (error) {
+            console.error(error);
             // 移除 token 并跳转登录页
             await userStore.resetToken();
             next(`/login?redirect=${to.path}`);
