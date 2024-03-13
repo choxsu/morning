@@ -1,6 +1,5 @@
 package com.syc.framework.sequence.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Component;
  * Snowflake 发号器属性
  * @author BCTC
  */
-@Data
 @Component
 @ConfigurationProperties(prefix = "morning.sequence.snowflake")
 public class SequenceSnowflakeProperties {
@@ -23,4 +21,33 @@ public class SequenceSnowflakeProperties {
      */
     private long workerId;
 
+    /**
+     * 是否允许睡眠
+     */
+    private boolean enableThread;
+
+
+    public long getDataCenterId() {
+        return dataCenterId;
+    }
+
+    public void setDataCenterId(long dataCenterId) {
+        this.dataCenterId = dataCenterId;
+    }
+
+    public long getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(long workerId) {
+        this.workerId = workerId;
+    }
+
+    public boolean isEnableThread() {
+        return enableThread;
+    }
+
+    public void setEnableThread(boolean enableThread) {
+        this.enableThread = enableThread;
+    }
 }

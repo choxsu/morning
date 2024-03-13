@@ -28,8 +28,11 @@ public class SequenceAutoConfiguration {
     @Bean
     @ConditionalOnBean(SequenceSnowflakeProperties.class)
     public Sequence snowflakeSequence(SequenceSnowflakeProperties properties) {
-        return SnowflakeSeqBuilder.create().datacenterId(properties.getDataCenterId())
-                .workerId(properties.getWorkerId()).build();
+        return SnowflakeSeqBuilder.create()
+                .datacenterId(properties.getDataCenterId())
+                .workerId(properties.getWorkerId())
+                .enableThread(properties.isEnableThread())
+                .build();
     }
 
 }

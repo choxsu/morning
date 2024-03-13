@@ -16,3 +16,10 @@ logging:
   level:
     com.syc: debug
     org.springframework: warn
+
+morning:
+  sequence:
+    snowflake:
+      dataCenterId: 1
+      workerId: 3
+      enableThread: false
