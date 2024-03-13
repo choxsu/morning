@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.syc.framework.sequence.config.SequenceAutoConfiguration,\
+  com.syc.framework.sequence.mybatis.SnowFlakeIdGenerator

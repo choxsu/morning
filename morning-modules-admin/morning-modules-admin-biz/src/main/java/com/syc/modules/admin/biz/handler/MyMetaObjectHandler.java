@@ -1,4 +1,4 @@
-package com.syc.modules.admin.api.mybatis.handler;
+package com.syc.modules.admin.biz.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

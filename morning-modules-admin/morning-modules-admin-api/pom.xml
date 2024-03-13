@@ -10,12 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>morning-modules-admin-api</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.syc</groupId>
-            <artifactId>morning-framework-security</artifactId>
-        </dependency>
-    </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

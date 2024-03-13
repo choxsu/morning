@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.syc.modules.admin.api.mybatis.handler.MyDataPermissionHandler;
-import com.syc.modules.admin.api.mybatis.handler.MyMetaObjectHandler;
-import org.mybatis.spring.annotation.MapperScan;
+import com.syc.modules.admin.biz.handler.MyDataPermissionHandler;
+import com.syc.modules.admin.biz.handler.MyMetaObjectHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

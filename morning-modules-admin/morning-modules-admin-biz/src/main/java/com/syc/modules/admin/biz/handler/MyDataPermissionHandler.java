@@ -1,12 +1,12 @@
-package com.syc.modules.admin.api.mybatis.handler;
+package com.syc.modules.admin.biz.handler;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
 import com.syc.framework.security.util.SecurityUtils;
+import com.syc.modules.admin.api.mybatis.annotation.DataPermission;
 import com.syc.modules.common.base.IBaseEnum;
 import com.syc.modules.common.enums.DataScopeEnum;
-import com.syc.modules.admin.api.mybatis.annotation.DataPermission;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;

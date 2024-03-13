@@ -25,7 +25,18 @@
 
         <dependency>
             <groupId>com.syc</groupId>
+            <artifactId>morning-framework-security</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.syc</groupId>
             <artifactId>morning-framework-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.syc</groupId>
+            <artifactId>morning-framework-sequence</artifactId>
         </dependency>
 
         <dependency>

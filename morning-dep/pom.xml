@@ -206,7 +206,7 @@
                 <artifactId>morning-common</artifactId>
                 <version>${reversion}</version>
             </dependency>
-            <!--系统模块-->
+            <!--框架模块-->
             <dependency>
                 <groupId>com.syc</groupId>
                 <artifactId>morning-framework-mybatis</artifactId>
@@ -216,6 +216,12 @@
             <dependency>
                 <groupId>com.syc</groupId>
                 <artifactId>morning-framework-security</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.syc</groupId>
+                <artifactId>morning-framework-sequence</artifactId>
                 <version>${reversion}</version>
             </dependency>
 
