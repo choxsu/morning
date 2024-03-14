@@ -40,6 +40,7 @@
         highlight-current-row
         row-key="id"
         :expand-row-keys="['1']"
+        :default-expand-all="defaultExpandAll"
         @row-click="onRowClick"
         :tree-props="{
           children: 'children',
@@ -53,16 +54,16 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="类型" align="center" width="80">
+        <el-table-column label="类型" align="center" width="120">
           <template #default="scope">
             <el-tag
               v-if="scope.row.type === MenuTypeEnum.CATALOG"
               type="warning"
               >目录</el-tag
             >
-            <el-tag v-if="scope.row.type === MenuTypeEnum.MENU" type="success"
-              >菜单</el-tag
-            >
+            <el-tag v-if="scope.row.type === MenuTypeEnum.MENU" type="success">
+              菜单{{ scope.row.isInner ? "-内链" : "" }}
+            </el-tag>
             <el-tag v-if="scope.row.type === MenuTypeEnum.BUTTON" type="danger"
               >按钮</el-tag
             >
@@ -105,7 +106,10 @@
         <el-table-column fixed="right" align="center" label="操作" width="220">
           <template #default="scope">
             <el-button
-              v-if="scope.row.type == 'CATALOG' || scope.row.type == 'MENU'"
+              v-if="
+                scope.row.type == 'CATALOG' ||
+                (scope.row.type == 'MENU' && !scope.row.isInner)
+              "
               v-hasPerm="['sys:menu:add']"
               type="primary"
               link
@@ -334,10 +338,11 @@
 
 <script setup lang="ts">
 defineOptions({
-  // eslint-disable-next-line vue/no-reserved-component-names
   name: "Menu",
   inheritAttrs: false,
 });
+
+const defaultExpandAll = ref(true);
 
 import { MenuQuery, MenuForm, MenuVO } from "@/api/menu/types";
 import {
@@ -350,7 +355,6 @@ import {
 } from "@/api/menu";
 
 import { MenuTypeEnum } from "@/enums/MenuTypeEnum";
-import { el } from "element-plus/es/locale";
 
 const queryFormRef = ref(ElForm);
 const menuFormRef = ref(ElForm);
