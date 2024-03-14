@@ -28,3 +28,7 @@ target
 
 .flattened-pom.xml
 
+
+application-*.yml
+application-*.yaml
+

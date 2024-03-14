@@ -32,7 +32,7 @@ public class AuthController {
 
     @Operation(summary = "注销")
     @DeleteMapping("/logout")
-    public Result logout() {
+    public Result<Object> logout() {
         authService.logout();
         return Result.success();
     }
