@@ -16,6 +16,7 @@
 ```
 morning
 ├─doc                 # 文档说明
+├─morning-deps       # 依赖层
 ├─morning-admin       # 后台管理模块
 ├─morning-common      # 公共模块
 ├─morning-framework   # 框架层
