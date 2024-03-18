@@ -129,7 +129,11 @@ function scrollToBottom() {
             <el-card>
               <el-form label-width="90px">
                 <el-form-item label="消息内容">
-                  <el-input type="textarea" v-model="topicMessage" />
+                  <el-input
+                    type="textarea"
+                    v-model="topicMessage"
+                    style="max-height: 50px"
+                  />
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="sendToAll" type="primary">发送</el-button>

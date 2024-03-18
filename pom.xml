@@ -20,7 +20,7 @@
         <module>morning-starter</module>
         <module>morning-modules-admin</module>
         <module>morning-modules-cms</module>
-        <module>morning-dep</module>
+        <module>morning-deps</module>
     </modules>
 
     <properties>
@@ -65,7 +65,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.syc</groupId>
-                <artifactId>morning-dep</artifactId>
+                <artifactId>morning-deps</artifactId>
                 <version>${reversion}</version>
                 <type>pom</type>
                 <scope>import</scope>
