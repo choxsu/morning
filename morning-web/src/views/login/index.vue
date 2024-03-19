@@ -12,7 +12,7 @@
       <lang-select class="ml-2 cursor-pointer" />
     </div>
     <!-- 登录表单 -->
-    <el-card class="!border-none !bg-transparent !rounded-4% w-100 <sm:w-85">
+    <el-card class="!rounded-4% w-100 <sm:w-85">
       <div class="text-center relative">
         <h2>{{ defaultSettings.title }}</h2>
         <el-tag class="ml-2 absolute-rt">{{ defaultSettings.version }}</el-tag>
@@ -252,12 +252,19 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 html.dark .login-container {
-  background: url("@/assets/images/login-bg-dark.jpg") no-repeat center right;
+  background-image: url("@/assets/images/login-bg-dark.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .login-container {
+  z-index: 10;
   overflow-y: auto;
-  background: url("@/assets/images/login-bg.jpg") no-repeat center right;
+  background-image: url("@/assets/images/login-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   @apply wh-full flex-center;
 

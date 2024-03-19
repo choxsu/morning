@@ -23,29 +23,38 @@
     </el-tooltip>
 
     <el-tooltip content="混合模式" placement="bottom">
-      <div
+      <div·
         class="layout-item mix"
         :class="{ 'is-active': modelValue === LayoutEnum.MIX }"
         @click="updateValue(LayoutEnum.MIX)"
       >
         <div></div>
         <div></div>
-      </div>
+      </div·>
     </el-tooltip>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { LayoutEnum } from "@/enums/LayoutEnum";
+import { LayoutEnum } from "@/enums/LayoutEnum"; // 导入布局枚举类型
 
+// 定义组件属性
 const props = defineProps({
-  modelValue: String,
+  modelValue: {
+    type: String,
+    required: true,
+  },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+// 定义组件发射的事件
+const emit = defineEmits(["update:modelValue"]); // 定义可以触发的事件，此处为更新modelValue
 
+/**
+ * 更新组件绑定的值
+ * @param {string} layout - 要更新的布局值，来自于LayoutEnum枚举
+ */
 function updateValue(layout: string) {
-  emit("update:modelValue", layout);
+  emit("update:modelValue", layout); // 触发更新组件绑定值的事件
 }
 </script>
 
