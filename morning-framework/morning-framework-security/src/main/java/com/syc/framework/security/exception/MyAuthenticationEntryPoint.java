@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * 认证异常处理
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.0.0
  */
 @Component

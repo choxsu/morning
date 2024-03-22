@@ -1,7 +1,7 @@
 package com.syc.modules.common.result;
 
 /**
- * @author haoxr
+ * @author xq.su
  **/
 public interface IResultCode {
 

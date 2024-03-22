@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * 用户分页查询对象
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/1/14
  */
 @EqualsAndHashCode(callSuper = true)

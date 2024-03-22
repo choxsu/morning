@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * 图形验证码校验过滤器
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/10/1
  */
 public class CaptchaValidationFilter extends OncePerRequestFilter {

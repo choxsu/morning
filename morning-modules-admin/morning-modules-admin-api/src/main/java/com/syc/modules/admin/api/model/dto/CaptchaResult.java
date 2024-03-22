@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 验证码响应对象
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/03/24
  */
 @Schema(description ="验证码响应对象")

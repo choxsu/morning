@@ -16,13 +16,13 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * Redis 缓存配置
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/12/4
  */
 @EnableCaching
 @EnableConfigurationProperties(CacheProperties.class)
 @Configuration
-@ConditionalOnProperty(name = "spring.cache.enabled") // xxl.job.enabled = true 才会自动装配
+@ConditionalOnProperty(name = "spring.cache.enabled") //spring.cache.enabled = true 才会自动装配
 public class RedisCacheConfig {
 
     /**

@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 /**
  * MinIO 文件上传服务类
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/6/2
  */
 @Component

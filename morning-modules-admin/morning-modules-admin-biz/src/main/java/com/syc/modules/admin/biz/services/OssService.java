@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 对象存储服务接口层
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/11/19
  */
 public interface OssService {

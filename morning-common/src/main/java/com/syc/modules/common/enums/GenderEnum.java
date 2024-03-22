@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * 性别枚举
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/10/14
  */
 @Schema(enumAsRef = true)

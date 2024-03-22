@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 /**
  * 防止重复提交注解
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.3.0
  */
 @Target(ElementType.METHOD)

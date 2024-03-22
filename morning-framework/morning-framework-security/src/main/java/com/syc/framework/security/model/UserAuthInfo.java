@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * 用户认证信息
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/10/22
  *
  */

@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * 响应工具类
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.0.0
  */
 public class ResponseUtils {

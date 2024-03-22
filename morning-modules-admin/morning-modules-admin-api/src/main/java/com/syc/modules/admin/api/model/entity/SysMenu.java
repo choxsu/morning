@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 菜单实体对象
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/3/6
  */
 @EqualsAndHashCode(callSuper = true)

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * JWT token 校验过滤器
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/9/13
  */
 public class JwtValidationFilter extends OncePerRequestFilter {

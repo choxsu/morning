@@ -11,7 +11,7 @@ import lombok.Data;
 /**
  * 字典数据表
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/12/17
  */
 @Data

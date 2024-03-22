@@ -8,7 +8,7 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 /**
  * 请求日志打印过滤器
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/03/03
  */
 @Configuration

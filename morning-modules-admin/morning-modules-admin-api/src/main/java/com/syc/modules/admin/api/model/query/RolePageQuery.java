@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 角色分页查询实体
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/6/3
  */
 @EqualsAndHashCode(callSuper = true)

@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * SpringSecurity 权限校验
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/2/22
  */
 @Component("ss")

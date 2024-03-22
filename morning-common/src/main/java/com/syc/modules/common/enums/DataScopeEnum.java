@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 数据权限枚举
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.3.0
  */
 public enum DataScopeEnum implements IBaseEnum<Integer> {

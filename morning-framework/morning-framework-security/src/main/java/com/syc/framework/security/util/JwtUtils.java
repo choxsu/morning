@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * JWT 工具类
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.6.0
  */
 @Component

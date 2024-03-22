@@ -15,7 +15,7 @@ import java.security.Principal;
 /**
  * WebSocket 测试控制器
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.3.0
  */
 @RestController

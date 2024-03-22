@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 认证服务实现类
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.4.0
  */
 @Service

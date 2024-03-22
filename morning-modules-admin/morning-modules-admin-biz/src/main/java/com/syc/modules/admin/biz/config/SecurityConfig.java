@@ -24,9 +24,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * Spring Security 权限配置
+ * Spring Security 权限配置类，用于配置应用的访问安全策略。
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/2/17
  */
 @Configuration
@@ -35,12 +35,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    /**
+     * 异常处理和登录入口等服务的注入
+     */
     private final MyAuthenticationEntryPoint authenticationEntryPoint;
     private final MyAccessDeniedHandler accessDeniedHandler;
     private final RedisTemplate<String, Object> redisTemplate;
     private final CodeGenerator codeGenerator;
 
-
+    /**
+     * 配置安全过滤链，定义请求的访问权限。
+     *
+     * @param http 用于构建和配置HttpSecurity的接口
+     * @return 返回配置好的SecurityFilterChain
+     * @throws Exception 可能抛出的异常
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -58,16 +67,17 @@ public class SecurityConfig {
 
         ;
 
-        // 验证码校验过滤器
+        // 添加验证码和JWT验证过滤器到过滤链中
         http.addFilterBefore(new CaptchaValidationFilter(redisTemplate,codeGenerator), UsernamePasswordAuthenticationFilter.class);
-        // JWT 校验过滤器
         http.addFilterBefore(new JwtValidationFilter(redisTemplate), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     /**
-     * 不走过滤器链的放行配置
+     * 配置忽略的URL，这些URL不会被Spring Security过滤。
+     *
+     * @return 返回WebSecurityCustomizer实例
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -86,7 +96,9 @@ public class SecurityConfig {
     }
 
     /**
-     * 密码编码器
+     * 配置密码编码器，使用BCrypt算法。
+     *
+     * @return 返回BCryptPasswordEncoder实例
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -94,9 +106,11 @@ public class SecurityConfig {
     }
 
     /**
-     * AuthenticationManager 手动注入
+     * 手动注入AuthenticationManager。
      *
      * @param authenticationConfiguration 认证配置
+     * @return 返回配置好的AuthenticationManager
+     * @throws Exception 可能抛出的异常
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

@@ -7,7 +7,7 @@ import com.syc.modules.admin.api.model.dto.LoginResult;
 /**
  * 认证服务接口
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.4.0
  */
 public interface AuthService {

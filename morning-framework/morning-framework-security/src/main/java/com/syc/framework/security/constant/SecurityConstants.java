@@ -3,7 +3,7 @@ package com.syc.framework.security.constant;
 /**
  * Security 常量
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.0.0
  */
 public interface SecurityConstants {

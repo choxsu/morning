@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 字典类型实体
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/12/17
  */
 @Data

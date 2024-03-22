@@ -5,7 +5,7 @@ package com.syc.framework.security.constant;
  * <p>
  * JWT Claims 属于 Payload 的一部分，包含了一些实体（通常指的用户）的状态和额外的元数据。
  *
- * @author haoxr
+ * @author xq.su
  * @since 2023/11/24
  */
 public interface JwtClaimConstants {

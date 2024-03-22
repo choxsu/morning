@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 用户角色访问层
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/1/15
  */
 @Mapper

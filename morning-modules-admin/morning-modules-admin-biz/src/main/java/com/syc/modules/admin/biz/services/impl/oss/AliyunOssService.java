@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 /**
  * Aliyun 对象存储服务类
  *
- * @author haoxr
+ * @author xq.su
  * @since 2.3.0
  */
 @Component

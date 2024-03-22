@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Spring Security访问异常处理器
  *
- * @author haoxr
+ * @author xq.su
  * @since 2022/10/18
  */
 @Component
