@@ -45,11 +45,6 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
         if (LOGIN_PATH_REQUEST_MATCHER.matches(request)) {
             // 请求中的验证码
             String captchaCode = request.getParameter(CAPTCHA_CODE_PARAM_NAME);
-            // TODO 兼容没有验证码的版本(线上请移除这个判断)
-            if (StrUtil.isBlank(captchaCode)) {
-                chain.doFilter(request, response);
-                return;
-            }
             // 缓存中的验证码
             String verifyCodeKey = request.getParameter(CAPTCHA_KEY_PARAM_NAME);
             String cacheVerifyCode = (String) redisTemplate.opsForValue().get(SecurityConstants.CAPTCHA_CODE_PREFIX + verifyCodeKey);

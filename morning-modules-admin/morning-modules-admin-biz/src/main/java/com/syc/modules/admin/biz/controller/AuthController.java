@@ -6,6 +6,7 @@ import com.syc.modules.admin.api.model.dto.LoginResult;
 import com.syc.modules.admin.biz.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,10 @@ public class AuthController {
 
     @Operation(summary = "登录")
     @PostMapping("/login")
+    @Parameters({
+            @Parameter(description = "验证码", name = "captchaCode", example = "1", required = true),
+            @Parameter(description = "验证码Key", name = "captchaKey", example = "xxxx", required = true),
+    })
     public Result<LoginResult> login(
             @Parameter(description = "用户名", example = "admin") @RequestParam String username,
             @Parameter(description = "密码", example = "123456") @RequestParam String password

@@ -1,8 +1,5 @@
 package com.syc.modules.common.result;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
 /**
@@ -10,13 +7,11 @@ import java.io.Serializable;
  *
  * @author xq.su
  **/
-@AllArgsConstructor
-@NoArgsConstructor
 public enum ResultCode implements IResultCode, Serializable {
     /**
      * 响应码枚举
      */
-    SUCCESS("00000", "一切ok"),
+    SUCCESS("00000", "ok"),
 
     USER_ERROR("A0001", "用户端错误"),
     REPEAT_SUBMIT_ERROR("A0002", "您的请求已提交，请不要重复提交或等待片刻再尝试。"),
@@ -81,6 +76,7 @@ public enum ResultCode implements IResultCode, Serializable {
     DATABASE_DEADLOCK("C0331", "数据库死锁"),
     DATABASE_PRIMARY_KEY_CONFLICT("C0341", "主键冲突");
 
+
     @Override
     public String getCode() {
         return code;
@@ -91,9 +87,14 @@ public enum ResultCode implements IResultCode, Serializable {
         return msg;
     }
 
-    private String code;
+    private final String code;
 
-    private String msg;
+    private final String msg;
+
+    ResultCode(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 
     @Override
     public String toString() {
