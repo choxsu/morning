@@ -8,20 +8,18 @@ import com.xxl.job.core.biz.model.RegistryParam;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.util.GsonTool;
 import com.xxl.job.core.util.XxlJobRemotingUtil;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
- * Created by xuxueli on 17/5/10.
+ * @author xuxueli
+ * @date 17/5/10
+ * Updated by xiaoqiu.su 2024-04-12
  */
-@Controller
+@RestController
 @RequestMapping("/api")
 public class JobApiController {
 
@@ -35,22 +33,17 @@ public class JobApiController {
      * @param data
      * @return
      */
-    @RequestMapping("/{uri}")
-    @ResponseBody
-    @PermissionLimit(limit=false)
+    @PostMapping("/{uri}")
+    @PermissionLimit(limit = false)
     public ReturnT<String> api(HttpServletRequest request, @PathVariable("uri") String uri, @RequestBody(required = false) String data) {
 
-        // valid
-        if (!"POST".equalsIgnoreCase(request.getMethod())) {
-            return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, HttpMethod not support.");
-        }
-        if (uri==null || uri.trim().length()==0) {
+        if (uri == null || uri.trim().length() == 0) {
             return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping empty.");
         }
-        if (XxlJobAdminConfig.getAdminConfig().getAccessToken()!=null
-                && XxlJobAdminConfig.getAdminConfig().getAccessToken().trim().length()>0
+        if (XxlJobAdminConfig.getAdminConfig().getAccessToken() != null
+                && XxlJobAdminConfig.getAdminConfig().getAccessToken().trim().length() > 0
                 && !XxlJobAdminConfig.getAdminConfig().getAccessToken().equals(request.getHeader(XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN))) {
-            return new ReturnT<String>(ReturnT.FAIL_CODE, "The access token is wrong.");
+            return new ReturnT<>(ReturnT.FAIL_CODE, "The access token is wrong.");
         }
 
         // services mapping
@@ -64,7 +57,7 @@ public class JobApiController {
             RegistryParam registryParam = GsonTool.fromJson(data, RegistryParam.class);
             return adminBiz.registryRemove(registryParam);
         } else {
-            return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping("+ uri +") not found.");
+            return new ReturnT<>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + uri + ") not found.");
         }
 
     }

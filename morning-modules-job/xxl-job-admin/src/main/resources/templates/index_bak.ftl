@@ -9,12 +9,11 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
 <div class="wrapper">
-
 	<!-- header -->
 	<@netCommon.commonHeader />
 	<!-- left -->
 	<@netCommon.commonLeft "index" />
-
+	
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
