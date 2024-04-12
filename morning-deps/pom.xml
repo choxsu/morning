@@ -29,6 +29,7 @@
         <dynamic-ds.version>4.2.0</dynamic-ds.version>
         <redisson.version>3.24.3</redisson.version>
         <druid.version>1.2.16</druid.version>
+        <mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
         <!-- 工具类相关 -->
         <lombok.version>1.18.30</lombok.version>
         <hutool.version>5.8.23</hutool.version>
@@ -46,6 +47,12 @@
         <!-- 对象存储 -->
         <minio.version>8.5.2</minio.version>
         <aliyun-sdk-oss.version>3.16.3</aliyun-sdk-oss.version>
+
+        <!-- 定时任务 -->
+        <netty.version>4.1.90.Final</netty.version>
+        <gson.version>2.10.1</gson.version>
+        <groovy.version>4.0.10</groovy.version>
+        <spring.version>6.0.19</spring.version>
 
     </properties>
 
@@ -226,6 +233,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.syc</groupId>
+                <artifactId>morning-framework-job</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-mapstruct-binding</artifactId>
                 <version>${lombok-mapstruct-binding.version}</version>
@@ -242,6 +255,47 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
+
+
+
+            <!-- mybatis-starter：mybatis + mybatis-spring + hikari（default） -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.syc</groupId>
+                <artifactId>xxl-job-admin</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.syc</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+            <!--xxl job-->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- ********************** plugin ********************** -->
+            <!-- groovy-all -->
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

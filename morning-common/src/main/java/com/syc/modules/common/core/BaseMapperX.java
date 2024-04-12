@@ -15,9 +15,17 @@ import java.util.List;
 
 /**
  * 在 MyBatis Plus 的 BaseMapper 的基础上拓展，提供更多的能力
+ *
+ * @author xq.su
  */
 public interface BaseMapperX<T> extends BaseMapper<T> {
 
+    /**
+     * 分页查询
+     *
+     * @param queryWrapper 查询对象
+     * @return
+     */
     default PageResult<T> selectPage(@Param("ew") Wrapper<T> queryWrapper) {
         Page<T> page = new Page<>();
         selectPage(page, queryWrapper);

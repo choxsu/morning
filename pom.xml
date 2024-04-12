@@ -21,6 +21,7 @@
         <module>morning-modules-admin</module>
         <module>morning-modules-cms</module>
         <module>morning-deps</module>
+        <module>morning-modules-job</module>
     </modules>
 
     <properties>

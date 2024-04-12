@@ -93,6 +93,7 @@ public class AliyunOssService implements OssService {
         FileInfo fileInfo = new FileInfo();
         fileInfo.setName(fileName);
         fileInfo.setUrl(fileUrl);
+        fileInfo.setUuid(uuid);
         return fileInfo;
     }
 

@@ -59,6 +59,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.syc</groupId>
+            <artifactId>morning-framework-job</artifactId>
+        </dependency>
+
     </dependencies>
 
 

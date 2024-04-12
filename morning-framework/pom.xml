@@ -15,6 +15,7 @@
         <module>morning-framework-mybatis</module>
         <module>morning-framework-security</module>
         <module>morning-framework-sequence</module>
+        <module>morning-framework-job</module>
     </modules>
 
     <properties>

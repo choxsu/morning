@@ -1,7 +1,5 @@
 <!-- 文件上传组件(单图+多图)示例 -->
 <script setup lang="ts">
-import SingleUpload from "@/components/Upload/SingleUpload.vue";
-import MultiUpload from "@/components/Upload/MultiUpload.vue";
 const singlePicUrl = ref(
   "https://assets.styc.cc/20240307/176210e4694f4a7f8d63d43fed0a4f29.jpg"
 );
@@ -18,14 +16,6 @@ const multiPicUrls = ref([
 </script>
 <template>
   <div class="app-container">
-    <el-link
-      href="https://gitee.com/youlaiorg/vue3-element-admin/blob/master/src/views/demo/upload.vue"
-      type="primary"
-      target="_blank"
-      class="mb-10"
-      >示例源码 请点击>>>></el-link
-    >
-
     <el-form>
       <el-form-item label="单图上传">
         <SingleUpload v-model="singlePicUrl" />

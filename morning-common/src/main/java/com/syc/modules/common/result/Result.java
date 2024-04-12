@@ -66,7 +66,13 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+    public boolean isSuccess() {
+        return ResultCode.SUCCESS.getCode().equals(this.code);
+    }
+
     public static boolean isSuccess(Result<?> result) {
         return result != null && ResultCode.SUCCESS.getCode().equals(result.getCode());
     }
+
+
 }

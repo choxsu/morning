@@ -1,5 +1,6 @@
 package com.syc.server;
 
+import com.syc.framework.job.annotation.EnableXxlJob;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import java.util.TimeZone;
  */
 @SpringBootApplication(scanBasePackages = {"com.syc.server", "com.syc.modules", "com.syc.framework"})
 @MapperScan("com.syc.modules.**.**.mapper")
+@EnableXxlJob
 public class MorningApplication {
 
 

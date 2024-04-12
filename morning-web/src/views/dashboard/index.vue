@@ -13,8 +13,31 @@
             />
             <div>
               <p>{{ greetings }}</p>
+
               <p class="text-sm text-gray">
-                今日天气晴朗，气温在15℃至25℃之间，东南风。
+                <span>
+                  您的位置：<el-tag>{{ weather.location.path }}</el-tag>
+                </span>
+                <span>
+                  经纬度：
+                  <el-tag>
+                    {{
+                      weather.location.latitude +
+                      "° " +
+                      weather.location.longitude +
+                      "°"
+                    }}
+                  </el-tag>
+                </span>
+              </p>
+
+              <p class="text-sm text-gray">
+                {{ weather?.daily }}
+                今日{{ weather.daily[0].nightText }}，气温在{{
+                  weather.daily[0].low
+                }}℃至{{ weather.daily[0].high }}℃之间，{{
+                  weather.daily[0].dayWindDirection
+                }}
               </p>
             </div>
           </div>
@@ -200,6 +223,8 @@ defineOptions({
 
 import { useUserStore } from "@/store/modules/user";
 import { useTransition, TransitionPresets } from "@vueuse/core";
+import { queryWeather } from "@/api/dashboard";
+import { WeatherVo } from "@/api/dashboard/types";
 
 const userStore = useUserStore();
 const date: Date = new Date();
@@ -219,7 +244,14 @@ const greetings = computed(() => {
   }
 });
 
+const weather = ref<WeatherVo>({});
+
 const duration = 5000;
+
+async function initWeatherInfo() {
+  const { data } = await queryWeather();
+  weather.value = data;
+}
 
 // 销售额
 const amount = ref(0);
@@ -252,6 +284,10 @@ const orderCountOutput = useTransition(orderCount, {
   transition: TransitionPresets.easeOutExpo,
 });
 orderCount.value = 2000;
+
+onMounted(async () => {
+  initWeatherInfo();
+});
 </script>
 
 <style lang="scss" scoped>
