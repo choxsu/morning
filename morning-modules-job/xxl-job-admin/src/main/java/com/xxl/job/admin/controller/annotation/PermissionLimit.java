@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * 权限限制
  * @author xuxueli 2015-12-12 18:29:02
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PermissionLimit {
 	

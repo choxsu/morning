@@ -30,11 +30,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- freemarker-starter -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
 
         <!-- mail-starter -->
         <dependency>
