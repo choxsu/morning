@@ -152,7 +152,7 @@ public class UserController {
         }
         password = password.trim();
         if (!(password.length() >= 4 && password.length() <= 20)) {
-            return new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("system_lengh_limit") + "[4-20]");
+            return new ReturnT<>(ReturnT.FAIL_CODE, I18nUtil.getString("system_lengh_limit") + "[4-20]");
         }
 
         // md5 password
