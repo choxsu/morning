@@ -26,7 +26,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
-@PermissionLimit(adminuser = true)
 public class UserController {
 
     @Resource
@@ -45,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/pageList")
-//    @PermissionLimit(adminuser = true)
+    @PermissionLimit(adminuser = true)
     public ReturnT<Map<String, Object>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
                                                  @RequestParam(required = false, defaultValue = "10") int length,
                                                  String username, int role) {
