@@ -1,6 +1,7 @@
 package com.xxl.job.admin.controller;
 
 import com.xxl.job.admin.controller.annotation.PermissionLimit;
+import com.xxl.job.admin.pojo.LoginParam;
 import com.xxl.job.admin.service.LoginService;
 import com.xxl.job.admin.service.XxlJobService;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -9,13 +10,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -46,9 +45,8 @@ public class IndexController {
 
     @PostMapping("login")
     @PermissionLimit(limit = false)
-    public ReturnT<String> loginDo(HttpServletRequest request, HttpServletResponse response, String userName, String password, String ifRemember) {
-        boolean ifRem = ifRemember != null && ifRemember.trim().length() > 0 && "on".equals(ifRemember);
-        return loginService.login(request, response, userName, password, ifRem);
+    public ReturnT<Map<String, String>> loginDo(HttpServletResponse response, @RequestBody LoginParam loginParam) {
+        return loginService.login(response, loginParam);
     }
 
     @PostMapping("logout")

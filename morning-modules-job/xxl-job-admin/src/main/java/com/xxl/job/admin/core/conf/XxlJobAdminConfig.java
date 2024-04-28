@@ -88,7 +88,7 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
 
 
     public String getI18n() {
-        if (!Arrays.asList("zh_CN", "zh_TC", "en").contains(i18n)) {
+        if (!Arrays.asList("zh_CN", "en").contains(i18n)) {
             return "zh_CN";
         }
         return i18n;

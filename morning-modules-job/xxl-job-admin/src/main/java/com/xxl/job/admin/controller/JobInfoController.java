@@ -71,7 +71,7 @@ public class JobInfoController {
     public static List<XxlJobGroup> filterJobGroupByRole(HttpServletRequest request, List<XxlJobGroup> xxlJobGroups) {
         List<XxlJobGroup> jobGroupList = new ArrayList<>();
         if (xxlJobGroups != null && xxlJobGroups.size() > 0) {
-            XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+            XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_AUTHORIZATION);
             if (loginUser.getRole() == 1) {
                 jobGroupList = xxlJobGroups;
             } else {
@@ -90,7 +90,7 @@ public class JobInfoController {
     }
 
     public static void validPermission(HttpServletRequest request, int jobGroup) {
-        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_AUTHORIZATION);
         if (!loginUser.validPermission(jobGroup)) {
             throw new RuntimeException(I18nUtil.getString("system_permission_limit") + "[username=" + loginUser.getUsername() + "]");
         }

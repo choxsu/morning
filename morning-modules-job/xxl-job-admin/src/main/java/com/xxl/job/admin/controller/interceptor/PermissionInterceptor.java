@@ -71,7 +71,7 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
                 throw new XxlJobException(I18nUtil.getString("system_permission_limit"));
             }
             // 设置登录用户信息，供后续使用
-            request.setAttribute(LoginService.LOGIN_IDENTITY_KEY, loginUser);
+            request.setAttribute(LoginService.LOGIN_AUTHORIZATION, loginUser);
         }
 
         return true;    // proceed with the next interceptor

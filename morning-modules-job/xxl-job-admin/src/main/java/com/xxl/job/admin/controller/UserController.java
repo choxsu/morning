@@ -107,7 +107,7 @@ public class UserController {
     public ReturnT<String> update(HttpServletRequest request, XxlJobUser xxlJobUser) {
 
         // avoid opt login seft
-        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_AUTHORIZATION);
         if (loginUser.getUsername().equals(xxlJobUser.getUsername())) {
             return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("user_update_loginuser_limit"));
         }
@@ -134,7 +134,7 @@ public class UserController {
     public ReturnT<String> remove(HttpServletRequest request, int id) {
 
         // avoid opt login seft
-        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_AUTHORIZATION);
         if (loginUser.getId() == id) {
             return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("user_update_loginuser_limit"));
         }
@@ -159,7 +159,7 @@ public class UserController {
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
 
         // update pwd
-        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        XxlJobUser loginUser = (XxlJobUser) request.getAttribute(LoginService.LOGIN_AUTHORIZATION);
 
         // do write
         XxlJobUser existUser = xxlJobUserDao.loadByUserName(loginUser.getUsername());
